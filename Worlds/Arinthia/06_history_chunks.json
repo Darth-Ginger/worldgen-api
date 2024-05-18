@@ -1,0 +1,29 @@
+{
+  "Era": "The Age of Enlightenment",
+  "Chunks": [
+    {
+      "period": "0-500",
+      "events": ["Founding of Elanthia", "Rise of Valoria", "First Orc Wars"],
+      "perspective": {
+        "Elanthia": "The Age of Enlightenment began with the founding of Elandor.",
+        "Valoria": "The Kingdom of Valoria rose to prominence through trade and diplomacy.",
+        "Korgath": "The First Orc Wars forged the strength of our people.",
+        "Unbiased": "The first 500 years saw the rise of major kingdoms and early conflicts."
+      }
+    },
+    {
+      "period": "500-1000",
+      "events": [
+        "Expansion of Duramark",
+        "Golden Age of Valoria",
+        "Shadow Uprisings in Nighthaven"
+      ],
+      "perspective": {
+        "Duramark": "The Iron Brotherhood secured new mining territories.",
+        "Valoria": "Valoria experienced a golden age of prosperity and culture.",
+        "Nighthaven": "The Shadow Uprisings marked a period of turmoil and resistance.",
+        "Unbiased": "The second period was marked by expansion, prosperity, and uprisings."
+      }
+    }
+  ]
+}

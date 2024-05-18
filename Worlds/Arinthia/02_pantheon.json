@@ -1,0 +1,28 @@
+{
+  "Gods": [
+    {
+      "name": "Zarathul",
+      "domain": "Creation, life, fate"
+    },
+    {
+      "name": "Aerion",
+      "domain": "Sky, wind, eagles"
+    },
+    {
+      "name": "Lumina",
+      "domain": "Stars, light"
+    },
+    {
+      "name": "Tharos",
+      "domain": "Craft, earth, Dwarves"
+    },
+    {
+      "name": "Neria",
+      "domain": "Nature, growth, forests"
+    },
+    {
+      "name": "Maelstrom",
+      "domain": "Sea, rivers, water"
+    }
+  ]
+}

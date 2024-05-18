@@ -1,0 +1,13 @@
+<!-- /path/to/your/flask_app/templates/sidebar.html -->
+
+<div class="sidebar">
+  <ul>
+    {% for item in sidebar_items %}
+      <li>
+        <a href="/{{ item }}">
+                {{ item }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>

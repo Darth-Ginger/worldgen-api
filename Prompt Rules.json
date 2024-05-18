@@ -1,0 +1,61 @@
+{
+    "directives": {
+      "world_name": "Arinthia",
+      "geography": {
+        "size": "Large",
+        "balance": "Well-balanced geographical features",
+        "landmarks": "Include landmarks that provide narrative significance"
+      },
+      "races_and_creatures": {
+        "races": ["Elves", "Dwarves", "Humans", "Halflings", "Orcs", "Goblins", "Giants", "Trolls", "Werewolves", "Dragons"],
+        "creatures": ["Phoenixes", "Hydras", "Gryphons", "Basilisks", "Elementals", "Mythological Beasts"]
+      },
+      "kingdoms_and_settlements": {
+        "guidance": "Ensure enough kingdoms for interactions without overpopulation, use common tropes for various races."
+      },
+      "factions_and_organizations": {
+        "types": ["Political", "Social", "Religious", "Military"],
+        "basic_goals": ["Power", "Wealth", "Control"]
+      },
+      "history_simulation": {
+        "chunks": [500, 1000],
+        "perspectives": ["Each major kingdom with their own bias", "Unbiased narrator"],
+        "events": ["Wars", "Alliances", "Discoveries", "Catastrophes"]
+      },
+      "magic_and_mysticism": {
+        "pantheon": [
+          {"name": "Zarathul", "domain": "Creation, life, fate"},
+          {"name": "Aerion", "domain": "Sky, wind, eagles"},
+          {"name": "Lumina", "domain": "Stars, light"},
+          {"name": "Tharos", "domain": "Craft, earth, Dwarves"},
+          {"name": "Neria", "domain": "Nature, growth, forests"},
+          {"name": "Maelstrom", "domain": "Sea, rivers, water"}
+        ],
+        "magic_system": {
+          "role": "All magic derives from one or more domains",
+          "power_source": "Determined by its god"
+        }
+      },
+      "leadership_and_characters": {
+        "formation": "Form organically",
+        "traits": "Determined by kingdom, race, and historical context",
+        "goals": "Shaped by personal ambitions, kingdom's needs, and historical events"
+      }
+    },
+    "instructions": [
+      "Create a large world with a balanced mix of geographical features and significant landmarks.",
+      "Include all creatures and races from the Tolkien-inspired universe.",
+      "Use discretion to create a suitable number of kingdoms ensuring ample interaction.",
+      "Create various types of factions with diverse goals and leadership.",
+      "Simulate history in chunks of 500 or 1000 years, recording from multiple perspectives.",
+      "Develop a pantheon of six gods, each with distinct domains influencing the magic system.",
+      "Allow leaders to form organically with traits and goals shaped by their environment."
+    ],
+    "prompt": {
+      "geography": {
+        "description": "A large fantasy world map with diverse geographical features including the Azure Peaks, Silver Mountains, Crimson Highlands, Serpent River, Crystal Stream, Bloodflow River, Whispering Woods, Shadowgrove, Eldertree Forest, Scorched Expanse, Verdant Fields, Golden Prairie, western and southern coastlines, and major landmarks like Ember Crater, Moonstone Ruins, Enchanted Glade, and Obsidian Caverns.",
+        "kingdoms": ["Elanthia", "Duramark", "Valoria", "Korgath", "Sylvaria", "Nighthaven"]
+      }
+    }
+  }
+  

@@ -1,0 +1,39 @@
+{
+    "Elanthia": {
+      "race": "Elves",
+      "description": "A kingdom of ancient forests and hidden cities.",
+      "capital": "Elandor",
+      "population": 1000000
+    },
+    "Duramark": {
+      "race": "Dwarves",
+      "description": "A mountainous kingdom known for its mining and craftsmanship.",
+      "capital": "Stonehelm",
+      "population": 800000
+    },
+    "Valoria": {
+      "race": "Humans",
+      "description": "A diverse and populous kingdom with bustling cities.",
+      "capital": "Valeria",
+      "population": 1200000
+    },
+    "Korgath": {
+      "race": "Orcs",
+      "description": "A harsh and warlike kingdom in the barren lands.",
+      "capital": "Kragmar",
+      "population": 500000
+    },
+    "Sylvaria": {
+      "race": "Halflings",
+      "description": "A peaceful and rural kingdom of rolling hills and farmlands.",
+      "capital": "Hearthshire",
+      "population": 300000
+    },
+    "Nighthaven": {
+      "race": "Goblins",
+      "description": "A shadowy kingdom hidden in the dark forests.",
+      "capital": "Gloomtown",
+      "population": 400000
+    }
+}
+  

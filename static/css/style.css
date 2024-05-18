@@ -1,0 +1,41 @@
+/* /path/to/your/flask_app/static/css/styles.css */
+
+body {
+    display: flex;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.sidebar {
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #f4f4f4;
+    overflow: auo;
+    position: fixed;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar li {
+    margin: 10px 0;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: #333;
+}
+
+.sidebar a:hover {
+    text-decoration: underline;
+}
+
+.main-content {
+    margin-left: 200px;
+    flex: 1;
+    padding: 20px;
+}
