@@ -1,13 +1,120 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ world_name }} - Arinthia</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="sidebar">
+        {% include 'sidebar.html' %}
+    </div>
+    <div class="content">
+        <h1>World: {{ world_name }}</h1>
 
-{% block content %}
-<h2>{{ description.name }}</h2>
-<p>{{ description.overview }}</p>
-<nav>
-    <ul>
-        <li><a href="{{ url_for('kingdoms', world_name=world_name) }}">Kingdoms</a></li>
-        <li><a href="{{ url_for('factions', world_name=world_name) }}">Factions</a></li>
-        <li><a href="{{ url_for('leaders', world_name=world_name) }}">Leaders</a></li>
-    </ul>
-</nav>
-{% endblock %}
+        <section id="world-description">
+            <h2>World Description</h2>
+            <p>{{ world_description.description }}</p>
+        </section>
+
+        <section id="pantheon">
+            <h2>Pantheon</h2>
+            {% if pantheon %}
+                <ul>
+                    {% for god in pantheon %}
+                    <li>
+                        <h3>{{ god.name }}</h3>
+                        <p>Domain: {{ god.domain }}</p>
+                    </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No pantheon details available.</p>
+            {% endif %}
+        </section>
+
+        <section id="magic-system">
+            <h2>Magic System</h2>
+            <p>{{ magic_system.role }}</p>
+            <p>Power Source: {{ magic_system.power_source }}</p>
+        </section>
+
+        <section id="factions">
+            <h2>Factions</h2>
+            {% if factions %}
+                <ul>
+                    {% for name, details in factions.items() %}
+                    <li>
+                        <h3>{{ name }}</h3>
+                        <p>Type: {{ details.type }}</p>
+                        <p>Goals: {{ details.goals | join(', ') }}</p>
+                        <p>Leadership: {{ details.leadership }}</p>
+                        <p>Influence: {{ details.influence }}</p>
+                        {% if details.leaders %}
+                            <h4>Leaders</h4>
+                            <ul>
+                                {% for leader in details.leaders %}
+                                <li>{{ leader.name }} - {{ leader.role }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No factions available.</p>
+            {% endif %}
+        </section>
+
+        <section id="kingdoms">
+            <h2>Kingdoms</h2>
+            {% if kingdoms %}
+                <ul>
+                    {% for name, details in kingdoms.items() %}
+                    <li>
+                        <h3>{{ name }}</h3>
+                        <p>Race: {{ details.race }}</p>
+                        <p>Description: {{ details.description }}</p>
+                        <p>Capital: {{ details.capital }}</p>
+                        <p>Population: {{ details.population }}</p>
+                        {% if details.leaders %}
+                            <h4>Leaders</h4>
+                            <ul>
+                                {% for leader in details.leaders %}
+                                <li>{{ leader.name }} - {{ leader.role }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No kingdoms available.</p>
+            {% endif %}
+        </section>
+
+        <section id="history-chunks">
+            <h2>History</h2>
+            {% if history_chunks %}
+                {% for chunk in Chunks %}
+                <div>
+                    <h3>Period: {{ chunk.period }}</h3>
+                    <p>Events: {{ chunk.events | join(', ') }}</p>
+                    <h4>Perspectives:</h4>
+                    <ul>
+                        {% for key, value in chunk.perspective.items() %}
+                        <li>
+                            <strong>{{ key }}:</strong> {{ value }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>No history chunks available.</p>
+            {% endif %}
+        </section>
+    </div>
+</body>
+</html>

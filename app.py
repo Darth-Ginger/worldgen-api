@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, url_for
+from flask import Flask, abort, render_template, jsonify, url_for
 import json
 import os
 
@@ -35,11 +35,38 @@ def index():
 
 @app.route('/world/<world_name>')
 def world(world_name):
-    world_dir = os.path.join('Worlds', world_name)
-    if not os.path.exists(world_dir):
-        return "World not found", 404
-    description = load_json(os.path.join(world_dir, '01_world_description.json'))
-    return render_template('world.html', world_name=world_name, description=description)
+    base_dir = os.path.join(worlds_dir, world_name)
+    
+    if not os.path.exists(base_dir):
+        abort(404)
+
+    def load_json(file_name):
+        file_path = os.path.join(base_dir, file_name)
+        if os.path.exists(file_path):
+            with open(file_path, 'r') as f:
+                return json.load(f)
+        return None
+
+
+    world_description = load_json('01_world_description.json')
+    pantheon = load_json('02_pantheon.json')
+    magic_system = load_json('03_magic_system.json')
+    factions = load_json('04_factions.json')
+    kingdoms = load_json('05_kingdoms.json')
+    leaders = load_json('06_key_leaders.json')
+    history_chunks = load_json('07_history_chunks.json')
+
+    return render_template(
+        'world.html', 
+        world_name=world_name, 
+        world_description=world_description,
+        kingdoms=kingdoms,
+        factions=factions,
+        pantheon=pantheon,
+        magic_system=magic_system,
+        history_chunks=history_chunks,
+        leaders=leaders
+    )
 
 @app.route('/world/<world_name>/kingdoms')
 def kingdoms(world_name):
