@@ -1,27 +1,89 @@
 {
-    "Order of the Silver Moon": {
-      "type": "Religious",
-      "goals": ["Spread the worship of Lumina", "Protect the innocent"],
-      "leadership": "High Priestess Elara",
-      "influence": "High in Elanthia, moderate in Valoria"
-    },
-    "Iron Brotherhood": {
-      "type": "Military",
-      "goals": ["Defend Duramark", "Expand mining territories"],
-      "leadership": "General Thrain",
-      "influence": "High in Duramark"
-    },
-    "Valorian Trade Guild": {
-      "type": "Economic",
-      "goals": ["Control trade routes", "Accumulate wealth"],
-      "leadership": "Guildmaster Marcellus",
-      "influence": "High in Valoria, moderate in Sylvaria"
-    },
-    "Shadows of Kragmar": {
+  "factions": [
+    {
+      "name": "The Silver Hand",
       "type": "Political",
-      "goals": ["Gain political power", "Undermine rivals"],
-      "leadership": "Chieftain Grulk",
-      "influence": "High in Korgath"
+      "goal": "Power",
+      "leadership": "Lord Elandor",
+      "relationships": {
+        "The Iron Fist": {
+          "reputation": -40,
+          "intelligence": {
+            "level": "High",
+            "schemes": ["Influence royal court", "Undermine The Iron Fist"],
+            "known_schemes": [
+              "Iron Fist's military buildup",
+              "Golden Dawn's wealth accumulation"
+            ]
+          }
+        },
+        "The Golden Dawn": {
+          "reputation": 60,
+          "intelligence": {
+            "level": "Medium",
+            "schemes": ["Form religious alliances", "Accumulate wealth"],
+            "known_schemes": [
+              "Silver Hand's influence campaign",
+              "Nightshade's control efforts"
+            ]
+          }
+        },
+        "The Nightshade": {
+          "reputation": -70,
+          "intelligence": {
+            "level": "Low",
+            "schemes": [
+              "Expand underworld influence",
+              "Assassinate key figures"
+            ],
+            "known_schemes": [
+              "Nightshade's assassination plans",
+              "Iron Fist's strategic positions"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "The Iron Fist",
+      "type": "Military",
+      "goal": "Control",
+      "leadership": "General Thorin",
+      "relationships": {
+        "The Silver Hand": {
+          "reputation": -40,
+          "intelligence": {
+            "level": "Medium",
+            "schemes": ["Expand military", "Control strategic locations"],
+            "known_schemes": [
+              "Silver Hand's political influence",
+              "Nightshade's underworld activities"
+            ]
+          }
+        },
+        "The Golden Dawn": {
+          "reputation": 20,
+          "intelligence": {
+            "level": "Low",
+            "schemes": ["Accumulate military resources", "Secure alliances"],
+            "known_schemes": [
+              "Golden Dawn's wealth plans",
+              "Silver Hand's political maneuvers"
+            ]
+          }
+        },
+        "The Nightshade": {
+          "reputation": -60,
+          "intelligence": {
+            "level": "High",
+            "schemes": ["Control underworld", "Assassinate rivals"],
+            "known_schemes": [
+              "Nightshade's assassination plots",
+              "Golden Dawn's religious influence"
+            ]
+          }
+        }
+      }
     }
+  ]
 }
-  

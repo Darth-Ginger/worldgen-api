@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Key Leaders of {{ world_name }}</h2>
+<ul>
+    {% for leader in leaders %}
+    <li>
+        <h3>{{ leader.name }}</h3>
+        <p>Kingdom/Faction: {{ leader.kingdom or leader.faction }}</p>
+        <p>Traits: {{ leader.traits | join(', ') }}</p>
+        <p>Goals: {{ leader.goals | join(', ') }}</p>
+        <h4>Relationships:</h4>
+        <ul>
+            {% for relation, details in leader.relationships.items() %}
+            <li>
+                <strong>{{ relation }}:</strong>
+                <p>Reputation: {{ details.reputation }}</p>
+                <p>Intelligence Level: {{ details.intelligence.level }}</p>
+                <p>Schemes: {{ details.intelligence.schemes | join(', ') }}</p>
+                <p>Known Schemes: {{ details.intelligence.known_schemes | join(', ') }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

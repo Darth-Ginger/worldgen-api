@@ -1,39 +1,142 @@
 {
-    "Elanthia": {
+  "kingdoms": [
+    {
+      "name": "Elanthia",
       "race": "Elves",
-      "description": "A kingdom of ancient forests and hidden cities.",
-      "capital": "Elandor",
-      "population": 1000000
+      "capital": "Eldoria",
+      "population": 120000,
+      "relationships": {
+        "Duramark": {
+          "reputation": 50,
+          "intelligence": {
+            "level": "High",
+            "schemes": ["Expand magical wards", "Alliance with Valoria"],
+            "known_schemes": [
+              "Duramark's mithril mining",
+              "Valoria's trade expansion"
+            ]
+          }
+        },
+        "Valoria": {
+          "reputation": 30,
+          "intelligence": {
+            "level": "Medium",
+            "schemes": [
+              "Cultural exchange with Sylvaria",
+              "Expand trade routes"
+            ],
+            "known_schemes": [
+              "Valoria's naval skirmishes",
+              "Sylvaria's agricultural innovations"
+            ]
+          }
+        },
+        "Korgath": {
+          "reputation": -20,
+          "intelligence": {
+            "level": "Low",
+            "schemes": ["Defend borders", "Strengthen military"],
+            "known_schemes": [
+              "Korgath's dark rituals",
+              "Nighthaven's expansion"
+            ]
+          }
+        },
+        "Sylvaria": {
+          "reputation": 70,
+          "intelligence": {
+            "level": "High",
+            "schemes": [
+              "Protect agricultural lands",
+              "Enhance trade with Elanthia"
+            ],
+            "known_schemes": [
+              "Sylvaria's cultural preservation",
+              "Elanthia's magical advancements"
+            ]
+          }
+        },
+        "Nighthaven": {
+          "reputation": -50,
+          "intelligence": {
+            "level": "Low",
+            "schemes": [
+              "Expand influence in Shadowgrove",
+              "Research dark magic"
+            ],
+            "known_schemes": [
+              "Nighthaven's goblin raids",
+              "Korgath's military expansion"
+            ]
+          }
+        }
+      }
     },
-    "Duramark": {
+    {
+      "name": "Duramark",
       "race": "Dwarves",
-      "description": "A mountainous kingdom known for its mining and craftsmanship.",
-      "capital": "Stonehelm",
-      "population": 800000
-    },
-    "Valoria": {
-      "race": "Humans",
-      "description": "A diverse and populous kingdom with bustling cities.",
-      "capital": "Valeria",
-      "population": 1200000
-    },
-    "Korgath": {
-      "race": "Orcs",
-      "description": "A harsh and warlike kingdom in the barren lands.",
-      "capital": "Kragmar",
-      "population": 500000
-    },
-    "Sylvaria": {
-      "race": "Halflings",
-      "description": "A peaceful and rural kingdom of rolling hills and farmlands.",
-      "capital": "Hearthshire",
-      "population": 300000
-    },
-    "Nighthaven": {
-      "race": "Goblins",
-      "description": "A shadowy kingdom hidden in the dark forests.",
-      "capital": "Gloomtown",
-      "population": 400000
+      "capital": "Ironhold",
+      "population": 80000,
+      "relationships": {
+        "Elanthia": {
+          "reputation": 50,
+          "intelligence": {
+            "level": "Medium",
+            "schemes": ["Expand mithril mining", "Form trade alliances"],
+            "known_schemes": [
+              "Elanthia's magical wards",
+              "Valoria's naval expansion"
+            ]
+          }
+        },
+        "Valoria": {
+          "reputation": 40,
+          "intelligence": {
+            "level": "High",
+            "schemes": ["Strengthen economic ties", "Expand trade routes"],
+            "known_schemes": [
+              "Valoria's trade network",
+              "Sylvaria's agricultural growth"
+            ]
+          }
+        },
+        "Korgath": {
+          "reputation": -10,
+          "intelligence": {
+            "level": "Medium",
+            "schemes": ["Defend mithril mines", "Expand military"],
+            "known_schemes": [
+              "Korgath's dark rituals",
+              "Nighthaven's goblin activities"
+            ]
+          }
+        },
+        "Sylvaria": {
+          "reputation": 60,
+          "intelligence": {
+            "level": "High",
+            "schemes": [
+              "Enhance trade with Elanthia",
+              "Protect agricultural lands"
+            ],
+            "known_schemes": [
+              "Sylvaria's cultural preservation",
+              "Elanthia's magical advancements"
+            ]
+          }
+        },
+        "Nighthaven": {
+          "reputation": -30,
+          "intelligence": {
+            "level": "Low",
+            "schemes": ["Research dark magic", "Expand goblin influence"],
+            "known_schemes": [
+              "Nighthaven's dark magic",
+              "Korgath's military expansion"
+            ]
+          }
+        }
+      }
     }
+  ]
 }
-  

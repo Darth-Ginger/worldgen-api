@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Kingdoms of {{ world_name }}</h2>
+<ul>
+    {% for kingdom in kingdoms %}
+    <li>
+        <h3>{{ kingdom.name }} ({{ kingdom.race }})</h3>
+        <p>Capital: {{ kingdom.capital }}</p>
+        <p>Population: {{ kingdom.population }}</p>
+        <h4>Relationships:</h4>
+        <ul>
+            {% for relation, details in kingdom.relationships.items() %}
+            <li>
+                <strong>{{ relation }}:</strong>
+                <p>Reputation: {{ details.reputation }}</p>
+                <p>Intelligence Level: {{ details.intelligence.level }}</p>
+                <p>Schemes: {{ details.intelligence.schemes | join(', ') }}</p>
+                <p>Known Schemes: {{ details.intelligence.known_schemes | join(', ') }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>{{ description.name }}</h2>
+<p>{{ description.overview }}</p>
+<nav>
+    <ul>
+        <li><a href="{{ url_for('kingdoms', world_name=world_name) }}">Kingdoms</a></li>
+        <li><a href="{{ url_for('factions', world_name=world_name) }}">Factions</a></li>
+        <li><a href="{{ url_for('leaders', world_name=world_name) }}">Leaders</a></li>
+    </ul>
+</nav>
+{% endblock %}
