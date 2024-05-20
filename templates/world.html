@@ -20,18 +20,24 @@
 
         <section id="pantheon">
             <h2>Pantheon</h2>
+            <table>
+                <th><h3>God</h3></th>
+                <th><h3>Domain</h3></th=>
             {% if pantheon %}
-                <ul>
-                    {% for god in pantheon %}
-                    <li>
-                        <h3>{{ god.name }}</h3>
-                        <p>Domain: {{ god.domain }}</p>
-                    </li>
+            {% for god in pantheon %}
+                <tr >
+                    <td>
+                        <h4>{{ god.name }}</h4>
+                    </td>
+                    <td>
+                    <p>{{ god.domain }}</p>
+                    </td>
+                </tr>
                     {% endfor %}
-                </ul>
             {% else %}
                 <p>No pantheon details available.</p>
             {% endif %}
+            </table>
         </section>
 
         <section id="magic-system">
@@ -44,47 +50,70 @@
             <h2>Factions</h2>
             {% if factions %}
                 <ul>
-                    {% for name, details in factions.items() %}
-                    <li>
-                        <h3>{{ name }}</h3>
-                        <p>Type: {{ details.type }}</p>
-                        <p>Goals: {{ details.goals | join(', ') }}</p>
-                        <p>Leadership: {{ details.leadership }}</p>
-                        <p>Influence: {{ details.influence }}</p>
-                        {% if details.leaders %}
-                            <h4>Leaders</h4>
+                    {% for faction in factions.factions%}
+                    <li><h3>{{ faction.name }}</h3></li>
+                    <ul>
+                        <li>Type:  {{ faction.type }}</li>
+                        <li>Goals: {{ faction.goal }}</li>
+                        <li>Leadership: {{ faction.leadership }}</li>
+                        <li><h4 style="margin:0">Key Leaders</h4></li>
+                        {% for leader in leaders.leaders%}
+                        {% if leader.kingdom == faction.name or leader.faction == faction.name %}
                             <ul>
-                                {% for leader in details.leaders %}
-                                <li>{{ leader.name }} - {{ leader.role }}</li>
-                                {% endfor %}
+                                <li>{{ leader.name }} - {{ leader.traits | join(', ') }}</li>
+                                        <ul>
+                                            <li> <h4 style="margin:0">Goals: </h4></li>
+                                                {% for goal in leader.goals %}
+                                                <ul>
+                                                    <li> {{ goal }} </li>
+                                                </ul>
+                                                {% endfor %}
+                                        </ul>
+                                        <ul>
+                                            <li> <h4 style="margin:0">Relationships: </h4></li>
+                                            <ul>
+                                            {% for relation, detail in leader.relationships.items() %}
+                                            <li> {{ relation }} </li>
+                                            <ul>
+                                                <li>{{detail}}</li>
+                                            </ul>
+                                            {% endfor %}
+                                        </ul>       
+                                </ul>
                             </ul>
                         {% endif %}
-                    </li>
-                    {% endfor %}
+                        {% endfor %}
+                    </ul>  
+                    {% endfor %}   
                 </ul>
-            {% else %}
+                {% else %}
                 <p>No factions available.</p>
-            {% endif %}
+                {% endif %}
         </section>
 
         <section id="kingdoms">
             <h2>Kingdoms</h2>
             {% if kingdoms %}
                 <ul>
-                    {% for name, details in kingdoms.items() %}
-                    <li>
-                        <h3>{{ name }}</h3>
-                        <p>Race: {{ details.race }}</p>
-                        <p>Description: {{ details.description }}</p>
-                        <p>Capital: {{ details.capital }}</p>
-                        <p>Population: {{ details.population }}</p>
-                        {% if details.leaders %}
-                            <h4>Leaders</h4>
-                            <ul>
-                                {% for leader in details.leaders %}
-                                <li>{{ leader.name }} - {{ leader.role }}</li>
-                                {% endfor %}
-                            </ul>
+                    {% for kingdom in kingdoms.kingdoms %}
+                    <li><h3>{{ kingdom.name }}</h3></li>
+                        <li>Race: {{ kingdom.race }}</li>
+                        <li>Capital: {{ kingdom.capital }}</li>
+                        <li>Population: {{ kingdom.population }}</li>
+                        {% if kingdom.relationships %}
+                        <ul>
+                            <li><h4 style="margin:0">Relationships:</h4>
+                                <ul>
+                                    <ul>
+                                        {% for relation, detail in kingdom.relationships.items() %}
+                                        <li> {{ relation }} </li>
+                                        <ul>
+                                            <li>{{detail}}</li>
+                                        </ul>
+                                        {% endfor %}
+                                    </ul>
+                                </ul>
+                        </ul>
                         {% endif %}
                     </li>
                     {% endfor %}
@@ -97,7 +126,7 @@
         <section id="history-chunks">
             <h2>History</h2>
             {% if history_chunks %}
-                {% for chunk in Chunks %}
+                {% for chunk in history_chunks.Chunks %}
                 <div>
                     <h3>Period: {{ chunk.period }}</h3>
                     <p>Events: {{ chunk.events | join(', ') }}</p>

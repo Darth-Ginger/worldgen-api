@@ -7,7 +7,6 @@ app = Flask(__name__)
 
 worlds_dir = 'Worlds'
 
-
 @app.context_processor
 def inject_sidebar():
     """Injects the directory contents into the template context."""

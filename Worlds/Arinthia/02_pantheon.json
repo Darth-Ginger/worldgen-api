@@ -1,5 +1,5 @@
-{
-  "Gods": [
+
+[
     {
       "name": "Zarathul",
       "domain": "Creation, life, fate"
@@ -25,4 +25,5 @@
       "domain": "Sea, rivers, water"
     }
   ]
-}
+
+

@@ -29,3 +29,11 @@ body {
     padding: 20px;
     width: calc(100% - 200px);
 }
+table, th, td {
+    border: 1px solid black;
+    padding: 1px;
+    padding-left: 10px;
+}
+table {
+    border-spacing: 0px;
+}
