@@ -1,149 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ world_name }} - Arinthia</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-</head>
-<body>
-    <div class="sidebar">
-        {% include 'sidebar.html' %}
-    </div>
-    <div class="content">
-        <h1>World: {{ world_name }}</h1>
+{% extends "base.html" %} {% block title %}{{ world_name }}{% endblock %} 
+{%block script %}
+<script language="javascript" type="text/javascript">
+  var coll = document.getElementsByClassName("collapsible");
+  var i;
 
-        <section id="world-description">
-            <h2>World Description</h2>
-            <p>{{ world_description.description }}</p>
-        </section>
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function () {
+      this.classList.toggle("active");
+      var content = this.nextElementSibling;
+      if (content.style.display === "block") {
+        content.style.display = "none";
+      } else {
+        content.style.display = "block";
+      }
+    });
+  }
+</script>
+{% endblock %} 
 
-        <section id="pantheon">
-            <h2>Pantheon</h2>
-            <table>
-                <th><h3>God</h3></th>
-                <th><h3>Domain</h3></th=>
-            {% if pantheon %}
-            {% for god in pantheon %}
-                <tr >
-                    <td>
-                        <h4>{{ god.name }}</h4>
-                    </td>
-                    <td>
-                    <p>{{ god.domain }}</p>
-                    </td>
-                </tr>
-                    {% endfor %}
-            {% else %}
-                <p>No pantheon details available.</p>
-            {% endif %}
-            </table>
-        </section>
+{%block content %}
+<h1>{{ world_name }}</h1>
 
-        <section id="magic-system">
-            <h2>Magic System</h2>
-            <p>{{ magic_system.role }}</p>
-            <p>Power Source: {{ magic_system.power_source }}</p>
-        </section>
-
-        <section id="factions">
-            <h2>Factions</h2>
-            {% if factions %}
-                <ul>
-                    {% for faction in factions.factions%}
-                    <li><h3>{{ faction.name }}</h3></li>
-                    <ul>
-                        <li>Type:  {{ faction.type }}</li>
-                        <li>Goals: {{ faction.goal }}</li>
-                        <li>Leadership: {{ faction.leadership }}</li>
-                        <li><h4 style="margin:0">Key Leaders</h4></li>
-                        {% for leader in leaders.leaders%}
-                        {% if leader.kingdom == faction.name or leader.faction == faction.name %}
-                            <ul>
-                                <li>{{ leader.name }} - {{ leader.traits | join(', ') }}</li>
-                                        <ul>
-                                            <li> <h4 style="margin:0">Goals: </h4></li>
-                                                {% for goal in leader.goals %}
-                                                <ul>
-                                                    <li> {{ goal }} </li>
-                                                </ul>
-                                                {% endfor %}
-                                        </ul>
-                                        <ul>
-                                            <li> <h4 style="margin:0">Relationships: </h4></li>
-                                            <ul>
-                                            {% for relation, detail in leader.relationships.items() %}
-                                            <li> {{ relation }} </li>
-                                            <ul>
-                                                <li>{{detail}}</li>
-                                            </ul>
-                                            {% endfor %}
-                                        </ul>       
-                                </ul>
-                            </ul>
-                        {% endif %}
-                        {% endfor %}
-                    </ul>  
-                    {% endfor %}   
-                </ul>
-                {% else %}
-                <p>No factions available.</p>
-                {% endif %}
-        </section>
-
-        <section id="kingdoms">
-            <h2>Kingdoms</h2>
-            {% if kingdoms %}
-                <ul>
-                    {% for kingdom in kingdoms.kingdoms %}
-                    <li><h3>{{ kingdom.name }}</h3></li>
-                        <li>Race: {{ kingdom.race }}</li>
-                        <li>Capital: {{ kingdom.capital }}</li>
-                        <li>Population: {{ kingdom.population }}</li>
-                        {% if kingdom.relationships %}
-                        <ul>
-                            <li><h4 style="margin:0">Relationships:</h4>
-                                <ul>
-                                    <ul>
-                                        {% for relation, detail in kingdom.relationships.items() %}
-                                        <li> {{ relation }} </li>
-                                        <ul>
-                                            <li>{{detail}}</li>
-                                        </ul>
-                                        {% endfor %}
-                                    </ul>
-                                </ul>
-                        </ul>
-                        {% endif %}
-                    </li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <p>No kingdoms available.</p>
-            {% endif %}
-        </section>
-
-        <section id="history-chunks">
-            <h2>History</h2>
-            {% if history_chunks %}
-                {% for chunk in history_chunks.Chunks %}
-                <div>
-                    <h3>Period: {{ chunk.period }}</h3>
-                    <p>Events: {{ chunk.events | join(', ') }}</p>
-                    <h4>Perspectives:</h4>
-                    <ul>
-                        {% for key, value in chunk.perspective.items() %}
-                        <li>
-                            <strong>{{ key }}:</strong> {{ value }}
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                {% endfor %}
-            {% else %}
-                <p>No history chunks available.</p>
-            {% endif %}
-        </section>
-    </div>
-</body>
-</html>
+{% for key, data in world_data.items() %} 
+  {% set cat_page = [key,".html"]|join()%} 
+    {% if cat_page is defined %}
+      <button type="button" class="collapsible">
+        <h3>{{[key[0]|upper,key[1:]]|join()}}</h3>
+      </button>
+      <div class="collapsible-content">
+        {% include cat_page %}
+      </div>
+    {% endif %} 
+  {% endfor %} 
+{% endblock %}

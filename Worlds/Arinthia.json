@@ -1,0 +1,661 @@
+{
+  "world_name": "Arinthia",
+  "geography": {
+    "size": "Large",
+    "balance": "Well-balanced geographical features",
+    "landmarks": "Include landmarks that provide narrative significance",
+    "description": "A world of magic and mysticism"
+  },
+  "pantheon": {
+    "gods": [
+     {"name": "Zarathul", "domain": "Creation, life, fate" },
+     {"name": "Aerion", "domain": "Sky, wind, eagles" },
+     {"name": "Lumina", "domain": "Stars, light" },
+     {"name": "Tharos", "domain": "Craft, earth, Dwarves" },
+     {"name": "Neria", "domain": "Nature, growth, forests" },
+     {"name": "Maelstrom", "domain": "Sea, rivers, water"} 
+    ]
+},
+  "magic": {
+    "uses": ["Scholastic", "Religious Ceremony", "General Use"],
+    "sources": {
+      "The Divines": {
+        "type": "Deity",
+        "description": "Magic dirived directly fromthe gods of the realm",
+        "users": [
+          "Priests",
+          "Paladins",
+          "Cultists",
+          "Other Religious entities"
+        ],
+        "rules": [
+          "The use of magic is governed by the Gods",
+          "The Gods deem who is worthy to weild this magic",
+          "The Gods accept responsibility for its use"
+        ],
+        "notes": "",
+        "examples": {
+          "Healing": "Used by practisioners to heal those in need",
+          "Divine Smite": "Useable by practisioners to smite their enemies",
+          "Portent": "Used to invoke the gods of the realm knowledge"
+        }
+      },
+      "Nature's Path": {
+        "type": "Natural",
+        "description": "Magic used by the natural forces of the realm",
+        "users": ["Rangers", "Rogues", "Druids"],
+        "rules": [
+          "The use of magic is governed by the realm's natural forces",
+          "Practisioners hold each other responsible for its use",
+          "Those who misuse this magic are marked as wicked and punished"
+        ],
+        "notes": "",
+        "examples": {
+          "Healing": "Used by practisioners to heal those in need",
+          "Growth": "Used by the likes of Druids to enhance plant growth",
+          "Sense": "Used by individuals to sense their surroundings"
+        }
+      },
+      "The Arcane": {
+        "type": "Developed",
+        "description": "Magic used developed by powerful scholars and mystics",
+        "users": ["Sorcerers", "Wizard", "Arcanists", "Mystics"],
+        "rules": [
+          "The use of magic is governed by the realm's magical forces",
+          "Powerful orders define and enforce laws and rules"
+        ],
+        "notes": "",
+        "examples": {
+          "Healing": "Used by practisioners to heal those in need",
+          "Flaare": "Basic offensive elemental spell",
+          "Transmute": "Highly regulated spell used from transforming materials into other materials",
+          "Haste": "Advanced spell used to speed up the flow of time for the caster",
+          "Shield": "Basic spell used to protect the caster"
+        }
+      }
+    }
+  },
+  "kingdoms": {
+    "Elanthia": {
+      "adjective": "Elanthian",
+      "description": "The Elanthian Kingdom of Arinthia",
+      "races": ["Elves"],
+      "capital": "Eldoria",
+      "population": 120000,
+      "leadership": "High Councilor Thalindra",
+      "relationships": {
+        "Duramark": {
+          "reputation": 50,
+          "intelligence": {
+            "level": "High",
+            "schemes": ["Expand magical wards", "Alliance with Valoria"],
+            "known_schemes": [
+              "Duramark's mithril mining",
+              "Valoria's trade expansion"
+            ]
+          }
+        },
+        "Valoria": {
+          "reputation": 30,
+          "intelligence": {
+            "level": "Medium",
+            "schemes": [
+              "Cultural exchange with Sylvaria",
+              "Expand trade routes"
+            ],
+            "known_schemes": [
+              "Valoria's naval skirmishes",
+              "Sylvaria's agricultural innovations"
+            ]
+          }
+        },
+        "Korgath": {
+          "reputation": -20,
+          "intelligence": {
+            "level": "Low",
+            "schemes": ["Defend borders", "Strengthen military"],
+            "known_schemes": [
+              "Korgath's dark rituals",
+              "Nighthaven's expansion"
+            ]
+          }
+        },
+        "Sylvaria": {
+          "reputation": 70,
+          "intelligence": {
+            "level": "High",
+            "schemes": [
+              "Protect agricultural lands",
+              "Enhance trade with Elanthia"
+            ],
+            "known_schemes": [
+              "Sylvaria's cultural preservation",
+              "Elanthia's magical advancements"
+            ]
+          }
+        },
+        "Nighthaven": {
+          "reputation": -50,
+          "intelligence": {
+            "level": "Low",
+            "schemes": [
+              "Expand influence in Shadowgrove",
+              "Research dark magic"
+            ],
+            "known_schemes": [
+              "Nighthaven's goblin raids",
+              "Korgath's military expansion"
+            ]
+          }
+        }
+      }
+    },
+    "Duramark": {
+      "adjective": "Duran",
+      "description": "The Duramark Kingdom of Arinthia",
+      "races": ["Dwarves"],
+      "capital": "Ironhoold",
+      "population": 80000,
+      "leaders": {
+        "Guildmaster Borin": {
+          "High Councilor Thalindra": {
+            "reputation": 30,
+            "intelligence": {
+              "level": "Medium",
+              "schemes": ["Expand mithril trade", "Strengthen economic ties"],
+              "known_schemes": [
+                "Thalindra's magical advancements",
+                "Valoria's trade expansions"
+              ]
+            }
+          },
+          "General Thorin": {
+            "reputation": 20,
+            "intelligence": {
+              "level": "High",
+              "schemes": ["Expand military", "Control strategic locations"],
+              "known_schemes": [
+                "Thorin's military plans",
+                "Elandor's political maneuvers"
+              ]
+            }
+          }
+        }
+      },
+      "relationships": {
+        "Elanthia": {
+          "reputation": 50,
+          "intelligence": {
+            "level": "Medium",
+            "schemes": ["Expand mithril mining", "Form trade alliances"],
+            "known_schemes": [
+              "Elanthia's magical wards",
+              "Valoria's naval expansion"
+            ]
+          }
+        },
+        "Valoria": {
+          "reputation": 40,
+          "intelligence": {
+            "level": "High",
+            "schemes": ["Strengthen economic ties", "Expand trade routes"],
+            "known_schemes": [
+              "Valoria's trade network",
+              "Sylvaria's agricultural growth"
+            ]
+          }
+        },
+        "Korgath": {
+          "reputation": -10,
+          "intelligence": {
+            "level": "Medium",
+            "schemes": ["Defend mithril mines", "Expand military"],
+            "known_schemes": [
+              "Korgath's dark rituals",
+              "Nighthaven's goblin activities"
+            ]
+          }
+        },
+        "Sylvaria": {
+          "reputation": 60,
+          "intelligence": {
+            "level": "High",
+            "schemes": [
+              "Enhance trade with Elanthia",
+              "Protect agricultural lands"
+            ],
+            "known_schemes": [
+              "Sylvaria's cultural preservation",
+              "Elanthia's magical advancements"
+            ]
+          }
+        },
+        "Nighthaven": {
+          "reputation": -30,
+          "intelligence": {
+            "level": "Low",
+            "schemes": ["Research dark magic", "Expand goblin influence"],
+            "known_schemes": [
+              "Nighthaven's dark magic",
+              "Korgath's military expansion"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "factions": {
+    "The Silver Hand": {
+      "type": "Political",
+      "goal": "Power",
+      "leadership": "Lord Elandor",
+      "relationships": {
+        "The Iron Fist": {
+          "reputation": -40,
+          "intelligence": {
+            "level": "High",
+            "schemes": ["Influence royal court", "Undermine The Iron Fist"],
+            "known_schemes": [
+              "Iron Fist's military buildup",
+              "Golden Dawn's wealth accumulation"
+            ]
+          }
+        },
+        "The Golden Dawn": {
+          "reputation": 60,
+          "intelligence": {
+            "level": "Medium",
+            "schemes": ["Form religious alliances", "Accumulate wealth"]
+          }
+        },
+        "The Nightshade": {
+          "reputation": -70,
+          "intelligence": {
+            "level": "Low",
+            "schemes": [
+              "Expand underworld influence",
+              "Assassinate key figures"
+            ],
+            "known_schemes": [
+              "Nightshade's assassination plans",
+              "Iron Fist's strategic positions"
+            ]
+          }
+        }
+      }
+    },
+    "The Iron Fist": {
+      "type": "Military",
+      "goal": "control",
+      "leadership": "General Thorin",
+      "relationships": {
+        "The Silver Hand": {
+          "reputation": -40,
+          "intelligence": {
+            "level": "Medium",
+            "schemes": ["Expand military", "Control strategic locations"],
+            "known_schemes": [
+              "Silver Hand's political influence",
+              "Nightshade's underworld activities"
+            ]
+          }
+        },
+        "The Golden Dawn": {
+          "reputation": 20,
+          "intelligence": {
+            "level": "Low",
+            "schemes": ["Accumulate military resources", "Secure alliances"],
+            "known_schemes": [
+              "Golden Dawn's wealth plans",
+              "Silver Hand's political maneuvers"
+            ]
+          }
+        },
+        "The Nightshade": {
+          "reputation": -60,
+          "intelligence": {
+            "level": "High",
+            "schemes": ["Control underworld", "Assassinate rivals"],
+            "known_schemes": [
+              "Nightshade's assassination plots",
+              "Golden Dawn's religious influence"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "leaders": {
+    "High Councilor Thalindra": {
+      "kingdom": "Elanthia",
+      "traits": ["Wise", "Strategic", "Powerful"],
+      "goals": ["Protect Elanthia", "Preserve magical heritage"],
+      "relationships": {
+        "Lord Elandor": {
+          "reputation": 40,
+          "intelligence": {
+            "level": "High",
+            "schemes": ["Strengthen Silver Hand's influence", "Form alliances"],
+            "known_schemes": [
+              "Elandor's political maneuvers",
+              "Iron Fist's military expansion"
+            ]
+          }
+        },
+        "Guildmaster Borin": {
+          "reputation": 30,
+          "intelligence": {
+            "level": "Medium",
+            "schemes": ["Expand mithril trade", "Strengthen economic ties"],
+            "known_schemes": [
+              "Borin's mining projects",
+              "Golden Dawn's wealth accumulation"
+            ]
+          }
+        }
+      }
+    },
+    "Guildmaster Borin": {
+      "kingdom": "Duramark",
+      "traits": ["Shrewd", "Skilled", "Determined"],
+      "goals": ["Secure Duramark's wealth", "Expand mining operations"],
+      "relationships": {
+        "High Councilor Thalindra": {
+          "reputation": 30,
+          "intelligence": {
+            "level": "Medium",
+            "schemes": ["Expand mithril trade", "Strengthen economic ties"],
+            "known_schemes": [
+              "Thalindra's magical advancements",
+              "Valoria's trade expansions"
+            ]
+          }
+        },
+        "General Thorin": {
+          "reputation": 20,
+          "intelligence": {
+            "level": "High",
+            "schemes": ["Expand military", "Control strategic locations"],
+            "known_schemes": [
+              "Thorin's military plans",
+              "Elandor's political maneuvers"
+            ]
+          }
+        }
+      }
+    },
+    "King Valan": {
+      "kingdom": "Valoria",
+      "traits": ["Charismatic", "Diplomatic", "Brave"],
+      "goals": ["Expand Valoria's influence", "Strengthen naval power"],
+      "relationships": {
+        "High Councilor Thalindra": {
+          "reputation": 50,
+          "intelligence": {
+            "level": "High",
+            "schemes": ["Form alliances", "Expand trade routes"],
+            "known_schemes": [
+              "Thalindra's magical influence",
+              "Sylvaria's agricultural expansion"
+            ]
+          }
+        },
+        "Warlord Grishnak": {
+          "reputation": -30,
+          "intelligence": {
+            "level": "Medium",
+            "schemes": ["Defend borders", "Enhance military strength"],
+            "known_schemes": ["Grishnak's raids", "Nighthaven's dark rituals"]
+          }
+        }
+      }
+    },
+    "Warlord Grishnak": {
+      "kingdom": "Korgath",
+      "traits": ["Ruthless", "Tactical", "Fearsome"],
+      "goals": ["Expand Korgath's territory", "Dominate neighboring kingdoms"],
+      "relationships": {
+        "King Valen": {
+          "reputation": -30,
+          "intelligence": {
+            "level": "Medium",
+            "schemes": ["Conduct raids", "Strengthen military"],
+            "known_schemes": ["Valen's naval power", "Sylvaria's defenses"]
+          }
+        },
+        "Shadow Priestess Morgana": {
+          "reputation": -10,
+          "intelligence": {
+            "level": "High",
+            "schemes": ["Harness dark magic", "Expand influence"],
+            "known_schemes": [
+              "Morgana's dark rituals",
+              "Nightshade's assassination plans"
+            ]
+          }
+        }
+      }
+    },
+    "Mayor Bramblethorn": {
+      "kingdom": "Sylvaria",
+      "traits": ["Kind", "Wise", "Diplomatic"],
+      "goals": ["Ensure Sylvaria's prosperity", "Preserve cultural heritage"],
+      "relationships": {
+        "High Councilor Thalindra": {
+          "reputation": 70,
+          "intelligence": {
+            "level": "High",
+            "schemes": ["Enhance trade", "Cultural exchange"],
+            "known_schemes": [
+              "Thalindra's magical projects",
+              "Duramark's mining expansions"
+            ]
+          }
+        },
+        "King Valen": {
+          "reputation": 50,
+          "intelligence": {
+            "level": "Medium",
+            "schemes": ["Trade agreements", "Agricultural innovations"],
+            "known_schemes": [
+              "Valen's trade routes",
+              "Elandor's political maneuvers"
+            ]
+          }
+        }
+      }
+    },
+    "Shadow Priestess Morgana": {
+      "kingdom": "Nighthaven",
+      "traits": ["Mysterious", "Powerful", "Cunning"],
+      "goals": ["Expand Nighthaven's influence", "Harness dark magic"],
+      "relationships": {
+        "Warlord Grishnak": {
+          "reputation": -10,
+          "intelligence": {
+            "level": "High",
+            "schemes": ["Dark rituals", "Expand influence"],
+            "known_schemes": [
+              "Grishnak's military plans",
+              "Silver Hand's political influence"
+            ]
+          }
+        },
+        "Lord Elandor": {
+          "reputation": -40,
+          "intelligence": {
+            "level": "Low",
+            "schemes": [
+              "Expand underworld influence",
+              "Conduct assassinations"
+            ],
+            "known_schemes": [
+              "Elandor's political schemes",
+              "Iron Fist's military buildup"
+            ]
+          }
+        }
+      }
+    },
+    "Lord Elandor": {
+      "faction": "The Silver Hand",
+      "traits": ["Ambitious", "Charismatic", "Strategic"],
+      "goals": ["Gain political power", "Undermine rivals"],
+      "relationships": {
+        "General Thorin": {
+          "reputation": -40,
+          "intelligence": {
+            "level": "High",
+            "schemes": ["Influence royal court", "Undermine Iron Fist"],
+            "known_schemes": [
+              "Thorin's military strategies",
+              "Golden Dawn's wealth plans"
+            ]
+          }
+        },
+        "Priestess Alara": {
+          "reputation": 60,
+          "intelligence": {
+            "level": "Medium",
+            "schemes": ["Form religious alliances", "Accumulate wealth"],
+            "known_schemes": [
+              "Alara's religious influence",
+              "Nightshade's control efforts"
+            ]
+          }
+        }
+      }
+    },
+    "General Thorin": {
+      "faction": "The Iron Fist",
+      "traits": ["Disciplined", "Tactical", "Strong"],
+      "goals": ["Expand military control", "Secure strategic locations"],
+      "relationships": {
+        "Lord Elandor": {
+          "reputation": -40,
+          "intelligence": {
+            "level": "Medium",
+            "schemes": ["Expand military", "Control strategic locations"],
+            "known_schemes": [
+              "Elandor's political influence",
+              "Nightshade's underworld activities"
+            ]
+          }
+        },
+        "Shadowmaster Kryn": {
+          "reputation": -60,
+          "intelligence": {
+            "level": "High",
+            "schemes": ["Control underworld", "Assassinate rivals"],
+            "known_schemes": [
+              "Kryn's assassination plots",
+              "Golden Dawn's religious influence"
+            ]
+          }
+        }
+      }
+    },
+    "Priestess Alara": {
+      "faction": "The Golden Dawn",
+      "traits": ["Pious", "Wealthy", "Influential"],
+      "goals": ["Accumulate wealth", "Expand religious influence"],
+      "relationships": {
+        "Lord Elandor": {
+          "reputation": 60,
+          "intelligence": {
+            "level": "Medium",
+            "schemes": ["Form religious alliances", "Accumulate wealth"],
+            "known_schemes": [
+              "Elandor's influence campaign",
+              "Nightshade's control efforts"
+            ]
+          }
+        },
+        "General Thorin": {
+          "reputation": 20,
+          "intelligence": {
+            "level": "Low",
+            "schemes": ["Secure alliances", "Accumulate resources"],
+            "known_schemes": [
+              "Thorin's military plans",
+              "Elandor's political maneuvers"
+            ]
+          }
+        }
+      }
+    },
+    "Shadowmaster Kryn": {
+      "faction": "The Nightshade",
+      "traits": ["Stealthy", "Cunning", "Lethal"],
+      "goals": ["Control the underworld", "Eliminate rivals"],
+      "relationships": {
+        "Lord Elandor": {
+          "reputation": -70,
+          "intelligence": {
+            "level": "Low",
+            "schemes": [
+              "Expand underworld influence",
+              "Conduct assassinations"
+            ],
+            "known_schemes": [
+              "Elandor's political schemes",
+              "Iron Fist's military buildup"
+            ]
+          }
+        },
+        "General Thorin": {
+          "reputation": -60,
+          "intelligence": {
+            "level": "High",
+            "schemes": ["Control underworld", "Assassinate rivals"],
+            "known_schemes": [
+              "Thorin's strategic plans",
+              "Golden Dawn's wealth accumulation"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "history": {
+    "Era of Creation": {
+      "0": {
+        "period": "0 - 0",
+        "events": ["Creation of the world"],
+        "perspective": {
+          "Unbiased": "The world began with the creation of the world."
+        }
+      },
+      "500": {
+        "period": "0 - 500",
+        "major events": [
+          "Rise of Elanthia",
+          "Rise of Valoria",
+          "First Orc Wars"
+        ],
+        "minor events": [],
+        "perspective": {
+          "Elanthia": "The Age of Enlightenment began with the founding of Elandor.",
+          "Valoria": "The Kingdom of Valoria rose to prominence through trade and diplomacy.",
+          "Korgath": "The First Orc Wars forged the strength of our people.",
+          "Unbiased": "The first 500 years saw the rise of major kingdoms and early conflicts."
+        }
+      },
+      "1000": {
+        "period": "500 - 1000",
+        "major events": [
+          "Expansion of Duramark",
+          "Golden Age of Valoria",
+          "Shadow Uprisings in Nighthaven"
+        ],
+        "minor events": [],
+        "perspective": {
+          "Duramark": "The Iron Brotherhood secured new mining territories.",
+          "Valoria": "Valoria experienced a golden age of prosperity and culture.",
+          "Nighthaven": "The Shadow Uprisings marked a period of turmoil and resistance.",
+          "Unbiased": "The second period was marked by expansion, prosperity, and uprisings."
+        }
+      }
+    }
+  }
+}

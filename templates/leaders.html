@@ -1,27 +1,93 @@
-{% extends "base.html" %}
-
-{% block content %}
-<h2>Key Leaders of {{ world_name }}</h2>
-<ul>
-    {% for leader in leaders %}
-    <li>
-        <h3>{{ leader.name }}</h3>
-        <p>Kingdom/Faction: {{ leader.kingdom or leader.faction }}</p>
-        <p>Traits: {{ leader.traits | join(', ') }}</p>
-        <p>Goals: {{ leader.goals | join(', ') }}</p>
-        <h4>Relationships:</h4>
-        <ul>
-            {% for relation, details in leader.relationships.items() %}
-            <li>
-                <strong>{{ relation }}:</strong>
-                <p>Reputation: {{ details.reputation }}</p>
-                <p>Intelligence Level: {{ details.intelligence.level }}</p>
-                <p>Schemes: {{ details.intelligence.schemes | join(', ') }}</p>
-                <p>Known Schemes: {{ details.intelligence.known_schemes | join(', ') }}</p>
-            </li>
+{% for name,data in world_data.leaders.items() %}
+<span style="font-size:18pt">
+<b>
+  {% set upper_name = [name[0]|upper,name[1:]]|join() %}
+  {{upper_name}}
+</b>
+</span>
+<table style="padding-left:50px;width:100%">
+    <tr>
+        {% if data.get('kingdom') %}
+        <td>
+            <b>Kingdom: </b>
+        </td>
+        <td>
+            <p>{{data["type"]}}</p>
+        </td>
+        {% else %}
+        <td>
+            <b>Faction: </b>
+        </td>
+        <td>
+            <p>{{data["faction"]}}</p>
+        </td>
+        {% endif %}
+    </tr>
+    <tr>
+        <td>
+            <b>Traits: </b>
+        </td>
+        <td>
+            <p>{{data["traits"]|join()}}</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <b>Goals: </b>
+        </td>
+        <td>
+            <ol>
+            {% for goal in data['goals'] %}
+            <li>{{ goal }}</li>
             {% endfor %}
-        </ul>
-    </li>
+            </ol>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <b>Relationships: </b>
+        </td>
+    </tr>
+    {% for relation,data in data['relationships'].items() %}
+    <tr>
+        <td colspan="2">
+                <button type="button" class="collapsible" style="padding:0px;font-size:12pt;background-color:#ccc">
+                    <b>{{ relation }}</b>
+                  </button>
+                  <div class="collapsible-content" style="background-color:#eee">
+                    <ul>
+                        <li>
+                            Level: {{ data["intelligence"]["level"]}}
+                        </li>
+                        <li>
+                            Schemes Against:
+                        </li>
+                        <ol>
+                            {% for scheme in data["intelligence"]["schemes"] %}
+                            <li>
+                                {{ scheme }}
+                            </li>
+                            {% endfor %}
+                        </ol>
+                        <li>
+                            Known Schemes:
+                        </li>
+                        <ol>
+                            {% for scheme in data["intelligence"]["known_schemes"] %}
+                            <li>
+                                {{ scheme }}
+                            </li>
+                            {% endfor %}
+                        </ol>
+                    </ul>
+                    </ul>
+                <td>
+                </ul>
+            </td>
+        </div>
+    </tr>
     {% endfor %}
-</ul>
-{% endblock %}
+</tr>
+</table>
+<hr>
+{% endfor %}

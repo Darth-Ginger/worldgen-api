@@ -1,0 +1,20 @@
+{
+  "factions": [
+    {
+      "name": "Faction Name",
+      "type": "Faction Type",
+      "goal": "Faction Goal",
+      "leadership": "Leader's Name",
+      "relationships": {
+        "Other Faction Name": {
+          "reputation": "int ReputationScore",
+          "intelligence": {
+            "level": "Intelligence Level",
+            "schemes": ["Scheme 1", "Scheme 2"],
+            "known_schemes": ["Known Scheme 1", "Known Scheme 2"]
+          }
+        }
+      }
+    }
+  ]
+}
