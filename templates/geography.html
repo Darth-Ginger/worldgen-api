@@ -1,17 +1,17 @@
 <spn id="geography">
-<table>
-    {% for attr,data in world_data.geography.items() %}
-    <tr>
-        <td>
-            {% set upper_attr = [attr[0]|upper,attr[1:]]|join() %}
-            <b>{{upper_attr}}</b>
-        </td>
-        <td>
-            {{data}}
-        </td>
-    </tr>
-    {% endfor %}
-</table>
-</span>
-
-  
+    <table>
+        {% for attr,data in world_data.geography.items() %}
+        <tr>
+            <td>
+                {% set upper_attr = [attr[0]|upper,attr[1:]]|join() %}
+                <b>{{upper_attr}}</b>
+            </td>
+            <td>
+                {{data}}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    </span>
+    
+      

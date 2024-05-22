@@ -1,0 +1,58 @@
+  <!-- Uses -->
+  <h3><b>
+    {% set keys = data.keys()| list %} {% set upper_attr =
+    [keys[0][0]|upper,keys[0][1:]]|join() %} {{upper_attr}}
+  </b></h3>
+  <ul><li>
+    <h4>{{ data["uses"]|join(", ") }}</h4>
+  </li></ul>
+
+  <!-- Sources -->
+  <h3><b>
+    {% set upper_attr = [keys[1][0]|upper,keys[1][1:]]|join() %}
+    {{upper_attr}}
+  </b></h3>
+  {% for source in data["sources"].items() %}
+  <ul>
+    <li>{{source[0]}}
+        <ul style="margin-bottom:5px">
+            <li>
+                Source Type: {{source[1]["type"]}}
+            </li>
+            <li>
+                Description: {{source[1]["description"]}}
+            </li>
+            <li>
+                Known Users: {{source[1]["users"]|join(", ")}}
+            </li>
+            <li>
+                Rules of the system:
+            </li>
+            <ol>
+                {% for rule in source[1]["rules"] %}
+                    <li>{{rule}}</li>
+                {% endfor %}
+            </ol>
+            {% if source[1]["examples"]|length > 0 %}
+            <li>
+                Example Spells:
+            </li>
+            {% endif %}
+            {% for key,value in source[1]["examples"].items() %}
+            <ul>
+                <li>
+                    {{ key }}: {{ value }}
+                </li>
+            </ul>
+            {% endfor %}
+            {% if source[1]["notes"] != "" %}
+                <li>
+                    Notes: {{source[1]["notes"]}}
+                </li>
+            {% endif %}
+        </ul>
+        
+    </li>
+</ul>
+{% endfor %}
+
