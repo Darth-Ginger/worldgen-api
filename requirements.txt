@@ -1,0 +1,15 @@
+annotated-types==0.7.0
+blinker==1.8.2
+click==8.1.7
+colorama==0.4.6
+Flask==0.12.5
+Flask-OpenAPI==0.1.0a1
+itsdangerous==2.2.0
+Jinja2==3.1.4
+jsonschema==2.6.0
+MarkupSafe==2.1.5
+pydantic==2.7.1
+pydantic_core==2.18.2
+PyYAML==3.13
+typing_extensions==4.11.0
+Werkzeug==0.16.1

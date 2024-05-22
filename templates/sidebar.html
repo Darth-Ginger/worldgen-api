@@ -11,14 +11,14 @@
     <a href="{{ url_for('world', world_name=world.name) }}">
       <span class="caret"> {{ world.name }} </span>
     </a>
-
+<!---->
     {% if world.categories|length > 0 %}
     <div class="category">
       <ul id="categories">
         {% for category in world.categories %}
         <li>
           <a
-            href="{{ url_for('category', world_name=world, category=category) }}"
+            href="{{ url_for('world', world_name=world, category=category) }}"
             >{{ category }}</a
           >
         </li>
@@ -28,3 +28,4 @@
     {% endif %} {% endfor %}
   </li>
 </ul>
+<!---->
