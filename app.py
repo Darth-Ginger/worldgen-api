@@ -20,10 +20,12 @@ def inject_sidebar():
     worlds = []
     
     for root, dirs, files in os.walk(worlds_dir):
-        for dir_name in dirs:
+        for file_name in files:
+            world_data = load_json(os.path.join(root, file_name))
             world = {
-                'name': dir_name,
-                'url': url_for('world', world_name=dir_name)
+                'name': world_data.get('world_name'),
+                'url': url_for('world', world_name=world_data.get('world_name')),
+                "categories": [category for category in world_data.keys() if category != 'world_name']
             }
             worlds.append(world)
         break
@@ -42,60 +44,52 @@ def world_exists(world_name) -> bool:
 
 @app.get('/')
 def index():
-    return render_template('index.html')
+    world_names = [world.replace('.json', '') for world in os.listdir(worlds_dir) if world.endswith('.json')] 
+    return render_template('index.html', world_names=world_names)
 
 @app.route('/world/<world_name>')
 def world(world_name):
-    base_dir = os.path.join(worlds_dir, world_name)
-    
-    if not os.path.exists(base_dir):
+    world_file = f"{world_name}.json"
+    world_path = os.path.join('Worlds', world_file)
+
+    if not os.path.exists(world_path): 
         abort(404)
 
-    def load_json(file_name):
-        file_path = os.path.join(base_dir, file_name)
-        if os.path.exists(file_path):
-            with open(file_path, 'r') as f:
-                return json.load(f)
-        return None
+    with open(world_path, 'r') as f:
+        world_data = json.load(f)
+    world_data = {k: world_data.get(k) for k in world_data if k != 'world_name'}
+    
+    return render_template('world.html', world_name=world_name, world_data=world_data)
 
+#endregion Web Routes
+#region API Routes
 
-    world_description = load_json('01_world_description.json')
-    pantheon = load_json('02_pantheon.json')
-    magic_system = load_json('03_magic_system.json')
-    factions = load_json('04_factions.json')
-    kingdoms = load_json('05_kingdoms.json')
-    leaders = load_json('06_key_leaders.json')
-    history_chunks = load_json('07_history_chunks.json')
+@app.get("/api/world/<world_name>")
+def api_world(world_name):
+    """
+    Retrieves the JSON data of a specific world by its name.
 
-    return render_template(
-        'world.html', 
-        world_name=world_name, 
-        world_description=world_description,
-        kingdoms=kingdoms,
-        factions=factions,
-        pantheon=pantheon,
-        magic_system=magic_system,
-        history_chunks=history_chunks,
-        leaders=leaders
-    )
+    Parameters:
+        world_name (str): The name of the world to retrieve the data for.
 
-@app.route('/world/<world_name>/kingdoms')
-def kingdoms(world_name):
-    filepath = os.path.join('Worlds', world_name, 'kingdoms.json')
-    data = load_json(filepath)
-    return render_template('kingdoms.html', kingdoms=data['kingdoms'], world_name=world_name)
+    Returns:
+        dict: A JSON object containing the data of the specified world.
 
-@app.route('/world/<world_name>/factions')
-def factions(world_name):
-    filepath = os.path.join('Worlds', world_name, 'factions.json')
-    data = load_json(filepath)
-    return render_template('factions.html', factions=data['factions'], world_name=world_name)
+    Raises:
+        404: If the specified world does not exist.
+    """
+    world_file = f"{world_name}.json"
+    world_path = os.path.join('Worlds', world_file)
 
-@app.route('/world/<world_name>/leaders')
-def leaders(world_name):
-    filepath = os.path.join('Worlds', world_name, 'leaders.json')
-    data = load_json(filepath)
-    return render_template('leaders.html', leaders=data['leaders'], world_name=world_name)
+    if not os.path.exists(world_path): 
+        abort(404, description="World not found")
+
+    with open(world_path, 'r') as f:
+        world_data = json.load(f)
+
+    return jsonify(world_data)
+
+#endregion API Routes
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True) 
