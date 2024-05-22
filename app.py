@@ -3,10 +3,9 @@ from flask import Flask, abort, render_template, jsonify, url_for
 import json
 import os
 
-
 app = Flask(__name__)
 app.jinja_env.add_extension('jinja2.ext.do')
-api_app = OpenAPI(app.name, info=info, security_schemes=security_schemes)
+
 
 #endregion App setup
 
@@ -41,7 +40,7 @@ def world_exists(world_name) -> bool:
 
 #region Web Routes
 
-@api_app.get('/')
+@app.get('/')
 def index():
     return render_template('index.html')
 
@@ -99,5 +98,5 @@ def leaders(world_name):
     return render_template('leaders.html', leaders=data['leaders'], world_name=world_name)
 
 if __name__ == '__main__':
-    # app.run(host='0.0.0.0', debug=True) 
-    api_app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0', debug=True) 
+   
