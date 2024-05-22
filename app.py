@@ -17,9 +17,10 @@ api_key = {
     "name": "Authorization"
 }
 
+security_schemes = {"api_key": api_key}
 info = Info(title="WorldGen-API", version="1.0.0")
 
-app = OpenAPI(__name__, info=info)
+app = OpenAPI(__name__, info=info, security_schemes=security_schemes)
 app.jinja_env.add_extension('jinja2.ext.do')
 app.config['API_SECRET_KEY'] = f"Bearer {api_secret}"
 

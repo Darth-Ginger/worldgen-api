@@ -31,6 +31,11 @@ components:
           title: Error Type
       title: ValidationErrorModel
       type: object
+  securitySchemes:
+    api_key:
+      in: header
+      name: Authorization
+      type: apiKey
 info:
   title: WorldGen-API
   version: 1.0.0
