@@ -22,7 +22,12 @@ def inject_sidebar():
     for root, dirs, files in os.walk(worlds_dir):
         for file_name in files:
             world_data = load_json(os.path.join(root, file_name))
+        for file_name in files:
+            world_data = load_json(os.path.join(root, file_name))
             world = {
+                'name': world_data.get('world_name'),
+                'url': url_for('world', world_name=world_data.get('world_name')),
+                "categories": [category for category in world_data.keys() if category != 'world_name']
                 'name': world_data.get('world_name'),
                 'url': url_for('world', world_name=world_data.get('world_name')),
                 "categories": [category for category in world_data.keys() if category != 'world_name']
@@ -42,13 +47,19 @@ def world_exists(world_name) -> bool:
 
 #region Web Routes
 
-@app.get('/')
+@app.get('/', operation_id="get_index")
 def index():
+    world_names = [world.replace('.json', '') for world in os.listdir(worlds_dir) if world.endswith('.json')] 
+    return render_template('index.html', world_names=world_names)
     world_names = [world.replace('.json', '') for world in os.listdir(worlds_dir) if world.endswith('.json')] 
     return render_template('index.html', world_names=world_names)
 
 @app.route('/world/<world_name>')
 def world(world_name):
+    world_file = f"{world_name}.json"
+    world_path = os.path.join('Worlds', world_file)
+
+    if not os.path.exists(world_path): 
     world_file = f"{world_name}.json"
     world_path = os.path.join('Worlds', world_file)
 
