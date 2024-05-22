@@ -2,17 +2,28 @@ from flask import Flask, abort, redirect, render_template, jsonify, url_for
 import json
 import os
 from auth import check_body, has_Key
-# from flask_openapi3 import OpenAPI3, Info, Tag
-# from pydantic import BaseModel
+from flask_openapi3 import OpenAPI, Info, Tag, OAuthConfig
+from pydantic import BaseModel
 
-# info = Info(title="WorldGen-API", version="1.0.0")
-app = Flask(__name__)
-# app = Flask(__name__, info=info)
-app.jinja_env.add_extension('jinja2.ext.do')
+#region App setup
+
 api_secret = os.getenv('API_SECRET')
 if not api_secret:
     raise ValueError("API_SECRET is not set in the environment variables")
+
+api_key = {
+    "type": "apiKey",
+    "in": "header",
+    "name": "Authorization"
+}
+
+info = Info(title="WorldGen-API", version="1.0.0")
+
+app = OpenAPI(__name__, info=info)
+app.jinja_env.add_extension('jinja2.ext.do')
 app.config['API_SECRET_KEY'] = f"Bearer {api_secret}"
+
+#endregion App setup
 
 worlds_dir = 'Worlds'
 
@@ -46,12 +57,12 @@ def world_exists(world_name) -> bool:
 #region Web Routes
 
 
-@app.route('/')
+@app.get('/', operation_id="get_index")
 def index():
     world_names = [world.replace('.json', '') for world in os.listdir(worlds_dir) if world.endswith('.json')] 
     return render_template('index.html', world_names=world_names)
 
-@app.route('/world/<world_name>', methods=['GET'])
+@app.get('/world/<world_name>', operation_id="get_world")
 def world(world_name):
     world_file = f"{world_name}.json"
     world_path = os.path.join('Worlds', world_file)
@@ -65,7 +76,7 @@ def world(world_name):
     
     return render_template('world.html', world_name=world_name, world_data=world_data)
 
-@app.route('/world/<world_name>/<category>', methods=['GET'])
+@app.get('/world/<world_name>/<category>', operation_id="get_category")
 def category(world_name, category):
     world_name += ".json"
     world_data = load_json(os.path.join('Worlds', world_name))
@@ -82,7 +93,7 @@ def category(world_name, category):
 #region API Endpoints
 
 
-@app.route("/api/world/<world_name>", methods=['GET'])
+@app.get("/api/world/<world_name>", operation_id="get_api_world")
 def api_world(world_name):
     """
     Retrieves the JSON data of a specific world by its name.
@@ -107,7 +118,7 @@ def api_world(world_name):
 
     return jsonify(world_data)
  
-@app.route("/api/world/<world_name>/<category>", methods=['GET'])
+@app.get("/api/world/<world_name>/<category>", operation_id="get_api_category")
 def api_category(world_name, category):
     if not world_exists(world_name):
         abort(404, description="World not found")

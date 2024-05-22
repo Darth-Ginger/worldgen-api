@@ -11,10 +11,14 @@ def has_Key():
         @wraps(fn)
         def wrapper(*args, **kwargs):
             # If the Auth header doesn't exist, abort
-            if not request.headers.get('Authorization'):
+            if not request.headers.get('Authorization') or not request.headers.get('Authorization').startswith('Bearer ') or request.headers.get("X-API-KEY"):
                 abort(401, description="Access Forbidden: Unauthorized")
 
-            auth_head = request.headers['Authorization']
+            if request.get("Authorization"):
+                auth_head = request.headers['Authorization']
+            if request.get("X-API-KEY"):
+                auth_head = request.headers['X-API-KEY']
+                
             # If the auth header doesn't include the secret, abort
             if auth_head != app.config['API_SECRET_KEY']:
                 abort(403, description="Access Forbidden: insufficient permissions")
