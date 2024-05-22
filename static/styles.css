@@ -19,36 +19,7 @@ body {
     color: white;
     padding: 10px 15px;
     text-decoration: none;
-}
-.sidebar ul li {
-    font-weight: bold;
-    font-size: 1.2em;
-    margin-bottom: 0px;
-}
-ul, #worlds {
-    list-style-type: none;
-}
-#worlds {
-    margin : 0;
-    padding: 0;
-}
-.caret {
-    cursor: pointer;
-}
-.caret::before {
-    content: "\25B6";
-    color: white;
-    display: inline-block;
-    margin-right: 6px;
-}
-.category {
-    display: block;
-    margin-left: 10px;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    font-size: 10px;
-    font-style: italic;
-    padding: 0px;
+    text-align: center;
 }
 .sidebar a:hover {
     background-color: #34495e;
@@ -58,63 +29,11 @@ ul, #worlds {
     padding: 20px;
     width: calc(100% - 200px);
 }
-.category-content {
-    margin: 10px;
-    padding: 5px;
-    width: 100%;
-    background-color: #cbccca;
-}
 table, th, td {
-    border: 0px solid hsl(0, 0%, 0%);
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-top: 0px;
-    padding-bottom: 0px;
-    margin: 0px;
-  
-    
-}
-
-/* Style the button that is used to open and close the collapsible content */
-.collapsible {
-    background-color: #eee;
-    color: #444;
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    border: none;
-    text-align: left;
-    outline: none;
-    font-size: 15px;
-}
-
-/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-.active, .collapsible:hover {
-  background-color: #ccc;
-}
-
-/* Style the collapsible content. Note: hidden by default */
-.collapsible-content {
-  padding: 0 18px;
-  display: none;
-  overflow: hidden;
-  background-color: #aaa9a9;
-}
-.era_record {
-    font-size: 14pt;
-    padding: 5px;
-    margin: 5px;
-    width: 100%;
-    background-color: #aaa9a9;
-}
-.period_record {
-    font-size: 12pt;
-    padding: 5px;
-    margin: 10px;
-    background-color: #bdbbbb;
     border: 1px solid black;
+    padding: 1px;
+    padding-left: 10px;
 }
-.historical_record b {
-    font-weight: bold;
-    font-size:18pt;
+table {
+    border-spacing: 0px;
 }

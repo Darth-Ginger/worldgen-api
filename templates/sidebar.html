@@ -1,11 +1,5 @@
-<center>
-  <h2>
-    <a href="{{ url_for('index')}}">
-    Worlds
-  </a>
-  </h2>
-</center>
-<ul id="worlds">
+<center><h2>Worlds</h2></center>
+<ul>
   {% for world in worlds %}
   <li>
     <a href="{{ url_for('world', world_name=world.name) }}">

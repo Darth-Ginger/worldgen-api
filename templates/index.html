@@ -1,10 +1,18 @@
-{% extends "base.html" %}
-{% block title %}Worlds{% endblock %}
-{% block content %}
-<h1>Worlds</h1>
-<ul>
-  {% for world in world_names %}
-    <li><a href="{{ url_for('world', world_name=world) }}">{{ world }}</a></li>
-  {% endfor %}
-</ul>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arinthia World Navigation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="sidebar">
+        {% include 'sidebar.html' %}
+    </div>
+    <div class="content">
+        <h1>Welcome to WorldGen</h1>
+        <p>Select a world from the sidebar to explore its details.</p>
+    </div>
+</body>
+</html>

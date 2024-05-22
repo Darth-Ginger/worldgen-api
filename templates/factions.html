@@ -1,80 +1,27 @@
-{% for name,data in world_data.factions.items() %}
-<span style="font-size:18pt">
-<b>
-  {% set upper_name = [name[0]|upper,name[1:]]|join() %}
-  {{upper_name}}
-</b>
-</span>
-<table style="padding-left:50px;width:100%">
-    <tr>
-        <td>
-            <b>Type: </b>
-        </td>
-        <td>
-            <p>{{data["type"]}}</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <b>Goal: </b>
-        </td>
-        <td>
-            <p>{{data["goal"]}}</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <b>Leader: </b>
-        </td>
-        <td>
-            <p>{{ data["leadership"]|join() }}</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <b>Relationships: </b>
-        </td>
-    </tr>
-    {% for relation,data in data['relationships'].items() %}
-    <tr>
-        <td colspan="2">
-                <button type="button" class="collapsible" style="padding:0px;font-size:12pt;background-color:#ccc">
-                    <b>{{ relation }}</b>
-                  </button>
-                  <div class="collapsible-content" style="background-color:#eee">
-                    <ul>
-                        <li>
-                            Level: {{ data["intelligence"]["level"]}}
-                        </li>
-                        <li>
-                            Schemes Against:
-                        </li>
-                        <ol>
-                            {% for scheme in data["intelligence"]["schemes"] %}
-                            <li>
-                                {{ scheme }}
-                            </li>
-                            {% endfor %}
-                        </ol>
-                        <li>
-                            Known Schemes:
-                        </li>
-                        <ol>
-                            {% for scheme in data["intelligence"]["known_schemes"] %}
-                            <li>
-                                {{ scheme }}
-                            </li>
-                            {% endfor %}
-                        </ol>
-                    </ul>
-                    </ul>
-                <td>
-                </ul>
-            </td>
-        </div>
-    </tr>
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Factions of {{ world_name }}</h2>
+<ul>
+    {% for faction in factions %}
+    <li>
+        <h3>{{ faction.name }}</h3>
+        <p>Type: {{ faction.type }}</p>
+        <p>Goal: {{ faction.goal }}</p>
+        <p>Leadership: {{ faction.leadership }}</p>
+        <h4>Relationships:</h4>
+        <ul>
+            {% for relation, details in faction.relationships.items() %}
+            <li>
+                <strong>{{ relation }}:</strong>
+                <p>Reputation: {{ details.reputation }}</p>
+                <p>Intelligence Level: {{ details.intelligence.level }}</p>
+                <p>Schemes: {{ details.intelligence.schemes | join(', ') }}</p>
+                <p>Known Schemes: {{ details.intelligence.known_schemes | join(', ') }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+    </li>
     {% endfor %}
-</tr>
-</table>
-<hr>
-{% endfor %}
+</ul>
+{% endblock %}
