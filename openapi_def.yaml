@@ -1,5 +1,227 @@
 components:
   schemas:
+    Era:
+      properties: {}
+      title: Era
+      type: object
+    Faction:
+      properties:
+        goal:
+          title: Goal
+          type: string
+        leadership:
+          title: Leadership
+          type: string
+        relationships:
+          additionalProperties:
+            $ref: '#/components/schemas/Relationship'
+          title: Relationships
+          type: object
+        type:
+          title: Type
+          type: string
+      required:
+      - type
+      - goal
+      - leadership
+      - relationships
+      title: Faction
+      type: object
+    Geography:
+      properties:
+        balance:
+          title: Balance
+          type: string
+        description:
+          title: Description
+          type: string
+        landmarks:
+          items: {}
+          title: Landmarks
+          type: array
+        size:
+          title: Size
+          type: string
+      required:
+      - size
+      - balance
+      - landmarks
+      - description
+      title: Geography
+      type: object
+    God:
+      properties:
+        domain:
+          title: Domain
+          type: string
+        name:
+          title: Name
+          type: string
+      required:
+      - name
+      - domain
+      title: God
+      type: object
+    Intel:
+      properties:
+        known_schemes:
+          items:
+            type: string
+          title: Known Schemes
+          type: array
+        level:
+          title: Level
+          type: string
+        schemes:
+          items:
+            type: string
+          title: Schemes
+          type: array
+      required:
+      - level
+      - schemes
+      - known_schemes
+      title: Intel
+      type: object
+    Kingdom:
+      properties:
+        capital:
+          title: Capital
+          type: string
+        leadership:
+          title: Leadership
+          type: string
+        name:
+          title: Name
+          type: string
+        population:
+          title: Population
+          type: integer
+        race:
+          title: Race
+          type: string
+        relationships:
+          additionalProperties:
+            $ref: '#/components/schemas/Relationship'
+          title: Relationships
+          type: object
+      required:
+      - name
+      - race
+      - capital
+      - population
+      - leadership
+      - relationships
+      title: Kingdom
+      type: object
+    Leader:
+      properties:
+        faction:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Faction
+        goals:
+          items:
+            type: string
+          title: Goals
+          type: array
+        kingdom:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Kingdom
+        relationships:
+          additionalProperties:
+            $ref: '#/components/schemas/Relationship'
+          title: Relationships
+          type: object
+        traits:
+          items:
+            type: string
+          title: Traits
+          type: array
+      required:
+      - kingdom
+      - faction
+      - traits
+      - goals
+      - relationships
+      title: Leader
+      type: object
+    Magic:
+      properties:
+        sources:
+          additionalProperties:
+            $ref: '#/components/schemas/Magic_Source'
+          title: Sources
+          type: object
+        uses:
+          items:
+            type: string
+          title: Uses
+          type: array
+      required:
+      - uses
+      - sources
+      title: Magic
+      type: object
+    Magic_Source:
+      properties:
+        description:
+          title: Description
+          type: string
+        examples:
+          title: Examples
+          type: object
+        notes:
+          title: Notes
+          type: string
+        rules:
+          items:
+            type: string
+          title: Rules
+          type: array
+        type:
+          title: Type
+          type: string
+        users:
+          items:
+            type: string
+          title: Users
+          type: array
+      required:
+      - type
+      - description
+      - users
+      - rules
+      - notes
+      - examples
+      title: Magic_Source
+      type: object
+    Pantheon:
+      properties:
+        gods:
+          items:
+            $ref: '#/components/schemas/God'
+          title: Gods
+          type: array
+      required:
+      - gods
+      title: Pantheon
+      type: object
+    Relationship:
+      properties:
+        intelligence:
+          $ref: '#/components/schemas/Intel'
+        reputation:
+          title: Reputation
+          type: integer
+      required:
+      - reputation
+      - intelligence
+      title: Relationship
+      type: object
     ValidationErrorModel:
       properties:
         ctx:
@@ -31,6 +253,48 @@ components:
           title: Error Type
       title: ValidationErrorModel
       type: object
+    World:
+      properties:
+        factions:
+          additionalProperties:
+            $ref: '#/components/schemas/Faction'
+          title: Factions
+          type: object
+        geography:
+          $ref: '#/components/schemas/Geography'
+        history:
+          additionalProperties:
+            $ref: '#/components/schemas/Era'
+          title: History
+          type: object
+        kingdoms:
+          additionalProperties:
+            $ref: '#/components/schemas/Kingdom'
+          title: Kingdoms
+          type: object
+        leaders:
+          additionalProperties:
+            $ref: '#/components/schemas/Leader'
+          title: Leaders
+          type: object
+        magic:
+          $ref: '#/components/schemas/Magic'
+        pantheon:
+          $ref: '#/components/schemas/Pantheon'
+        world_name:
+          title: World Name
+          type: string
+      required:
+      - world_name
+      - geography
+      - pantheon
+      - magic
+      - kingdoms
+      - factions
+      - leaders
+      - history
+      title: World
+      type: object
   securitySchemes:
     api_key:
       in: header
@@ -41,10 +305,6 @@ info:
   version: 1.0.0
 openapi: 3.1.0
 paths:
-  /:
-    get:
-      operationId: get_index
-      responses: {}
   /api/world/{world_name}:
     get:
       description: '</br>Parameters:</br>    world_name (str): The name of the world
@@ -52,17 +312,11 @@ paths:
         the data of the specified world.</br></br>Raises:</br>    404: If the specified
         world does not exist.'
       operationId: get_api_world
-      responses: {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/World'
+          description: OK
       summary: Retrieves the JSON data of a specific world by its name.
-  /api/world/{world_name}/{category}:
-    get:
-      operationId: get_api_category
-      responses: {}
-  /world/{world_name}:
-    get:
-      operationId: get_world
-      responses: {}
-  /world/{world_name}/{category}:
-    get:
-      operationId: get_category
-      responses: {}

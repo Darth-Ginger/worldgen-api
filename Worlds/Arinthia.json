@@ -621,7 +621,7 @@
     "Era of Creation": {
       "0": {
         "period": "0 - 0",
-        "events": ["Creation of the world"],
+        "major events": ["Creation of the world"],
         "perspective": {
           "Unbiased": "The world began with the creation of the world."
         }

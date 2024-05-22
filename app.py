@@ -1,9 +1,11 @@
+from typing import Dict
 from flask import Flask, abort, redirect, render_template, jsonify, url_for
 import json
 import os
 from auth import check_body, has_Key
 from flask_openapi3 import OpenAPI, Info, Tag, OAuthConfig
 from pydantic import BaseModel
+import objects
 
 #region App setup
 
@@ -20,13 +22,15 @@ api_key = {
 security_schemes = {"api_key": api_key}
 info = Info(title="WorldGen-API", version="1.0.0")
 
-app = OpenAPI(__name__, info=info, security_schemes=security_schemes)
+app = Flask(__name__)
 app.jinja_env.add_extension('jinja2.ext.do')
-app.config['API_SECRET_KEY'] = f"Bearer {api_secret}"
+api_app = OpenAPI(app.name, info=info, security_schemes=security_schemes)
 
 #endregion App setup
 
 worlds_dir = 'Worlds'
+
+#region Utility Functions
 
 @app.context_processor
 def inject_sidebar():
@@ -53,49 +57,43 @@ def load_json(filepath):
 def world_exists(world_name) -> bool:
     return os.path.exists(os.path.join(worlds_dir, f"{world_name}.json"))
 
-
+#endregion Utility Functions
 
 #region Web Routes
 
-
-@app.get('/', operation_id="get_index")
+@api_app.get('/')
 def index():
     world_names = [world.replace('.json', '') for world in os.listdir(worlds_dir) if world.endswith('.json')] 
     return render_template('index.html', world_names=world_names)
 
-@app.get('/world/<world_name>', operation_id="get_world")
-def world(world_name):
+@api_app.get('/world/<string:world_name>')
+def world(world_name: str):
     world_file = f"{world_name}.json"
     world_path = os.path.join('Worlds', world_file)
 
-    if not os.path.exists(world_path): 
+    try:
+        with open(world_path, 'r') as f:
+            world_data = json.load(f)
+    except FileNotFoundError:
         abort(404)
-
-    with open(world_path, 'r') as f:
-        world_data = json.load(f)
+    except (json.JSONDecodeError, TypeError):
+        abort(500, "Invalid or missing JSON file")
+    
+    if world_data is None:
+        abort(500, "Invalid or missing world data")
+    
     world_data = {k: world_data.get(k) for k in world_data if k != 'world_name'}
+    
+    if world_data is None:
+        abort(500, "Invalid or missing world data")
     
     return render_template('world.html', world_name=world_name, world_data=world_data)
 
-@app.get('/world/<world_name>/<category>', operation_id="get_category")
-def category(world_name, category):
-    world_name += ".json"
-    world_data = load_json(os.path.join('Worlds', world_name))
-    categories = {k: world_data.get(k) for k in world_data if k != 'world_name'}
-
-    if categories.get(category) is None:
-        redirect(url_for('world', world_name=world_name))
-
-    category_url = f"{category}.html"
-
-    return render_template(category_url, world_name=world_name, category=category)
-    
 #endregion Web Routes
 #region API Endpoints
 
-
-@app.get("/api/world/<world_name>", operation_id="get_api_world")
-def api_world(world_name):
+@api_app.get("/api/world/<string:world_name>", responses={"200": objects.World}, operation_id="get_api_world")
+def api_world(world_name: str):
     """
     Retrieves the JSON data of a specific world by its name.
 
@@ -108,6 +106,8 @@ def api_world(world_name):
     Raises:
         404: If the specified world does not exist.
     """
+    
+    print(world_name)
     world_file = f"{world_name}.json"
     world_path = os.path.join('Worlds', world_file)
 
@@ -118,17 +118,11 @@ def api_world(world_name):
         world_data = json.load(f)
 
     return jsonify(world_data)
- 
-@app.get("/api/world/<world_name>/<category>", operation_id="get_api_category")
-def api_category(world_name, category):
-    if not world_exists(world_name):
-        abort(404, description="World not found")
-    world = load_json(os.path.join('Worlds', f"{world_name}.json"))
-    if category not in world:
-        abort(404, description="Category not found")
-    return jsonify(world[category])
     
 #endregion API Endpoints
 
+
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True) 
+    # app.run(host='0.0.0.0', debug=True) 
+    api_app.run(host='0.0.0.0', debug=True)
