@@ -351,6 +351,30 @@
                 },
                 "type": "object"
             },
+            "ValidationError": {
+                "properties": {
+                    "detail": {
+                        "properties": {
+                            "<location>": {
+                                "properties": {
+                                    "<field_name>": {
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "type": "array"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "World": {
                 "properties": {
                     "factions": {
@@ -504,6 +528,62 @@
                     }
                 },
                 "summary": "Retrieves the JSON data of a specific world by its name."
+            },
+            "patch": {
+                "description": "Parameters:\nworld_name (str): The name of the world to patch the data for.\npatch (dict): The patch to apply to the world.\n\nReturns:\ndict: A JSON object containing the patched data of the specified world.\n\nRaises:\n404: If the specified world does not exist.",
+                "operationId": "patch_api_world",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "world_name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/<fields.Dict(dump_default=<marshmallow.missing>, attribute=None, validate=None, required=False, load_only=False, dump_only=False, load_default=<marshmallow.missing>, allow_none=False, error_messages={'required': 'Missing data for required field.', 'null': 'Field may not be null.', 'validator_failed': 'Invalid value.', 'invalid': 'Not a valid mapping type.'})>"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/World"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        },
+                        "description": "World not found"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation error"
+                    }
+                },
+                "summary": "Patches the JSON data of a specific world by its name."
             }
         },
         "/world/{world_name}": {

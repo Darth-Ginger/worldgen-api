@@ -2,7 +2,12 @@
 
 
 from apiflask import Schema
-from apiflask.fields import String, Integer, List, Nested, Dict
+from apiflask.fields import String, Integer, List, Nested, Dict, Raw
+from marshmallow.validate import OneOf
+from marshmallow_dataclass import dataclass
+
+
+
 
 
 class GeographySchema(Schema):
@@ -91,3 +96,6 @@ class WorldSchema(Schema):
     leaders = Dict(keys=String(), values=Nested('LeaderSchema', title='Leader', description='Information about a leader in the world'))
     history = Dict(keys=String(), values=Nested('EraSchema', title='Era', description='Information about an era in the world'))
 
+
+class OneOfSchema(Schema):
+    Schema = Dict(keys=String(), values=Raw, validate=OneOf(['MagicSchema', 'GeographySchema', 'PantheonSchema', 'IntelligenceSchema', 'RelationshipSchema', 'KingdomSchema', 'FactionSchema', 'LeaderSchema', 'PeriodSchema', 'EraSchema', 'WorldSchema']))
