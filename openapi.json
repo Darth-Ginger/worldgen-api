@@ -1,0 +1,551 @@
+{
+    "components": {
+        "schemas": {
+            "Era": {
+                "properties": {
+                    "periods": {
+                        "additionalProperties": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/components/schemas/Period"
+                                }
+                            ],
+                            "description": "Information about a period in the era",
+                            "title": "Period"
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "Faction": {
+                "properties": {
+                    "goal": {
+                        "description": "Goal of the faction",
+                        "title": "Goal",
+                        "type": "string"
+                    },
+                    "leadership": {
+                        "description": "Leadership of the faction",
+                        "title": "Leadership",
+                        "type": "string"
+                    },
+                    "relationships": {
+                        "additionalProperties": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/components/schemas/Relationship"
+                                }
+                            ],
+                            "description": "Information about a relationship in the faction",
+                            "title": "Relationship"
+                        },
+                        "type": "object"
+                    },
+                    "type": {
+                        "description": "Type of the faction",
+                        "title": "Type",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Geography": {
+                "properties": {
+                    "balance": {
+                        "description": "Balance of the world",
+                        "title": "Balance",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Description of the world",
+                        "title": "Description",
+                        "type": "string"
+                    },
+                    "landmarks": {
+                        "additionalProperties": {
+                            "description": "Landmark of the world",
+                            "title": "Landmark",
+                            "type": "string"
+                        },
+                        "type": "object"
+                    },
+                    "size": {
+                        "description": "Size of the world",
+                        "title": "Size",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "God": {
+                "properties": {
+                    "domain": {
+                        "description": "Comma separated list of domains of the god",
+                        "title": "Domain",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Name of the god",
+                        "title": "Name",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "HTTPError": {
+                "properties": {
+                    "detail": {
+                        "type": "object"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Intelligence": {
+                "properties": {
+                    "known_schemes": {
+                        "items": {
+                            "description": "Known scheme of the intelligence",
+                            "title": "Known Scheme",
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "level": {
+                        "description": "Level of the intelligence",
+                        "title": "Level",
+                        "type": "string"
+                    },
+                    "schemes": {
+                        "items": {
+                            "description": "Scheme of the intelligence",
+                            "title": "Scheme",
+                            "type": "string"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
+            "Kingdom": {
+                "properties": {
+                    "capital": {
+                        "description": "Capital of the kingdom",
+                        "title": "Capital",
+                        "type": "string"
+                    },
+                    "leadership": {
+                        "description": "Leadership of the kingdom",
+                        "title": "Leadership",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Name of the kingdom",
+                        "title": "Name",
+                        "type": "string"
+                    },
+                    "population": {
+                        "description": "Population of the kingdom",
+                        "title": "Population",
+                        "type": "integer"
+                    },
+                    "race": {
+                        "description": "Race of the kingdom",
+                        "title": "Race",
+                        "type": "string"
+                    },
+                    "relationships": {
+                        "additionalProperties": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/components/schemas/Relationship"
+                                }
+                            ],
+                            "description": "Information about a relationship in the kingdom",
+                            "title": "Relationship"
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "Leader": {
+                "properties": {
+                    "faction": {
+                        "description": "Faction of the leader",
+                        "title": "Faction",
+                        "type": "string"
+                    },
+                    "goals": {
+                        "items": {
+                            "description": "Goal of the leader",
+                            "title": "Goal",
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "kingdom": {
+                        "description": "Kingdom of the leader",
+                        "title": "Kingdom",
+                        "type": "string"
+                    },
+                    "relationships": {
+                        "additionalProperties": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/components/schemas/Relationship"
+                                }
+                            ],
+                            "description": "Information about a relationship in the leader",
+                            "title": "Relationship"
+                        },
+                        "type": "object"
+                    },
+                    "traits": {
+                        "items": {
+                            "description": "Trait of the leader",
+                            "title": "Trait",
+                            "type": "string"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
+            "Magic": {
+                "properties": {
+                    "sources": {
+                        "additionalProperties": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/components/schemas/Magic_Source"
+                                }
+                            ],
+                            "description": "Information about a source in the magic system",
+                            "title": "Source"
+                        },
+                        "type": "object"
+                    },
+                    "uses": {
+                        "description": "Comma separated list of magic uses",
+                        "title": "Uses",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Magic_Source": {
+                "properties": {
+                    "description": {
+                        "description": "Description of the source",
+                        "title": "Description",
+                        "type": "string"
+                    },
+                    "examples": {
+                        "additionalProperties": {
+                            "description": "Description of the spell",
+                            "title": "Spell",
+                            "type": "string"
+                        },
+                        "type": "object"
+                    },
+                    "notes": {
+                        "description": "Notes on the source",
+                        "title": "Notes",
+                        "type": "string"
+                    },
+                    "rules": {
+                        "items": {
+                            "description": "List of rules for the magic source",
+                            "title": "Rules",
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "type": {
+                        "description": "Type of the source",
+                        "title": "Type",
+                        "type": "string"
+                    },
+                    "users": {
+                        "items": {
+                            "description": "List of users for the magic source",
+                            "title": "Users",
+                            "type": "string"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
+            "Pantheon": {
+                "properties": {
+                    "gods": {
+                        "additionalProperties": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/components/schemas/God"
+                                }
+                            ],
+                            "description": "Information about a god in the pantheon",
+                            "title": "God"
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "Period": {
+                "properties": {
+                    "major_events": {
+                        "items": {
+                            "description": "Major event of the era",
+                            "title": "Major Event",
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "minor_events": {
+                        "items": {
+                            "description": "Minor event of the era",
+                            "title": "Minor Event",
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "period": {
+                        "description": "Period of the era",
+                        "title": "Period",
+                        "type": "string"
+                    },
+                    "perspective": {
+                        "additionalProperties": {
+                            "description": "Perspective of the era",
+                            "title": "Perspective",
+                            "type": "string"
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "Relationship": {
+                "properties": {
+                    "intelligence": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Intelligence"
+                            }
+                        ],
+                        "description": "Intelligence of the relationship",
+                        "title": "Intelligence"
+                    },
+                    "reputation": {
+                        "description": "Reputation of the relationship",
+                        "title": "Reputation",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "World": {
+                "properties": {
+                    "factions": {
+                        "additionalProperties": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/components/schemas/Faction"
+                                }
+                            ],
+                            "description": "Information about a faction in the world",
+                            "title": "Faction"
+                        },
+                        "type": "object"
+                    },
+                    "geography": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Geography"
+                            }
+                        ],
+                        "description": "Information about the geography of the world",
+                        "title": "Geography"
+                    },
+                    "history": {
+                        "additionalProperties": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/components/schemas/Era"
+                                }
+                            ],
+                            "description": "Information about an era in the world",
+                            "title": "Era"
+                        },
+                        "type": "object"
+                    },
+                    "kingdoms": {
+                        "additionalProperties": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/components/schemas/Kingdom"
+                                }
+                            ],
+                            "description": "Information about a kingdom in the world",
+                            "title": "Kingdom"
+                        },
+                        "type": "object"
+                    },
+                    "leaders": {
+                        "additionalProperties": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/components/schemas/Leader"
+                                }
+                            ],
+                            "description": "Information about a leader in the world",
+                            "title": "Leader"
+                        },
+                        "type": "object"
+                    },
+                    "magic": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Magic"
+                            }
+                        ],
+                        "description": "Information about the magic system of the world",
+                        "title": "Magic"
+                    },
+                    "pantheon": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Pantheon"
+                            }
+                        ],
+                        "description": "Information about the pantheon of the world",
+                        "title": "Pantheon"
+                    },
+                    "world_name": {
+                        "description": "Name of the world",
+                        "title": "World Name",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "ApiKeyAuth": {
+                "in": "header",
+                "name": "X-API-KEY",
+                "type": "apiKey"
+            }
+        }
+    },
+    "info": {
+        "title": "Worldgen API",
+        "version": "1.0.0"
+    },
+    "openapi": "3.0.3",
+    "paths": {
+        "/": {
+            "get": {
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        },
+                        "description": "Successful response"
+                    }
+                },
+                "summary": "Index"
+            }
+        },
+        "/api/world/{world_name}": {
+            "get": {
+                "description": "Parameters:\nworld_name (str): The name of the world to retrieve the data for.\n\nReturns:\ndict: A JSON object containing the data of the specified world.\n\nRaises:\n404: If the specified world does not exist.",
+                "operationId": "get_api_world",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "world_name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/World"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        },
+                        "description": "World not found"
+                    }
+                },
+                "summary": "Retrieves the JSON data of a specific world by its name."
+            }
+        },
+        "/world/{world_name}": {
+            "get": {
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "world_name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        },
+                        "description": "Successful response"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        },
+                        "description": "Not found"
+                    }
+                },
+                "summary": "World"
+            }
+        }
+    },
+    "servers": [
+        {
+            "url": "http://worldgen.theschwarzy.club/"
+        }
+    ],
+    "tags": []
+}

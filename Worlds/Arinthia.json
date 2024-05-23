@@ -3,18 +3,27 @@
   "geography": {
     "size": "Large",
     "balance": "Well-balanced geographical features",
-    "landmarks": "Include landmarks that provide narrative significance",
+    "landmarks": {
+      "Razor Ridge": "A Mountain chain linking the north and south of the land",
+      "Crimson Highlands": "A land of wildflowers, wildflowers, and wildflowers",
+      "Serpent River": "A river of wildflowers and wildflowers",
+      "Crystal Stream": "A river of wildflowers and wildflowers",
+      "Bloodflow River": "A river of wildflowers and wildflowers",
+      "Shadowgrove": "A land of wildflowers, wildflowers, and wildflowers",
+      "Obsidian Caverns": "A land of wildflowers, wildflowers, and wildflowers",
+      "Enchanted Glade": "A land of wildflowers, wildflowers, and wildflowers"
+    },
     "description": "A world of magic and mysticism"
   },
   "pantheon": {
-    "gods": [
-     {"name": "Zarathul", "domain": "Creation, life, fate" },
-     {"name": "Aerion", "domain": "Sky, wind, eagles" },
-     {"name": "Lumina", "domain": "Stars, light" },
-     {"name": "Tharos", "domain": "Craft, earth, Dwarves" },
-     {"name": "Neria", "domain": "Nature, growth, forests" },
-     {"name": "Maelstrom", "domain": "Sea, rivers, water"} 
-    ]
+    "gods": {
+      "Zarathul" : {"name": "Zarathul", "domain": "Creation, life, fate" },
+      "Aerion"   : {"name": "Aerion", "domain": "Sky, wind, eagles" },
+      "Lumina"   : {"name": "Lumina", "domain": "Stars, light" },
+      "Tharos"   : {"name": "Tharos", "domain": "Craft, earth, Dwarves" },
+      "Neria"    : {"name": "Neria", "domain": "Nature, growth, forests" },
+      "Maelstrom": {"name": "Maelstrom", "domain": "Sea, rivers, water"} 
+    }
 },
   "magic": {
     "uses": ["Scholastic", "Religious Ceremony", "General Use"],

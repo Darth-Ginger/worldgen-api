@@ -1,15 +1,39 @@
-from typing import Dict
-from flask import Flask, abort, render_template, jsonify, url_for
+from apiflask import APIFlask, abort, HTTPTokenAuth
+from apiflask.fields import String, Integer, List, Nested, Field, Boolean, Float, DateTime, Dict
+from apiflask.validators import Length, OneOf
+from flask import render_template, jsonify, url_for, Flask
 import json
 import os
+import schemas
 
-app = Flask(__name__)
+
+#region app setup
+
+# app = Flask(__name__)
+app = APIFlask(__name__, title='Worldgen API', version='1.0.0')
+app.config['SYNC_LOCAL_SPEC'] = True
+app.config['LOCAL_SPEC_PATH'] = os.path.join(app.root_path, 'openapi.json')
+app.config['LOCAL_SPEC_JSON_INDENT'] = 4
+
 app.jinja_env.add_extension('jinja2.ext.do')
 
+auth = HTTPTokenAuth(scheme='ApiKey', header='X-API-KEY')
+
+app.security_schemes = {
+    'ApiKeyAuth': {
+        'type': 'apiKey',
+        'in': 'header',
+        'name': 'X-API-KEY'
+    }
+}
 
 #endregion App setup
 
 worlds_dir = 'Worlds'
+if os.getenv('API_SECRET_KEY'):
+    app.config['API_SECRET_KEY'] = os.getenv('API_SECRET_KEY')
+    
+schema_class = {c: getattr(schemas, c) for c in dir(schemas) if not c.startswith('_') and not c.endswith('_')}
 
 #region Utility Functions
 
@@ -42,6 +66,14 @@ def world_exists(world_name) -> bool:
 
 #endregion Utility Functions
 
+#region Security Functions
+
+@auth.verify_token
+def verify_token(token):
+    return token if token == app.config['API_SECRET_KEY'] else None
+
+#endregion Security Functions
+
 #region Web Routes
 
 @app.get('/')
@@ -50,13 +82,14 @@ def index():
     return render_template('index.html', world_names=world_names)
 
 
-@app.route('/world/<world_name>')
+@app.get('/world/<string:world_name>')
 def world(world_name):
     world_file = f"{world_name}.json"
     world_path = os.path.join('Worlds', world_file)
 
     if not os.path.exists(world_path): 
         abort(404)
+        
 
     with open(world_path, 'r') as f:
         world_data = json.load(f)
@@ -67,7 +100,9 @@ def world(world_name):
 #endregion Web Routes
 #region API Routes
 
-@app.get("/api/world/<world_name>")
+@app.get("/api/world/<string:world_name>")
+@app.doc(operation_id="get_api_world", responses={200: "Success", 404: "World not found"})
+@app.output(schema_class["WorldSchema"])
 def api_world(world_name):
     """
     Retrieves the JSON data of a specific world by its name.
@@ -81,11 +116,14 @@ def api_world(world_name):
     Raises:
         404: If the specified world does not exist.
     """
+    
+    print(world_name)
     world_file = f"{world_name}.json"
     world_path = os.path.join('Worlds', world_file)
 
     if not os.path.exists(world_path): 
         abort(404, description="World not found")
+        
 
     with open(world_path, 'r') as f:
         world_data = json.load(f)
