@@ -1,0 +1,566 @@
+{
+    "SH-IF": {
+        "reputation": -40,
+        "intelligence": {
+            "level": "High",
+            "schemes": [
+                "Influence royal court",
+                "Undermine The Iron Fist"
+            ],
+            "known_schemes": [
+                "Iron Fist's military buildup",
+                "Golden Dawn's wealth accumulation"
+            ]
+        },
+        "from": "The Silver Hand",
+        "to": "The Iron Fist"
+    },
+    "SH-GD": {
+        "reputation": 60,
+        "intelligence": {
+            "level": "Medium",
+            "schemes": [
+                "Form religious alliances",
+                "Accumulate wealth"
+            ],
+            "known_schemes": [
+                "Silver Hand's influence campaign",
+                "Nightshade's control efforts"
+            ]
+        },
+        "from": "The Silver Hand"
+    },
+    "SH-NS": {
+        "reputation": -70,
+        "intelligence": {
+            "level": "Low",
+            "schemes": [
+                "Expand underworld influence",
+                "Assassinate key figures"
+            ],
+            "known_schemes": [
+                "Nightshades's assassination plans",
+                "Iron Fist's strategic positions"
+            ]
+        },
+        "from": "The Silver Hand"
+    },
+    "IF-SH": {
+        "reputation": -40,
+        "intelligence": {
+            "level": "Medium",
+            "schemes": [
+                "Expand Military",
+                "Control Strategic Locations"
+            ],
+            "known_schemes": [
+                "Silver Hand's political influence",
+                "Nightshade's underworld activities"
+            ]
+        },
+        "from": "The Iron Fist",
+        "to": "The Silver Hand"
+    },
+    "IF-GD": {
+        "reputation": 20,
+        "intelligence": {
+            "level": "Low",
+            "schemes": [
+                "Accumulate military resources",
+                "Secure alliances"
+            ],
+            "known_schemes": [
+                "Golden Dawn's wealth plans",
+                "Silver Hand's political maneuvers"
+            ]
+        },
+        "from": "The Iron Fist"
+    },
+    "IF-NS": {
+        "reputation": -60,
+        "intelligence": {
+            "level": "High",
+            "schemes": [
+                "Control underworld",
+                "Assassinate rivals"
+            ],
+            "known_schemes": [
+                "Nightshade's assassination plots",
+                "Golden Dawn's religious influence"
+            ]
+        },
+        "from": "The Iron Fist"
+    },
+    "EL-DM": {
+        "reputation": 50,
+        "intelligence": {
+            "level": "High",
+            "schemes": [
+                "Expand magical wards",
+                "Alliance with Valoria"
+            ],
+            "known_schemes": [
+                "Duramark's mithril mining",
+                "Valoria's trade expansion"
+            ]
+        },
+        "from": "Elanthia",
+        "to": "Duramark"
+    },
+    "EL-VL": {
+        "reputation": 30,
+        "intelligence": {
+            "level": "Medium",
+            "schemes": [
+                "Cultural exchange with Sylvaria",
+                "Expand trade routes"
+            ],
+            "known_schemes": [
+                "Valoria's naval skirmishes",
+                "Sylvaria's agricultural innovations"
+            ]
+        },
+        "from": "Elanthia"
+    },
+    "EL-KG": {
+        "reputation": -20,
+        "intelligence": {
+            "level": "Low",
+            "schemes": [
+                "Defend borders",
+                "Strengthen military"
+            ],
+            "known_schemes": [
+                "Korgath's dark rituals",
+                "Duramark's mithril mining"
+            ]
+        },
+        "from": "Elanthia"
+    },
+    "EL-SY": {
+        "reputation": 70,
+        "intelligence": {
+            "level": "High",
+            "schemes": [
+                "Protect agricultural lands",
+                "Enhance trade with Elanthia"
+            ],
+            "known_schemes": [
+                "Sylvaria's cultural preservation",
+                "Elanthia's magical advancements"
+            ]
+        },
+        "from": "Elanthia"
+    },
+    "EL-NS": {
+        "reputation": -50,
+        "intelligence": {
+            "level": "Low",
+            "schemes": [
+                "Expand influence in Shadowgrove",
+                "Research dark magic"
+            ],
+            "known_schemes": [
+                "Nighthaven's goblin raids",
+                "Korgath's military expansion"
+            ]
+        },
+        "from": "Elanthia"
+    },
+    "DM-EL": {
+        "reputation": 50,
+        "intelligence": {
+            "level": "Medium",
+            "schemes": [
+                "Expand mithril mining",
+                "Form trade alliances"
+            ],
+            "known_schemes": [
+                "Elanthia's magical wards",
+                "Valoria's naval expansion"
+            ]
+        },
+        "from": "Duramark",
+        "to": "Elanthia"
+    },
+    "DM-VL": {
+        "reputation": 40,
+        "intelligence": {
+            "level": "High",
+            "schemes": [
+                "Strengthen economic ties",
+                "Expand trade routes"
+            ],
+            "known_schemes": [
+                "Valoria's trade network",
+                "Sylvaria's agricultural growth"
+            ]
+        },
+        "from": "Duramark"
+    },
+    "DM-KG": {
+        "reputation": -10,
+        "intelligence": {
+            "level": "Medium",
+            "schemes": [
+                "Defend mithril mines",
+                "Expand military"
+            ],
+            "known_schemes": [
+                "Korgath's dark rituals",
+                "Nighthaven's goblin activities"
+            ]
+        },
+        "from": "Duramark"
+    },
+    "DM-SY": {
+        "reputation": 60,
+        "intelligence": {
+            "level": "High",
+            "schemes": [
+                "Enhance trade with Elanthia",
+                "Protect agricultural lands"
+            ],
+            "known_schemes": [
+                "Sylvaria's cultural preservation",
+                "Elanthia's magical advancements"
+            ]
+        },
+        "from": "Duramark"
+    },
+    "DM-NS": {
+        "reputation": -30,
+        "intelligence": {
+            "level": "Low",
+            "schemes": [
+                "Research dark magic",
+                "Expand goblin influence"
+            ],
+            "known_schemes": [
+                "Nighthaven's dark magic",
+                "Korgath's military expansion"
+            ]
+        },
+        "from": "Duramark"
+    },
+    "HC-LE": {
+        "reputation": 40,
+        "intelligence": {
+            "level": "High",
+            "schemes": [
+                "Strengthen Silver Hand's influence",
+                "Form alliances"
+            ],
+            "known_schemes": [
+                "Elandor's political maneuvers",
+                "Iron Fist's military expansion"
+            ]
+        },
+        "from": "High Councilor Thalindra",
+        "to": "Lord Elandor"
+    },
+    "HC-GB": {
+        "reputation": 30,
+        "intelligence": {
+            "level": "Medium",
+            "schemes": [
+                "Expand mithril trade",
+                "Strengthen economic ties"
+            ],
+            "known_schemes": [
+                "Borin's mining projects",
+                "Golden Dawn's wealth accumulation"
+            ]
+        },
+        "from": "High Councilor Thalindra",
+        "to": "Guildmaster Borin"
+    },
+    "GB-HC": {
+        "reputation": 30,
+        "intelligence": {
+            "level": "Medium",
+            "schemes": [
+                "Expand mithril trade",
+                "Strengthen economic ties"
+            ],
+            "known_schemes": [
+                "Thalindra's magical advancements",
+                "Valoria's trade expansions"
+            ]
+        },
+        "from": "Guildmaster Borin",
+        "to": "High Councilor Thalindra"
+    },
+    "GB-GT": {
+        "reputation": 20,
+        "intelligence": {
+            "level": "High",
+            "schemes": [
+                "Expand military",
+                "Control strategic locations"
+            ],
+            "known_schemes": [
+                "Thorin's military plans",
+                "Elandor's political maneuvers"
+            ]
+        },
+        "from": "Guildmaster Borin",
+        "to": "General Thorin"
+    },
+    "KV-HC": {
+        "reputation": 50,
+        "intelligence": {
+            "level": "High",
+            "schemes": [
+                "Form alliances",
+                "Expand trade routes"
+            ],
+            "known_schemes": [
+                "Thalindra's magical influence",
+                "Sylvaria's agricultural expansion"
+            ]
+        },
+        "from": "King Valen",
+        "to": "High Councilor Thalindra"
+    },
+    "KV-WG": {
+        "reputation": -30,
+        "intelligence": {
+            "level": "Medium",
+            "schemes": [
+                "Defend borders",
+                "Enhance military strength"
+            ],
+            "known_schemes": [
+                "Grishnak's raids",
+                "Nighthaven's dark rituals"
+            ]
+        },
+        "from": "King Valen",
+        "to": "Warlord Grishnak"
+    },
+    "WG-KV": {
+        "reputation": -30,
+        "intelligence": {
+            "level": "Medium",
+            "schemes": [
+                "Conduct raids",
+                "Strengthen military"
+            ],
+            "known_schemes": [
+                "Valen's naval power",
+                "Sylvaria's defenses"
+            ]
+        },
+        "from": "Warlord Grishnak",
+        "to": "King Valen"
+    },
+    "WG-SP": {
+        "reputation": -10,
+        "intelligence": {
+            "level": "High",
+            "schemes": [
+                "Harness dark magic",
+                "Expand influence"
+            ],
+            "known_schemes": [
+                "Morgana's dark rituals",
+                "Nightshade's assassination plans"
+            ]
+        },
+        "from": "Warlord Grishnak",
+        "to": "Shadow Priestess Morgana"
+    },
+    "MB-HC": {
+        "reputation": 70,
+        "intelligence": {
+            "level": "High",
+            "schemes": [
+                "Enhance trade",
+                "Cultural exchange"
+            ],
+            "known_schemes": [
+                "Thalindra's magical projects",
+                "Duramark's mining expansions"
+            ]
+        },
+        "from": "Mayor Bramblethorn",
+        "to": "High Councilor Thalindra"
+    },
+    "MB-KV": {
+        "reputation": 50,
+        "intelligence": {
+            "level": "Medium",
+            "schemes": [
+                "Trade agreements",
+                "Agricultural innovations"
+            ],
+            "known_schemes": [
+                "Valen's trade routes",
+                "Elandor's political maneuvers"
+            ]
+        },
+        "from": "Mayor Bramblethorn",
+        "to": "King Valen"
+    },
+    "SP-WG": {
+        "reputation": -10,
+        "intelligence": {
+            "level": "High",
+            "schemes": [
+                "Dark rituals",
+                "Expand influence"
+            ],
+            "known_schemes": [
+                "Grishnak's military plans",
+                "Silver Hand's political influence"
+            ]
+        },
+        "from": "Shadow Priestess Morgana",
+        "to": "Warlord Grishnak"
+    },
+    "SP-LE": {
+        "reputation": -40,
+        "intelligence": {
+            "level": "Low",
+            "schemes": [
+                "Expand underworld influence",
+                "Conduct assassinations"
+            ],
+            "known_schemes": [
+                "Elandor's political schemes",
+                "Iron Fist's military buildup"
+            ]
+        },
+        "from": "Shadow Priestess Morgana",
+        "to": "Lord Elandor"
+    },
+    "LE-GT": {
+        "reputation": -40,
+        "intelligence": {
+            "level": "High",
+            "schemes": [
+                "Influence royal court",
+                "Undermine Iron Fist"
+            ],
+            "known_schemes": [
+                "Thorin's military strategies",
+                "Golden Dawn's wealth plans"
+            ]
+        },
+        "from": "Lord Elandor",
+        "to": "General Thorin"
+    },
+    "LE-PA": {
+        "reputation": 60,
+        "intelligence": {
+            "level": "Medium",
+            "schemes": [
+                "Form religious alliances",
+                "Accumulate wealth"
+            ],
+            "known_schemes": [
+                "Alara's religious influence",
+                "Nightshade's control efforts"
+            ]
+        },
+        "from": "Lord Elandor",
+        "to": "Priestess Alara"
+    },
+    "GT-LE": {
+        "reputation": -40,
+        "intelligence": {
+            "level": "Medium",
+            "schemes": [
+                "Expand military",
+                "Control strategic locations"
+            ],
+            "known_schemes": [
+                "Elandor's political influence",
+                "Nightshade's underworld activities"
+            ]
+        },
+        "from": "General Thorin",
+        "to": "Lord Elandor"
+    },
+    "GT-SK": {
+        "reputation": -60,
+        "intelligence": {
+            "level": "High",
+            "schemes": [
+                "Control underworld",
+                "Assassinate rivals"
+            ],
+            "known_schemes": [
+                "Kryn's assassination plots",
+                "Golden Dawn's religious influence"
+            ]
+        },
+        "from": "General Thorin",
+        "to": "Shadowmaster Kryn"
+    },
+    "PA-LE": {
+        "reputation": 60,
+        "intelligence": {
+            "level": "Medium",
+            "schemes": [
+                "Form religious alliances",
+                "Accumulate wealth"
+            ],
+            "known_schemes": [
+                "Elandor's influence campaign",
+                "Nightshade's control efforts"
+            ]
+        },
+        "from": "Priestess Alara",
+        "to": "Lord Elandor"
+    },
+    "PA-GT": {
+        "reputation": 20,
+        "intelligence": {
+            "level": "Low",
+            "schemes": [
+                "Secure alliances",
+                "Accumulate resources"
+            ],
+            "known_schemes": [
+                "Thorin's military plans",
+                "Elandor's political maneuvers"
+            ]
+        },
+        "from": "Priestess Alara",
+        "to": "General Thorin"
+    },
+    "SK-LE": {
+        "reputation": -70,
+        "intelligence": {
+            "level": "Low",
+            "schemes": [
+                "Expand underworld influence",
+                "Conduct assassinations"
+            ],
+            "known_schemes": [
+                "Elandor's political schemes",
+                "Iron Fist's military buildup"
+            ]
+        },
+        "from": "Shadowmaster Kryn",
+        "to": "Lord Elandor"
+    },
+    "SK-GT": {
+        "reputation": -60,
+        "intelligence": {
+            "level": "High",
+            "schemes": [
+                "Control underworld",
+                "Assassinate rivals"
+            ],
+            "known_schemes": [
+                "Thorin's strategic plans",
+                "Golden Dawn's wealth accumulation"
+            ]
+        },
+        "from": "Shadowmaster Kryn",
+        "to": "General Thorin"
+    }
+}

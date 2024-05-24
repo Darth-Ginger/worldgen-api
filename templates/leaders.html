@@ -28,7 +28,7 @@
             <b>Traits: </b>
         </td>
         <td>
-            <p>{{data["traits"]|join()}}</p>
+            <p>{{data["traits"]|join(", ")}}</p>
         </td>
     </tr>
     <tr>
@@ -48,22 +48,22 @@
             <b>Relationships: </b>
         </td>
     </tr>
-    {% for relation,data in data['relationships'].items() %}
+    {% for relation in data['relationships'] %}
     <tr>
         <td colspan="2">
                 <button type="button" class="collapsible" style="padding:0px;font-size:12pt;background-color:#ccc">
-                    <b>{{ relation }}</b>
+                    <b>{{ world_data['relationships'][relation]['to'] }}</b>
                   </button>
                   <div class="collapsible-content" style="background-color:#eee">
                     <ul>
                         <li>
-                            Level: {{ data["intelligence"]["level"]}}
+                            Level: {{ world_data['relationships'][relation]["intelligence"]["level"]}}
                         </li>
                         <li>
                             Schemes Against:
                         </li>
                         <ol>
-                            {% for scheme in data["intelligence"]["schemes"] %}
+                            {% for scheme in world_data['relationships'][relation]["intelligence"]["schemes"] %}
                             <li>
                                 {{ scheme }}
                             </li>
@@ -73,7 +73,7 @@
                             Known Schemes:
                         </li>
                         <ol>
-                            {% for scheme in data["intelligence"]["known_schemes"] %}
+                            {% for scheme in world_data['relationships'][relation]["intelligence"]["known_schemes"] %}
                             <li>
                                 {{ scheme }}
                             </li>

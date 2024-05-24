@@ -1,0 +1,60 @@
+{
+    "uses": ["Scholastic", "Religious Ceremony", "General Use"],
+    "sources": {
+      "The Divines": {
+        "type": "Deity",
+        "description": "Magic dirived directly fromthe gods of the realm",
+        "users": [
+          "Priests",
+          "Paladins",
+          "Cultists",
+          "Other Religious entities"
+        ],
+        "rules": [
+          "The use of magic is governed by the Gods",
+          "The Gods deem who is worthy to weild this magic",
+          "The Gods accept responsibility for its use"
+        ],
+        "notes": "",
+        "examples": {
+          "Healing": "Used by practisioners to heal those in need",
+          "Divine Smite": "Useable by practisioners to smite their enemies",
+          "Portent": "Used to invoke the gods of the realm knowledge"
+        }
+      },
+      "Nature's Path": {
+        "type": "Natural",
+        "description": "Magic used by the natural forces of the realm",
+        "users": ["Rangers", "Rogues", "Druids"],
+        "rules": [
+          "The use of magic is governed by the realm's natural forces",
+          "Practisioners hold each other responsible for its use",
+          "Those who misuse this magic are marked as wicked and punished"
+        ],
+        "notes": "",
+        "examples": {
+          "Healing": "Used by practisioners to heal those in need",
+          "Growth": "Used by the likes of Druids to enhance plant growth",
+          "Sense": "Used by individuals to sense their surroundings"
+        }
+      },
+      "The Arcane": {
+        "type": "Developed",
+        "description": "Magic used developed by powerful scholars and mystics",
+        "users": ["Sorcerers", "Wizard", "Arcanists", "Mystics"],
+        "rules": [
+          "The use of magic is governed by the realm's magical forces",
+          "Powerful orders define and enforce laws and rules"
+        ],
+        "notes": "",
+        "examples": {
+          "Healing": "Used by practisioners to heal those in need",
+          "Flaare": "Basic offensive elemental spell",
+          "Transmute": "Highly regulated spell used from transforming materials into other materials",
+          "Haste": "Advanced spell used to speed up the flow of time for the caster",
+          "Shield": "Basic spell used to protect the caster"
+        }
+      }
+    }
+}
+  

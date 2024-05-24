@@ -1,20 +1,14 @@
 {% for attr,data in world_data.pantheon.items() %}
-<span style="font-size:18pt">
-<b>
-  {% set upper_attr = [attr[0]|upper,attr[1:]]|join() %}
-  {{upper_attr}}
-</b>
-</span>
+
 <table style="padding-left:50px">
-  {% for cat_attr in data %}
   <tr>
     <td>
-      <b>{{cat_attr.name}}</b>
+      <b>{{data.name}}</b>
     </td>
     <td>
-      <p>{{cat_attr.domain}}</p>
+      <p>{{data.domain}}</p>
     </td>
   </tr>
-  {% endfor %} {% endfor %}
+ {% endfor %}
 </table>
 

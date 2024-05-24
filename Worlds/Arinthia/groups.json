@@ -1,0 +1,46 @@
+{
+  "The Silver Hand": {
+      "name": "The Silver Hand",
+      "short_name": "SH",
+      "type": "Faction",
+      "agenda": "political",
+      "goal": "Power",
+      "leadership": "Lord Elandor",
+      "relationships": ["SH-IF", "SH-GD", "SH-NS"]
+    },
+  "The Iron Fist": {
+    "name": "The Iron Fist",
+    "short_name": "IF",
+    "type": "Faction",
+    "agenda": "Military",
+    "goal": "Control",
+    "leadership": "General Thorin",
+    "relationships": ["IF-SH", "IF-GD", "IF-NS"]
+  },
+  "Elanthia":{
+    "name": "Elanthia",
+    "short_name": "EL",
+    "type": "Kingdom",
+    "goal": "Power",
+    "leadership": "Lord Elandor",
+    "kingdom_properties": {
+      "race": "Elves",
+      "capital": "Eldoria",
+      "population": 120000
+    },
+    "relationships": ["EL-DM", "EL-VL", "EL-KG", "EL-SY", "EL-NS"]
+  },
+  "Duramark": {
+    "name": "Duramark",
+    "short_name": "DM",
+    "type": "Kinigdom",
+    "goal": "Power",
+    "leadership": "Lord Duramark",
+    "kingdom_properties": {
+      "race": "Dwarves",
+      "capital": "Ironhold",
+      "population": 80000
+    },
+    "relationships": ["DM-EL", "DM-VL", "DM-KG", "DM-SY", "DM-NS"]
+  }
+}

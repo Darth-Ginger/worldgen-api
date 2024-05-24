@@ -18,38 +18,6 @@
                 },
                 "type": "object"
             },
-            "Faction": {
-                "properties": {
-                    "goal": {
-                        "description": "Goal of the faction",
-                        "title": "Goal",
-                        "type": "string"
-                    },
-                    "leadership": {
-                        "description": "Leadership of the faction",
-                        "title": "Leadership",
-                        "type": "string"
-                    },
-                    "relationships": {
-                        "additionalProperties": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/components/schemas/Relationship"
-                                }
-                            ],
-                            "description": "Information about a relationship in the faction",
-                            "title": "Relationship"
-                        },
-                        "type": "object"
-                    },
-                    "type": {
-                        "description": "Type of the faction",
-                        "title": "Type",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
             "Geography": {
                 "properties": {
                     "balance": {
@@ -93,6 +61,128 @@
                 },
                 "type": "object"
             },
+            "Group": {
+                "properties": {
+                    "agenda": {
+                        "description": "Agenda of the group",
+                        "enum": [
+                            "Political",
+                            "Military",
+                            "Religious"
+                        ],
+                        "title": "Agenda",
+                        "type": "string"
+                    },
+                    "goal": {
+                        "description": "Goal of the group",
+                        "enum": [
+                            "Power",
+                            "Wealth",
+                            "Control"
+                        ],
+                        "title": "Goal",
+                        "type": "string"
+                    },
+                    "kingdom_properties": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/KindomProperty"
+                            }
+                        ],
+                        "description": "Kingdom properties of the group",
+                        "title": "Kingdom Properties"
+                    },
+                    "leadership": {
+                        "description": "Leadership of the group",
+                        "title": "Leadership",
+                        "type": "string"
+                    },
+                    "relationships": {
+                        "items": {
+                            "description": "Name of the relationship",
+                            "title": "Relation",
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "short_name": {
+                        "description": "Short name of the group",
+                        "title": "Short Name",
+                        "type": "string"
+                    },
+                    "type": {
+                        "description": "Type of the group",
+                        "enum": [
+                            "Kingdom",
+                            "Faction"
+                        ],
+                        "title": "Type",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "GroupUpdate": {
+                "properties": {
+                    "agenda": {
+                        "description": "Agenda of the group",
+                        "enum": [
+                            "Political",
+                            "Military",
+                            "Religious"
+                        ],
+                        "title": "Agenda",
+                        "type": "string"
+                    },
+                    "goal": {
+                        "description": "Goal of the group",
+                        "enum": [
+                            "Power",
+                            "Wealth",
+                            "Control"
+                        ],
+                        "title": "Goal",
+                        "type": "string"
+                    },
+                    "kingdom_properties": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/KindomProperty"
+                            }
+                        ],
+                        "description": "Kingdom properties of the group",
+                        "title": "Kingdom Properties"
+                    },
+                    "leadership": {
+                        "description": "Leadership of the group",
+                        "title": "Leadership",
+                        "type": "string"
+                    },
+                    "relationships": {
+                        "items": {
+                            "description": "Name of the relationship",
+                            "title": "Relation",
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "short_name": {
+                        "description": "Short name of the group",
+                        "title": "Short Name",
+                        "type": "string"
+                    },
+                    "type": {
+                        "description": "Type of the group",
+                        "enum": [
+                            "Kingdom",
+                            "Faction"
+                        ],
+                        "title": "Type",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "HTTPError": {
                 "properties": {
                     "detail": {
@@ -130,44 +220,22 @@
                 },
                 "type": "object"
             },
-            "Kingdom": {
+            "KindomProperty": {
                 "properties": {
                     "capital": {
-                        "description": "Capital of the kingdom",
+                        "description": "Capital of the property",
                         "title": "Capital",
                         "type": "string"
                     },
-                    "leadership": {
-                        "description": "Leadership of the kingdom",
-                        "title": "Leadership",
-                        "type": "string"
-                    },
-                    "name": {
-                        "description": "Name of the kingdom",
-                        "title": "Name",
-                        "type": "string"
-                    },
                     "population": {
-                        "description": "Population of the kingdom",
+                        "description": "Population of the property",
                         "title": "Population",
                         "type": "integer"
                     },
                     "race": {
-                        "description": "Race of the kingdom",
+                        "description": "Race of the property",
                         "title": "Race",
                         "type": "string"
-                    },
-                    "relationships": {
-                        "additionalProperties": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/components/schemas/Relationship"
-                                }
-                            ],
-                            "description": "Information about a relationship in the kingdom",
-                            "title": "Relationship"
-                        },
-                        "type": "object"
                     }
                 },
                 "type": "object"
@@ -377,18 +445,6 @@
             },
             "World": {
                 "properties": {
-                    "factions": {
-                        "additionalProperties": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/components/schemas/Faction"
-                                }
-                            ],
-                            "description": "Information about a faction in the world",
-                            "title": "Faction"
-                        },
-                        "type": "object"
-                    },
                     "geography": {
                         "allOf": [
                             {
@@ -397,6 +453,18 @@
                         ],
                         "description": "Information about the geography of the world",
                         "title": "Geography"
+                    },
+                    "groups": {
+                        "additionalProperties": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/components/schemas/Group"
+                                }
+                            ],
+                            "description": "Information about a kingdom in the world",
+                            "title": "Group"
+                        },
+                        "type": "object"
                     },
                     "history": {
                         "additionalProperties": {
@@ -410,15 +478,76 @@
                         },
                         "type": "object"
                     },
-                    "kingdoms": {
+                    "leaders": {
                         "additionalProperties": {
                             "allOf": [
                                 {
-                                    "$ref": "#/components/schemas/Kingdom"
+                                    "$ref": "#/components/schemas/Leader"
+                                }
+                            ],
+                            "description": "Information about a leader in the world",
+                            "title": "Leader"
+                        },
+                        "type": "object"
+                    },
+                    "magic": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Magic"
+                            }
+                        ],
+                        "description": "Information about the magic system of the world",
+                        "title": "Magic"
+                    },
+                    "pantheon": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Pantheon"
+                            }
+                        ],
+                        "description": "Information about the pantheon of the world",
+                        "title": "Pantheon"
+                    },
+                    "world_name": {
+                        "description": "Name of the world",
+                        "title": "World Name",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "WorldUpdate": {
+                "properties": {
+                    "geography": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Geography"
+                            }
+                        ],
+                        "description": "Information about the geography of the world",
+                        "title": "Geography"
+                    },
+                    "groups": {
+                        "additionalProperties": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/components/schemas/Group"
                                 }
                             ],
                             "description": "Information about a kingdom in the world",
-                            "title": "Kingdom"
+                            "title": "Group"
+                        },
+                        "type": "object"
+                    },
+                    "history": {
+                        "additionalProperties": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/components/schemas/Era"
+                                }
+                            ],
+                            "description": "Information about an era in the world",
+                            "title": "Era"
                         },
                         "type": "object"
                     },
@@ -493,7 +622,7 @@
         },
         "/api/world/{world_name}": {
             "get": {
-                "description": "Parameters:\nworld_name (str): The name of the world to retrieve the data for.\n\nReturns:\ndict: A JSON object containing the data of the specified world.\n\nRaises:\n404: If the specified world does not exist.",
+                "description": "Parameters:\n            world_name (str): The name of the world to retrieve the data for.\n    \n        Returns:\n            dict: A JSON object containing the data of the specified world.\n    \n        Raises:\n            404: If the specified world does not exist.",
                 "operationId": "get_api_world",
                 "parameters": [
                     {
@@ -530,7 +659,7 @@
                 "summary": "Retrieves the JSON data of a specific world by its name."
             },
             "patch": {
-                "description": "Parameters:\nworld_name (str): The name of the world to patch the data for.\npatch (dict): The patch to apply to the world.\n\nReturns:\ndict: A JSON object containing the patched data of the specified world.\n\nRaises:\n404: If the specified world does not exist.",
+                "description": "Parameters:\n            world_name (str): The name of the world to patch the data for.\n            patch (dict): The patch to apply to the world.\n    \n        Returns:\n            dict: A JSON object containing the patched data of the specified world.\n    \n        Raises:\n            404: If the specified world does not exist.",
                 "operationId": "patch_api_world",
                 "parameters": [
                     {
@@ -546,7 +675,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/<fields.Dict(dump_default=<marshmallow.missing>, attribute=None, validate=None, required=False, load_only=False, dump_only=False, load_default=<marshmallow.missing>, allow_none=False, error_messages={'required': 'Missing data for required field.', 'null': 'Field may not be null.', 'validator_failed': 'Invalid value.', 'invalid': 'Not a valid mapping type.'})>"
+                                "$ref": "#/components/schemas/WorldUpdate"
                             }
                         }
                     }
@@ -584,6 +713,156 @@
                     }
                 },
                 "summary": "Patches the JSON data of a specific world by its name."
+            }
+        },
+        "/api/{world_name}/groups": {
+            "get": {
+                "description": "Parameters:\n            world_name (str): The name of the world to retrieve the data for.\n    \n        Returns:\n            dict: A JSON object containing the data of the specified world.\n    \n        Raises:\n            404: If the specified world does not exist.",
+                "operationId": "get_api_groups",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "world_name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Group"
+                                }
+                            }
+                        },
+                        "description": "Successful response"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        },
+                        "description": "Not found"
+                    }
+                },
+                "summary": "Retrieves the JSON data of a specific world by its name."
+            },
+            "patch": {
+                "description": "Args:\n            world_name (str): The name of the world.\n\n        Returns:\n            None: If the 'groups' category exists for the world and the patch operation is successful.\n\n        Raises:\n            None: If the 'groups' category does not exist for the world.",
+                "operationId": "patch_api_groups",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "world_name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GroupUpdate"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Group"
+                                }
+                            }
+                        },
+                        "description": "Successful response"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        },
+                        "description": "Not found"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation error"
+                    }
+                },
+                "summary": "Patches the JSON data of the 'groups' category for a specific world."
+            },
+            "put": {
+                "operationId": "put_api_groups",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "world_name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Group"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Group"
+                                }
+                            }
+                        },
+                        "description": "Successful response"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        },
+                        "description": "Not found"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation error"
+                    }
+                },
+                "summary": "Put API_Groups"
             }
         },
         "/world/{world_name}": {
@@ -624,7 +903,7 @@
     },
     "servers": [
         {
-            "url": "http://worldgen.theschwarzy.club/"
+            "url": "http://127.0.0.1:5000/"
         }
     ],
     "tags": []

@@ -1,0 +1,19 @@
+{
+    "world_name": "Arinthia",
+    "geography": {
+      "size": "Large",
+      "balance": "Well-balanced geographical features",
+      "landmarks": {
+        "Razor Ridge": "A Mountain chain linking the north and south of the land",
+        "Crimson Highlands": "A land of wildflowers, wildflowers, and wildflowers",
+        "Serpent River": "A river of wildflowers and wildflowers",
+        "Crystal Stream": "A river of wildflowers and wildflowers",
+        "Bloodflow River": "A river of wildflowers and wildflowers",
+        "Shadowgrove": "A land of wildflowers, wildflowers, and wildflowers",
+        "Obsidian Caverns": "A land of wildflowers, wildflowers, and wildflowers",
+        "Enchanted Glade": "A land of wildflowers, wildflowers, and wildflowers"
+      },
+      "description": "A world of magic and mysticism"
+    }
+}
+  

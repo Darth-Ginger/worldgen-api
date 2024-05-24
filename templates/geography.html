@@ -1,16 +1,55 @@
 <spn id="geography">
     <table>
-        {% for attr,data in world_data.geography.items() %}
         <tr>
             <td>
-                {% set upper_attr = [attr[0]|upper,attr[1:]]|join() %}
-                <b>{{upper_attr}}</b>
+                <b>World Name:</b>
             </td>
             <td>
-                {{data}}
+                {% set upper_world_name = [world_data.geography.world_name[0]|upper,world_data.geography.world_name[1:]]|join() %}
+                <b>{{upper_world_name}}</b>
             </td>
         </tr>
-        {% endfor %}
+        <tr>
+            <td>
+                <b>Size:</b>
+            </td>
+            <td>
+                {{world_data.geography.geography.size}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Balance:</b>
+            </td>
+            <td>
+                {{world_data.geography.geography.balance}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Landmarks:</b>
+            </td>
+            <td>
+                <ul>
+                    {% for lm, desc in world_data.geography.geography.landmarks.items() %}
+                    <li>
+                        {{ lm }}
+                        <ul>
+                            <li> {{desc}} </li>
+                        </ul>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Description:</b>
+            </td>
+            <td>
+                {{world_data.geography.geography.description}}
+            </td>
+        </tr>
     </table>
     </span>
     

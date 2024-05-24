@@ -1,0 +1,8 @@
+{
+  "Zarathul": { "name": "Zarathul", "domain": "Creation, life, fate" },
+  "Aerion": { "name": "Aerion", "domain": "Sky, wind, eagles" },
+  "Lumina": { "name": "Lumina", "domain": "Stars, light" },
+  "Tharos": { "name": "Tharos", "domain": "Craft, earth, Dwarves" },
+  "Neria": { "name": "Neria", "domain": "Nature, growth, forests" },
+  "Maelstrom": { "name": "Maelstrom", "domain": "Sea, rivers, water" }
+}

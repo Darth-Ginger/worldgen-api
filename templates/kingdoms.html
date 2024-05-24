@@ -8,26 +8,34 @@
 <table style="padding-left:50px;width:100%">
     <tr>
         <td>
-            <b>Adjective: </b>
+            <b>Short Name: </b>
         </td>
         <td>
-            <p>{{data["Adjective"]}}</p>
+            <p>{{data["short_name"]}}</p>
         </td>
     </tr>
     <tr>
         <td>
-            <b>Description: </b>
+            <b>Goal: </b>
         </td>
         <td>
-            <p>{{data["description"]}}</p>
+            <p>{{data["goal"]}}</p>
         </td>
     </tr>
     <tr>
+        <tr>
+            <td>
+                <b>Leader: </b>
+            </td>
+            <td>
+                <p>{{data["leadership"]}}</p>
+            </td>
+        </tr>
         <td>
             <b>Races: </b>
         </td>
         <td>
-            <p>{{ data["races"]|join() }}</p>
+            <p>{{ data["kingdom_properties"]["race"] }}</p>
         </td>
     </tr>
     <tr>
@@ -35,7 +43,7 @@
             <b>Capital: </b>
         </td>
         <td>
-            <p>{{data["capital"]}}</p>
+            <p>{{data["kingdom_properties"]["capital"]}}</p>
         </td>
     </tr>
     <tr>
@@ -43,15 +51,7 @@
             <b>Population: </b>
         </td>
         <td>
-            <p>{{data["population"]}}</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <b>Leader: </b>
-        </td>
-        <td>
-            <p>{{data["leadership"]}}</p>
+            <p>{{data["kingdom_properties"]["population"]}}</p>
         </td>
     </tr>
     <tr>
@@ -59,22 +59,22 @@
             <b>Relationships: </b>
         </td>
     </tr>
-        {% for relation,data in data['relationships'].items() %}
+        {% for relation in data['relationships'] %}
     <tr>
         <td colspan=2>
                 <button type="button" class="collapsible" style="padding:0px;font-size:12pt;background-color:#ccc">
-                    <b>{{ relation }}</b>
+                    <b>{{ world_data['relationships'][relation]['to'] }}</b>
                   </button>
                   <div class="collapsible-content" style="background-color:#eee">
                     <ul>
                         <li>
-                            Level: {{ data["intelligence"]["level"]}}
+                            Level: {{ world_data['relationships'][relation]["intelligence"]["level"]}}
                         </li>
                         <li>
                             Schemes Against:
                         </li>
                         <ol>
-                            {% for scheme in data["intelligence"]["schemes"] %}
+                            {% for scheme in world_data['relationships'][relation]["intelligence"]["schemes"] %}
                             <li>
                                 {{ scheme }}
                             </li>
@@ -84,7 +84,7 @@
                             Known Schemes:
                         </li>
                         <ol>
-                            {% for scheme in data["intelligence"]["known_schemes"] %}
+                            {% for scheme in world_data['relationships'][relation]["intelligence"]["known_schemes"] %}
                             <li>
                                 {{ scheme }}
                             </li>

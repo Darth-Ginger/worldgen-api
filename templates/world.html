@@ -23,6 +23,7 @@
 
 {% for key, data in world_data.items() %} 
   {% set cat_page = [key,".html"]|join()%} 
+  {% if cat_page != "relationships.html" %}
     {% if cat_page is defined %}
       <button type="button" class="collapsible">
         <h3>{{[key[0]|upper,key[1:]]|join()}}</h3>
@@ -30,6 +31,7 @@
       <div class="collapsible-content">
         {% include cat_page %}
       </div>
+      {% endif %}
     {% endif %} 
   {% endfor %} 
 {% endblock %}
