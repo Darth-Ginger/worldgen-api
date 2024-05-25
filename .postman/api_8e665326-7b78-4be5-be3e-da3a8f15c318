@@ -9,12 +9,13 @@ id = 8e665326-7b78-4be5-be3e-da3a8f15c318
 
 [config.relations.collections]
 rootDirectory = postman/collections
+files[] = {"id":"4786606-6d656516-f82b-4785-ae4b-85e326f631f9","path":"WorldGenAPI.json","metaData":{"generateCollectionPreferences":"{\"requestNameSource\":\"URL\",\"indentCharacter\":\"Tab\",\"parametersResolution\":\"Schema\",\"folderStrategy\":\"Paths\",\"includeAuthInfoInExample\":true,\"enableOptionalParameters\":true,\"keepImplicitHeaders\":false,\"includeDeprecated\":true,\"alwaysInheritAuthentication\":false,\"updateCollectionSync\":true,\"requestParametersResolution\":\"Schema\",\"exampleParametersResolution\":\"Schema\"}"}}
 
 [config.relations.collections.metaData]
 
 [config.relations.apiDefinition]
-files[] = {"path":"openapi_def.yaml","metaData":{}}
+files[] = {"path":"openapi.json","metaData":{}}
 
 [config.relations.apiDefinition.metaData]
-type = openapi:3_1
-rootFiles[] = openapi_def.yaml
+rootFiles[] = openapi.json
+type = openapi:3
