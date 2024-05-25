@@ -5018,9 +5018,48 @@
 			"id": "fe15d78e-e304-41a4-9cec-4e6127c381de"
 		}
 	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "key",
+				"value": "X-API-KEY",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "\tm5rk0zrsF1vf-l4Vardw_Urvv3nJlVvEUT3RZMGqEYM",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "b65a7261-40ca-49af-ad10-1768a83a4ad3",
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "88e706c7-7378-4fff-9689-8498ad91d281",
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
 	"variable": [
 		{
-			"id": "25c5ab22-1abb-42cc-bba8-78a9fc0e9b87",
+			"id": "36954a97-3e6b-41d3-b237-5e855b1ffe81",
 			"key": "baseUrl",
 			"value": "/"
 		}
