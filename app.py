@@ -1,4 +1,3 @@
-import re
 from apiflask import APIFlask, abort, HTTPTokenAuth
 from flask import render_template, jsonify, request, url_for
 import json
@@ -47,18 +46,14 @@ def inject_sidebar():
     
     worlds = []
     
-    for root, dirs, files in os.walk(worlds_dir):
-        for file_name in files:
-            world_data = load_json(os.path.join(root, file_name))
-        for file_name in files:
-            world_data = load_json(os.path.join(root, file_name))
-            world = {
-                'name': world_data.get('world_name'),
-                'url': url_for('world', world_name=world_data.get('world_name')),
-                "categories": [category for category in world_data.keys() if category != 'world_name']
-            }
-            worlds.append(world)
-        break
+    for world in os.listdir(worlds_dir):
+        
+        world = {
+            'name': world,
+            'url': url_for('world', world_name=world)
+        }
+        worlds.append(world)
+        
     
     return dict(worlds=worlds)
 
@@ -152,7 +147,7 @@ def verify_token(token):
 
 @app.get('/')
 def index():
-    world_names = [world.replace('.json', '') for world in os.listdir(worlds_dir) if world.endswith('.json')] 
+    world_names = [world.replace('.json', '') for world in os.listdir(worlds_dir)] 
     return render_template('index.html', world_names=world_names)
 
 
@@ -172,7 +167,7 @@ def world(world_name):
     }
     
     world_data.pop("groups")
-    print(world_data)
+    # print(world_data)
     
     return render_template('world.html', world_name=world_name, world_data=world_data)
 
@@ -254,9 +249,14 @@ class API_Groups(MethodView):
         Raises:
             404: If the specified world does not exist.
         """
-        
         if category_exists(world_name, "groups"):
-            return get_category_data(world_name, "groups")
+            path = request.path
+            if path.endswith('/kingdoms'):
+                return get_category_data(world_name, "kingdoms")
+            elif path.endswith('/factions'):
+                return get_category_data(world_name, "factions")
+            else:
+                return get_category_data(world_name, "groups")
         else:
             abort(404, "World or Category not found")
 
@@ -286,14 +286,338 @@ class API_Groups(MethodView):
     def put(self,world_name):
         dump_new_category_data(world_name, "groups", request.get_json())
             
-#endregion API Groups           
+#endregion API Groups  
+
+#region API magic
+
+class API_Magic(MethodView):
+    
+    decorators = [app.auth_required, app.output(schema_class["MagicSchema"])]
+    
+    @app.doc(operation_id="get_api_magic")
+    def get(self,world_name):
+        """
+        Retrieves the JSON data of a specific world by its name.
+    
+        Parameters:
+            world_name (str): The name of the world to retrieve the data for.
+    
+        Returns:
+            dict: A JSON object containing the data of the specified world.
+    
+        Raises:
+            404: If the specified world does not exist.
+        """
+        if category_exists(world_name, "magic"):
+            return get_category_data(world_name, "magic")
+        else:
+            abort(404, "World or Category not found")
+
+    @app.input(schema_class["MagicSchema"](partial=True), location="json")
+    @app.doc(operation_id="patch_api_magic")
+    def patch(self,world_name):
+        """
+        Patches the JSON data of the 'magic' category for a specific world.
+
+        Args:
+            world_name (str): The name of the world.
+
+        Returns:
+            None: If the 'magic' category exists for the world and the patch operation is successful.
+
+        Raises:
+            None: If the 'magic' category does not exist for the world.
+        """
+        if category_exists(world_name, "magic"):
+            patched_data = patch_dict(get_category_data(world_name, "magic"), request.get_json())
+            dump_category_data(world_name, "magic", patched_data)
+        else:
+            abort(404, "magic not found")
             
-               
+    @app.input(schema_class["MagicSchema"], location="json")
+    @app.doc(operation_id="put_api_magic")
+    def put(self,world_name):
+        dump_new_category_data(world_name, "magic", request.get_json())
+
+#endregion API magic
+
+#region API leaders
+
+class API_Leaders(MethodView):
+    
+    decorators = [app.auth_required, app.output(schema_class["LeaderSchema"])]
+    
+    @app.doc(operation_id="get_api_leaders")
+    def get(self,world_name):
+        """
+        Retrieves the JSON data of a specific world by its name.
+    
+        Parameters:
+            world_name (str): The name of the world to retrieve the data for.
+    
+        Returns:
+            dict: A JSON object containing the data of the specified world.
+    
+        Raises:
+            404: If the specified world does not exist.
+        """
+        if category_exists(world_name, "leaders"):
+            return get_category_data(world_name, "leaders")
+        else:
+            abort(404, "World or Category not found")
+
+    @app.input(schema_class["LeaderSchema"](partial=True), location="json")
+    @app.doc(operation_id="patch_api_leaders")
+    def patch(self,world_name):
+        """
+        Patches the JSON data of the 'leaders' category for a specific world.
+
+        Args:
+            world_name (str): The name of the world.
+
+        Returns:
+            None: If the 'leaders' category exists for the world and the patch operation is successful.
+
+        Raises:
+            None: If the 'leaders' category does not exist for the world.
+        """
+        if category_exists(world_name, "leaders"):
+            patched_data = patch_dict(get_category_data(world_name, "leaders"), request.get_json())
+            dump_category_data(world_name, "leaders", patched_data)
+        else:
+            abort(404, "leaders not found")
+            
+    @app.input(schema_class["LeaderSchema"], location="json")
+    @app.doc(operation_id="put_api_leaders")
+    def put(self,world_name):
+        dump_new_category_data(world_name, "leaders", request.get_json())
+
+#endregion API leaders
+
+#region API Geo
+
+class API_Geography(MethodView):
+    
+    decorators = [app.auth_required, app.output(schema_class["GeographySchema"])]
+    
+    @app.doc(operation_id="get_api_geography")
+    def get(self,world_name):
+        """
+        Retrieves the JSON data of a specific world by its name.
+    
+        Parameters:
+            world_name (str): The name of the world to retrieve the data for.
+    
+        Returns:
+            dict: A JSON object containing the data of the specified world.
+    
+        Raises:
+            404: If the specified world does not exist.
+        """
+        if category_exists(world_name, "geography"):
+            return get_category_data(world_name, "geography")
+        else:
+            abort(404, "World or Category not found")
+
+    @app.input(schema_class["GeographySchema"](partial=True), location="json")
+    @app.doc(operation_id="patch_api_geography")
+    def patch(self,world_name):
+        """
+        Patches the JSON data of the 'leaders' category for a specific world.
+
+        Args:
+            world_name (str): The name of the world.
+
+        Returns:
+            None: If the 'geography' category exists for the world and the patch operation is successful.
+
+        Raises:
+            None: If the 'geography' category does not exist for the world.
+        """
+        if category_exists(world_name, "geography"):
+            patched_data = patch_dict(get_category_data(world_name, "geography"), request.get_json())
+            dump_category_data(world_name, "geography", patched_data)
+        else:
+            abort(404, "geography not found")
+            
+    @app.input(schema_class["GeographySchema"], location="json")
+    @app.doc(operation_id="put_api_geography")
+    def put(self,world_name):
+        dump_new_category_data(world_name, "geography", request.get_json())
+
+#endregion API Geo       
+ 
+#region API Relationships
+
+class API_Relationships(MethodView):
+    
+    decorators = [app.auth_required, app.output(schema_class["RelationshipSchema"])]
+    
+    @app.doc(operation_id="get_api_relationships")
+    def get(self,world_name):
+        """
+        Retrieves the JSON data of a specific world by its name.
+    
+        Parameters:
+            world_name (str): The name of the world to retrieve the data for.
+    
+        Returns:
+            dict: A JSON object containing the data of the specified world.
+    
+        Raises:
+            404: If the specified world does not exist.
+        """
+        if category_exists(world_name, "relationships"):
+            return get_category_data(world_name, "relationships")
+        else:
+            abort(404, "World or Category not found")
+
+    @app.input(schema_class["RelationshipSchema"](partial=True), location="json")
+    @app.doc(operation_id="patch_api_relationships")
+    def patch(self,world_name):
+        """
+        Patches the JSON data of the 'leaders' category for a specific world.
+
+        Args:
+            world_name (str): The name of the world.
+
+        Returns:
+            None: If the 'relationships' category exists for the world and the patch operation is successful.
+
+        Raises:
+            None: If the 'relationships' category does not exist for the world.
+        """
+        if category_exists(world_name, "relationships"):
+            patched_data = patch_dict(get_category_data(world_name, "relationships"), request.get_json())
+            dump_category_data(world_name, "relationships", patched_data)
+        else:
+            abort(404, "relationships not found")
+            
+    @app.input(schema_class["RelationshipSchema"], location="json")
+    @app.doc(operation_id="put_api_relationships")
+    def put(self,world_name):
+        dump_new_category_data(world_name, "relationships", request.get_json())
+
+#endregion API Relationships            
+      
+#region API Pantheon
+
+class API_Pantheon(MethodView):
+    
+    decorators = [app.auth_required, app.output(schema_class["PantheonSchema"])]
+    
+    @app.doc(operation_id="get_api_pantheon")
+    def get(self,world_name):
+        """
+        Retrieves the JSON data of a specific world by its name.
+    
+        Parameters:
+            world_name (str): The name of the world to retrieve the data for.
+    
+        Returns:
+            dict: A JSON object containing the data of the specified world.
+    
+        Raises:
+            404: If the specified world does not exist.
+        """
+        if category_exists(world_name, "pantheon"):
+            return get_category_data(world_name, "pantheon")
+        else:
+            abort(404, "World or Category not found")
+
+    @app.input(schema_class["PantheonSchema"](partial=True), location="json")
+    @app.doc(operation_id="patch_api_pantheon")
+    def patch(self,world_name):
+        """
+        Patches the JSON data of the 'leaders' category for a specific world.
+
+        Args:
+            world_name (str): The name of the world.
+
+        Returns:
+            None: If the 'pantheon' category exists for the world and the patch operation is successful.
+
+        Raises:
+            None: If the 'pantheon' category does not exist for the world.
+        """
+        if category_exists(world_name, "pantheon"):
+            patched_data = patch_dict(get_category_data(world_name, "pantheon"), request.get_json())
+            dump_category_data(world_name, "pantheon", patched_data)
+        else:
+            abort(404, "pantheon not found")
+            
+    @app.input(schema_class["PantheonSchema"], location="json")
+    @app.doc(operation_id="put_api_pantheon")
+    def put(self,world_name):
+        dump_new_category_data(world_name, "pantheon", request.get_json())
+
+#endregion API Pantheon  
+
+#region API History
+
+class API_History(MethodView):
+    
+    decorators = [app.auth_required, app.output(schema_class["EraSchema"])]
+    
+    @app.doc(operation_id="get_api_history")
+    def get(self,world_name):
+        """
+        Retrieves the JSON data of a specific world by its name.
+    
+        Parameters:
+            world_name (str): The name of the world to retrieve the data for.
+    
+        Returns:
+            dict: A JSON object containing the data of the specified world.
+    
+        Raises:
+            404: If the specified world does not exist.
+        """
+        if category_exists(world_name, "history"):
+            return get_category_data(world_name, "history")
+        else:
+            abort(404, "World or Category not found")
+
+    @app.input(schema_class["EraSchema"](partial=True), location="json")
+    @app.doc(operation_id="patch_api_history")
+    def patch(self,world_name):
+        """
+        Patches the JSON data of the 'leaders' category for a specific world.
+
+        Args:
+            world_name (str): The name of the world.
+
+        Returns:
+            None: If the 'history' category exists for the world and the patch operation is successful.
+
+        Raises:
+            None: If the 'history' category does not exist for the world.
+        """
+        if category_exists(world_name, "history"):
+            patched_data = patch_dict(get_category_data(world_name, "history"), request.get_json())
+            dump_category_data(world_name, "history", patched_data)
+        else:
+            abort(404, "history not found")
+            
+    @app.input(schema_class["EraSchema"], location="json")
+    @app.doc(operation_id="put_api_history")
+    def put(self,world_name):
+        dump_new_category_data(world_name, "history", request.get_json())
+
+#endregion API History 
+
 #endregion API Routes
 
 
 app.add_url_rule('/api/world/<string:world_name>', view_func=API_World.as_view('api_world'))
-app.add_url_rule('/api/<string:world_name>/groups', view_func=API_Groups.as_view('api_groups'))
+app.add_url_rule('/api/world/<string:world_name>/groups', view_func=API_Groups.as_view('api_groups'))
+app.add_url_rule('/api/world/<string:world_name>/kingdoms', view_func=API_Groups.as_view('api_kingdoms'))
+app.add_url_rule('/api/world/<string:world_name>/factions', view_func=API_Groups.as_view('api_factions'))
+app.add_url_rule('/api/world/<string:world_name>/magic', view_func=API_Magic.as_view('api_magic'))
+app.add_url_rule('/api/world/<string:world_name>/leaders', view_func=API_Leaders.as_view('api_leaders'))
+app.add_url_rule('/api/world/<string:world_name>/geography', view_func=API_Geography.as_view('api_geography'))
+app.add_url_rule('/api/world/<string:world_name>/pantheon', view_func=API_Pantheon.as_view('api_pantheon'))
+app.add_url_rule('/api/world/<string:world_name>/history', view_func=API_History.as_view('api_history'))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True) 

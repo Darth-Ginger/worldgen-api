@@ -18,7 +18,52 @@
                 },
                 "type": "object"
             },
+            "EraUpdate": {
+                "properties": {
+                    "periods": {
+                        "additionalProperties": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/components/schemas/Period"
+                                }
+                            ],
+                            "description": "Information about a period in the era",
+                            "title": "Period"
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
             "Geography": {
+                "properties": {
+                    "balance": {
+                        "description": "Balance of the world",
+                        "title": "Balance",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Description of the world",
+                        "title": "Description",
+                        "type": "string"
+                    },
+                    "landmarks": {
+                        "additionalProperties": {
+                            "description": "Landmark of the world",
+                            "title": "Landmark",
+                            "type": "string"
+                        },
+                        "type": "object"
+                    },
+                    "size": {
+                        "description": "Size of the world",
+                        "title": "Size",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "GeographyUpdate": {
                 "properties": {
                     "balance": {
                         "description": "Balance of the world",
@@ -283,7 +328,72 @@
                 },
                 "type": "object"
             },
+            "LeaderUpdate": {
+                "properties": {
+                    "faction": {
+                        "description": "Faction of the leader",
+                        "title": "Faction",
+                        "type": "string"
+                    },
+                    "goals": {
+                        "items": {
+                            "description": "Goal of the leader",
+                            "title": "Goal",
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "kingdom": {
+                        "description": "Kingdom of the leader",
+                        "title": "Kingdom",
+                        "type": "string"
+                    },
+                    "relationships": {
+                        "additionalProperties": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/components/schemas/Relationship"
+                                }
+                            ],
+                            "description": "Information about a relationship in the leader",
+                            "title": "Relationship"
+                        },
+                        "type": "object"
+                    },
+                    "traits": {
+                        "items": {
+                            "description": "Trait of the leader",
+                            "title": "Trait",
+                            "type": "string"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
             "Magic": {
+                "properties": {
+                    "sources": {
+                        "additionalProperties": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/components/schemas/Magic_Source"
+                                }
+                            ],
+                            "description": "Information about a source in the magic system",
+                            "title": "Source"
+                        },
+                        "type": "object"
+                    },
+                    "uses": {
+                        "description": "Comma separated list of magic uses",
+                        "title": "Uses",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "MagicUpdate": {
                 "properties": {
                     "sources": {
                         "additionalProperties": {
@@ -350,6 +460,23 @@
                 "type": "object"
             },
             "Pantheon": {
+                "properties": {
+                    "gods": {
+                        "additionalProperties": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/components/schemas/God"
+                                }
+                            ],
+                            "description": "Information about a god in the pantheon",
+                            "title": "God"
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "PantheonUpdate": {
                 "properties": {
                     "gods": {
                         "additionalProperties": {
@@ -715,7 +842,7 @@
                 "summary": "Patches the JSON data of a specific world by its name."
             }
         },
-        "/api/{world_name}/groups": {
+        "/api/world/{world_name}/factions": {
             "get": {
                 "description": "Parameters:\n            world_name (str): The name of the world to retrieve the data for.\n    \n        Returns:\n            dict: A JSON object containing the data of the specified world.\n    \n        Raises:\n            404: If the specified world does not exist.",
                 "operationId": "get_api_groups",
@@ -865,6 +992,1056 @@
                 "summary": "Put API_Groups"
             }
         },
+        "/api/world/{world_name}/geography": {
+            "get": {
+                "description": "Parameters:\n            world_name (str): The name of the world to retrieve the data for.\n    \n        Returns:\n            dict: A JSON object containing the data of the specified world.\n    \n        Raises:\n            404: If the specified world does not exist.",
+                "operationId": "get_api_geography",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "world_name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Geography"
+                                }
+                            }
+                        },
+                        "description": "Successful response"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        },
+                        "description": "Not found"
+                    }
+                },
+                "summary": "Retrieves the JSON data of a specific world by its name."
+            },
+            "patch": {
+                "description": "Args:\n            world_name (str): The name of the world.\n\n        Returns:\n            None: If the 'geography' category exists for the world and the patch operation is successful.\n\n        Raises:\n            None: If the 'geography' category does not exist for the world.",
+                "operationId": "patch_api_geography",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "world_name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GeographyUpdate"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Geography"
+                                }
+                            }
+                        },
+                        "description": "Successful response"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        },
+                        "description": "Not found"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation error"
+                    }
+                },
+                "summary": "Patches the JSON data of the 'leaders' category for a specific world."
+            },
+            "put": {
+                "operationId": "put_api_geography",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "world_name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Geography"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Geography"
+                                }
+                            }
+                        },
+                        "description": "Successful response"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        },
+                        "description": "Not found"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation error"
+                    }
+                },
+                "summary": "Put API_Geography"
+            }
+        },
+        "/api/world/{world_name}/groups": {
+            "get": {
+                "description": "Parameters:\n            world_name (str): The name of the world to retrieve the data for.\n    \n        Returns:\n            dict: A JSON object containing the data of the specified world.\n    \n        Raises:\n            404: If the specified world does not exist.",
+                "operationId": "get_api_groups",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "world_name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Group"
+                                }
+                            }
+                        },
+                        "description": "Successful response"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        },
+                        "description": "Not found"
+                    }
+                },
+                "summary": "Retrieves the JSON data of a specific world by its name."
+            },
+            "patch": {
+                "description": "Args:\n            world_name (str): The name of the world.\n\n        Returns:\n            None: If the 'groups' category exists for the world and the patch operation is successful.\n\n        Raises:\n            None: If the 'groups' category does not exist for the world.",
+                "operationId": "patch_api_groups",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "world_name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GroupUpdate"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Group"
+                                }
+                            }
+                        },
+                        "description": "Successful response"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        },
+                        "description": "Not found"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation error"
+                    }
+                },
+                "summary": "Patches the JSON data of the 'groups' category for a specific world."
+            },
+            "put": {
+                "operationId": "put_api_groups",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "world_name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Group"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Group"
+                                }
+                            }
+                        },
+                        "description": "Successful response"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        },
+                        "description": "Not found"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation error"
+                    }
+                },
+                "summary": "Put API_Groups"
+            }
+        },
+        "/api/world/{world_name}/history": {
+            "get": {
+                "description": "Parameters:\n            world_name (str): The name of the world to retrieve the data for.\n    \n        Returns:\n            dict: A JSON object containing the data of the specified world.\n    \n        Raises:\n            404: If the specified world does not exist.",
+                "operationId": "get_api_history",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "world_name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Era"
+                                }
+                            }
+                        },
+                        "description": "Successful response"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        },
+                        "description": "Not found"
+                    }
+                },
+                "summary": "Retrieves the JSON data of a specific world by its name."
+            },
+            "patch": {
+                "description": "Args:\n            world_name (str): The name of the world.\n\n        Returns:\n            None: If the 'history' category exists for the world and the patch operation is successful.\n\n        Raises:\n            None: If the 'history' category does not exist for the world.",
+                "operationId": "patch_api_history",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "world_name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/EraUpdate"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Era"
+                                }
+                            }
+                        },
+                        "description": "Successful response"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        },
+                        "description": "Not found"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation error"
+                    }
+                },
+                "summary": "Patches the JSON data of the 'leaders' category for a specific world."
+            },
+            "put": {
+                "operationId": "put_api_history",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "world_name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Era"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Era"
+                                }
+                            }
+                        },
+                        "description": "Successful response"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        },
+                        "description": "Not found"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation error"
+                    }
+                },
+                "summary": "Put API_History"
+            }
+        },
+        "/api/world/{world_name}/kingdoms": {
+            "get": {
+                "description": "Parameters:\n            world_name (str): The name of the world to retrieve the data for.\n    \n        Returns:\n            dict: A JSON object containing the data of the specified world.\n    \n        Raises:\n            404: If the specified world does not exist.",
+                "operationId": "get_api_groups",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "world_name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Group"
+                                }
+                            }
+                        },
+                        "description": "Successful response"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        },
+                        "description": "Not found"
+                    }
+                },
+                "summary": "Retrieves the JSON data of a specific world by its name."
+            },
+            "patch": {
+                "description": "Args:\n            world_name (str): The name of the world.\n\n        Returns:\n            None: If the 'groups' category exists for the world and the patch operation is successful.\n\n        Raises:\n            None: If the 'groups' category does not exist for the world.",
+                "operationId": "patch_api_groups",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "world_name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GroupUpdate"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Group"
+                                }
+                            }
+                        },
+                        "description": "Successful response"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        },
+                        "description": "Not found"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation error"
+                    }
+                },
+                "summary": "Patches the JSON data of the 'groups' category for a specific world."
+            },
+            "put": {
+                "operationId": "put_api_groups",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "world_name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Group"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Group"
+                                }
+                            }
+                        },
+                        "description": "Successful response"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        },
+                        "description": "Not found"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation error"
+                    }
+                },
+                "summary": "Put API_Groups"
+            }
+        },
+        "/api/world/{world_name}/leaders": {
+            "get": {
+                "description": "Parameters:\n            world_name (str): The name of the world to retrieve the data for.\n    \n        Returns:\n            dict: A JSON object containing the data of the specified world.\n    \n        Raises:\n            404: If the specified world does not exist.",
+                "operationId": "get_api_leaders",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "world_name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Leader"
+                                }
+                            }
+                        },
+                        "description": "Successful response"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        },
+                        "description": "Not found"
+                    }
+                },
+                "summary": "Retrieves the JSON data of a specific world by its name."
+            },
+            "patch": {
+                "description": "Args:\n            world_name (str): The name of the world.\n\n        Returns:\n            None: If the 'leaders' category exists for the world and the patch operation is successful.\n\n        Raises:\n            None: If the 'leaders' category does not exist for the world.",
+                "operationId": "patch_api_leaders",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "world_name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LeaderUpdate"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Leader"
+                                }
+                            }
+                        },
+                        "description": "Successful response"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        },
+                        "description": "Not found"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation error"
+                    }
+                },
+                "summary": "Patches the JSON data of the 'leaders' category for a specific world."
+            },
+            "put": {
+                "operationId": "put_api_leaders",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "world_name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Leader"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Leader"
+                                }
+                            }
+                        },
+                        "description": "Successful response"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        },
+                        "description": "Not found"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation error"
+                    }
+                },
+                "summary": "Put API_Leaders"
+            }
+        },
+        "/api/world/{world_name}/magic": {
+            "get": {
+                "description": "Parameters:\n            world_name (str): The name of the world to retrieve the data for.\n    \n        Returns:\n            dict: A JSON object containing the data of the specified world.\n    \n        Raises:\n            404: If the specified world does not exist.",
+                "operationId": "get_api_magic",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "world_name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Magic"
+                                }
+                            }
+                        },
+                        "description": "Successful response"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        },
+                        "description": "Not found"
+                    }
+                },
+                "summary": "Retrieves the JSON data of a specific world by its name."
+            },
+            "patch": {
+                "description": "Args:\n            world_name (str): The name of the world.\n\n        Returns:\n            None: If the 'magic' category exists for the world and the patch operation is successful.\n\n        Raises:\n            None: If the 'magic' category does not exist for the world.",
+                "operationId": "patch_api_magic",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "world_name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MagicUpdate"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Magic"
+                                }
+                            }
+                        },
+                        "description": "Successful response"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        },
+                        "description": "Not found"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation error"
+                    }
+                },
+                "summary": "Patches the JSON data of the 'magic' category for a specific world."
+            },
+            "put": {
+                "operationId": "put_api_magic",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "world_name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Magic"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Magic"
+                                }
+                            }
+                        },
+                        "description": "Successful response"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        },
+                        "description": "Not found"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation error"
+                    }
+                },
+                "summary": "Put API_Magic"
+            }
+        },
+        "/api/world/{world_name}/pantheon": {
+            "get": {
+                "description": "Parameters:\n            world_name (str): The name of the world to retrieve the data for.\n    \n        Returns:\n            dict: A JSON object containing the data of the specified world.\n    \n        Raises:\n            404: If the specified world does not exist.",
+                "operationId": "get_api_pantheon",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "world_name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Pantheon"
+                                }
+                            }
+                        },
+                        "description": "Successful response"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        },
+                        "description": "Not found"
+                    }
+                },
+                "summary": "Retrieves the JSON data of a specific world by its name."
+            },
+            "patch": {
+                "description": "Args:\n            world_name (str): The name of the world.\n\n        Returns:\n            None: If the 'pantheon' category exists for the world and the patch operation is successful.\n\n        Raises:\n            None: If the 'pantheon' category does not exist for the world.",
+                "operationId": "patch_api_pantheon",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "world_name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PantheonUpdate"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Pantheon"
+                                }
+                            }
+                        },
+                        "description": "Successful response"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        },
+                        "description": "Not found"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation error"
+                    }
+                },
+                "summary": "Patches the JSON data of the 'leaders' category for a specific world."
+            },
+            "put": {
+                "operationId": "put_api_pantheon",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "world_name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Pantheon"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Pantheon"
+                                }
+                            }
+                        },
+                        "description": "Successful response"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        },
+                        "description": "Not found"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation error"
+                    }
+                },
+                "summary": "Put API_Pantheon"
+            }
+        },
         "/world/{world_name}": {
             "get": {
                 "parameters": [
@@ -901,10 +2078,5 @@
             }
         }
     },
-    "servers": [
-        {
-            "url": "http://127.0.0.1:5000/"
-        }
-    ],
     "tags": []
 }
