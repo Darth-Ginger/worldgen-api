@@ -2,7 +2,9 @@ from apiflask import Schema
 from apiflask.fields import String, Integer, List, Nested
 from marshmallow.validate import OneOf
 
-from schemas import Agenda_Types, Goal_Types, Group_Types
+Group_Types  = ["Kingdom", "Faction"]
+Agenda_Types = ["Political", "Military", "Religious"]
+Goal_Types   = ["Power", "Wealth", "Control"]
 
 class KindomPropertySchema(Schema):
     race       = String(title='Race', description='Race of the property')

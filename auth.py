@@ -4,6 +4,15 @@ from functools import wraps
 
 from flask import abort, app, request
 
+auth = app.config['AUTH']
+
+#region Security Functions
+
+@auth.verify_token
+def verify_token(token):
+    return token if token == app.config['API_SECRET_KEY'] else None
+
+#endregion Security Functions
 
 def has_Key():
     """ Decorator to enforce API Key """

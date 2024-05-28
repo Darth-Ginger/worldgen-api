@@ -1,14 +1,12 @@
 # # type: ignore
 
-from .geography_schema import GeographySchema
-from .group_schema     import GroupSchema,    KindomPropertySchema
-from .leader_schema    import LeaderSchema
-from .magic_schema     import MagicSchema,    MagicSourceSchema
-from .pantheon_schema  import PantheonSchema, GodSchema
-from .world_schema     import WorldSchema
+from .geography_schema    import GeographySchema                         # noqa: F401
+from .group_schema        import GroupSchema,    KindomPropertySchema    # noqa: F401
+from .leader_schema       import LeaderSchema                            # noqa: F401
+from .magic_schema        import MagicSchema,    MagicSourceSchema       # noqa: F401
+from .pantheon_schema     import PantheonSchema, GodSchema               # noqa: F401
+from .world_schema        import WorldSchema                             # noqa: F401
+from .relationship_schema import RelationshipSchema, IntelligenceSchema  # noqa: F401
 
 #region Basic Schemas
 
-Group_Types  = ["Kingdom", "Faction"]
-Agenda_Types = ["Political", "Military", "Religious"]
-Goal_Types   = ["Power", "Wealth", "Control"]
