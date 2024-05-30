@@ -1,8 +1,42 @@
+[{
+  "_id": {
+    "$oid": "6657480ede7ffc102351c237"
+  },
+  "name": "Zarathul",
+  "domain": "Creation, life, fate"
+},
 {
-  "Zarathul": { "name": "Zarathul", "domain": "Creation, life, fate" },
-  "Aerion": { "name": "Aerion", "domain": "Sky, wind, eagles" },
-  "Lumina": { "name": "Lumina", "domain": "Stars, light" },
-  "Tharos": { "name": "Tharos", "domain": "Craft, earth, Dwarves" },
-  "Neria": { "name": "Neria", "domain": "Nature, growth, forests" },
-  "Maelstrom": { "name": "Maelstrom", "domain": "Sea, rivers, water" }
-}
+  "_id": {
+    "$oid": "6657480ede7ffc102351c238"
+  },
+  "name": "Aerion",
+  "domain": "Sky, wind, eagles"
+},
+{
+  "_id": {
+    "$oid": "6657480ede7ffc102351c239"
+  },
+  "name": "Lumina",
+  "domain": "Stars, light"
+},
+{
+  "_id": {
+    "$oid": "6657480ede7ffc102351c23a"
+  },
+  "name": "Tharos",
+  "domain": "Craft, earth, Dwarves"
+},
+{
+  "_id": {
+    "$oid": "6657480ede7ffc102351c23b"
+  },
+  "name": "Neria",
+  "domain": "Nature, growth, forests"
+},
+{
+  "_id": {
+    "$oid": "6657480ede7ffc102351c23c"
+  },
+  "name": "Maelstrom",
+  "domain": "Sea, rivers, water"
+}]

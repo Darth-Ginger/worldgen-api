@@ -1,1 +1,1 @@
-from .web_endpoints import index, world  # noqa: F401
+from .web_endpoints import index, world         # noqa: F401

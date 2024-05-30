@@ -1,13 +1,11 @@
-import inspect
-from flask import Blueprint, app, jsonify, request, current_app
+from flask import Blueprint, current_app, request
 from apiflask import Schema, input, output, abort
 from marshmallow import ValidationError
-from utils import load_json, dump_json, check_existence, abort_if_not_found
 
 
 entity_bp = Blueprint('entity', __name__)
 
-SCHEMA_CLASSES = app.config['SCHEMA_CLASSES']
+SCHEMA_CLASSES = current_app.config['SCHEMA_CLASSES']
 
 
 def get_schema(entity_type):

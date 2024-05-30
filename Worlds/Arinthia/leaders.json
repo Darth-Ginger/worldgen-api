@@ -1,182 +1,92 @@
-{
-    "High Councilor Thalindra": {
-        "name": "High Councilor Thalindra",
-        "kingdom": "Elanthia",
-        "traits": [
-            "Wise",
-            "Strategic",
-            "Powerful"
-        ],
-        "goals": [
-            "Protect Elanthia",
-            "Preserve magical heritage"
-        ],
-        "relationships": [
-            "HC-LE",
-            "HC-GB"
-        ],
-        "short_name": "HC"
-    },
-    "Guildmaster Borin": {
-        "name": "Guildmaster Borin",
-        "kingdom": "Duramark",
-        "traits": [
-            "Shrewd",
-            "Skilled",
-            "Determined"
-        ],
-        "goals": [
-            "Secure Duramark's wealth",
-            "Expand mining operations"
-        ],
-        "relationships": [
-            "GB-HC",
-            "GB-GT"
-        ],
-        "short_name": "GB"
-    },
-    "King Valen": {
-        "name": "King Valen",
-        "kingdom": "Valoria",
-        "traits": [
-            "Charismatic",
-            "Diplomatic",
-            "Brave"
-        ],
-        "goals": [
-            "Expand Valoria's influence",
-            "Strengthen naval power"
-        ],
-        "relationships": [
-            "KV-HC",
-            "KV-WG"
-        ],
-        "short_name": "KV"
-    },
-    "Warlord Grishnak": {
-        "name": "Warlord Grishnak",
-        "kingdom": "Korgath",
-        "traits": [
-            "Ruthless",
-            "Tactical",
-            "Fearsome"
-        ],
-        "goals": [
-            "Expand Korgath's territory",
-            "Dominate neighboring kingdoms"
-        ],
-        "relationships": [
-            "WG-KV",
-            "WG-SP"
-        ],
-        "short_name": "WG"
-    },
-    "Mayor Bramblethorn": {
-        "name": "Mayor Bramblethorn",
-        "kingdom": "Sylvaria",
-        "traits": [
-            "Kind",
-            "Wise",
-            "Diplomatic"
-        ],
-        "goals": [
-            "Ensure Sylvaria's prosperity",
-            "Preserve cultural heritage"
-        ],
-        "relationships": [
-            "MB-HC",
-            "MB-KV"
-        ],
-        "short_name": "MB"
-    },
-    "Shadow Priestess Morgana": {
-        "name": "Shadow Priestess Morgana",
-        "kingdom": "Nighthaven",
-        "traits": [
-            "Mysterious",
-            "Powerful",
-            "Cunning"
-        ],
-        "goals": [
-            "Expand Nighthaven's influence",
-            "Harness dark magic"
-        ],
-        "relationships": [
-            "SP-WG",
-            "SP-LE"
-        ],
-        "short_name": "SP"
-    },
-    "Lord Elandor": {
-        "name": "Lord Elandor",
-        "faction": "The Silver Hand",
-        "traits": [
-            "Ambitious",
-            "Charismatic",
-            "Strategic"
-        ],
-        "goals": [
-            "Gain political power",
-            "Undermine rivals"
-        ],
-        "relationships": [
-            "LE-GT",
-            "LE-PA"
-        ],
-        "short_name": "LE"
-    },
-    "General Thorin": {
-        "name": "General Thorin",
-        "faction": "The Iron Fist",
-        "traits": [
-            "Disciplined",
-            "Tactical",
-            "Strong"
-        ],
-        "goals": [
-            "Expand military control",
-            "Secure strategic locations"
-        ],
-        "relationships": [
-            "GT-LE",
-            "GT-SK"
-        ],
-        "short_name": "GT"
-    },
-    "Priestess Alara": {
-        "name": "Priestess Alara",
-        "faction": "The Golden Dawn",
-        "traits": [
-            "Pious",
-            "Wealthy",
-            "Influential"
-        ],
-        "goals": [
-            "Accumulate wealth",
-            "Expand religious influence"
-        ],
-        "relationships": [
-            "PA-LE",
-            "PA-GT"
-        ],
-        "short_name": "PA"
-    },
-    "Shadowmaster Kryn": {
-        "name": "Shadowmaster Kryn",
-        "faction": "The Nightshade",
-        "traits": [
-            "Stealthy",
-            "Cunning",
-            "Lethal"
-        ],
-        "goals": [
-            "Control the underworld",
-            "Eliminate rivals"
-        ],
-        "relationships": [
-            "SK-LE",
-            "SK-GT"
-        ],
-        "short_name": "SK"
-    }
-}
+[
+  {
+    "_id": { "$oid": "66573a0f27dcee8e75ac1e4a" },
+    "name": "High Councilor Thalindra",
+    "kingdom": "Elanthia",
+    "traits": ["Wise", "Strategic", "Powerful"],
+    "goals": ["Protect Elanthia", "Preserve magical heritage"],
+    "short_name": "HC",
+    "relationships": ["665741f2dcce998481adfc3f", "665741f2dcce998481adfc40"]
+  },
+  {
+    "_id": { "$oid": "66573a7227dcee8e75ac1e4b" },
+    "name": "Guildmaster Borin",
+    "kingdom": "Duramark",
+    "traits": ["Shrewd", "Skilled", "Determined"],
+    "goals": ["Secure Duramark's wealth", "Expand mining operations"],
+    "short_name": "GB",
+    "relationships": ["665741f2dcce998481adfc41", "665741f2dcce998481adfc42"]
+  },
+  {
+    "_id": { "$oid": "66573a8127dcee8e75ac1e4c" },
+    "name": "King Valen",
+    "kingdom": "Valoria",
+    "traits": ["Charismatic", "Diplomatic", "Brave"],
+    "goals": ["Expand Valoria's influence", "Strengthen naval power"],
+    "short_name": "KV",
+    "relationships": ["665741f2dcce998481adfc43", "665741f2dcce998481adfc44"]
+  },
+  {
+    "_id": { "$oid": "66573a8e27dcee8e75ac1e4d" },
+    "name": "Warlord Grishnak",
+    "kingdom": "Korgath",
+    "traits": ["Ruthless", "Tactical", "Fearsome"],
+    "goals": ["Expand Korgath's territory", "Dominate neighboring kingdoms"],
+    "short_name": "WG",
+    "relationships": ["665741f2dcce998481adfc45", "665741f2dcce998481adfc46"]
+  },
+  {
+    "_id": { "$oid": "66573aa027dcee8e75ac1e4e" },
+    "name": "Mayor Bramblethorn",
+    "kingdom": "Sylvaria",
+    "traits": ["Kind", "Wise", "Diplomatic"],
+    "goals": ["Ensure Sylvaria's prosperity", "Preserve cultural heritage"],
+    "short_name": "MB",
+    "relationships": ["665741f2dcce998481adfc47", "665741f2dcce998481adfc48"]
+  },
+  {
+    "_id": { "$oid": "66573aaa27dcee8e75ac1e4f" },
+    "name": "Shadow Priestess Morgana",
+    "kingdom": "Nighthaven",
+    "traits": ["Mysterious", "Powerful", "Cunning"],
+    "goals": ["Expand Nighthaven's influence", "Harness dark magic"],
+    "short_name": "SP",
+    "relationships": ["665741f2dcce998481adfc49", "665741f2dcce998481adfc4a"]
+  },
+  {
+    "_id": { "$oid": "66573ab527dcee8e75ac1e50" },
+    "name": "Lord Elandor",
+    "faction": "The Silver Hand",
+    "traits": ["Ambitious", "Charismatic", "Strategic"],
+    "goals": ["Gain political power", "Undermine rivals"],
+    "short_name": "LE",
+    "relationships": ["665741f2dcce998481adfc4b", "665741f2dcce998481adfc4c"]
+  },
+  {
+    "_id": { "$oid": "66573ac027dcee8e75ac1e51" },
+    "name": "General Thorin",
+    "faction": "The Iron Fist",
+    "traits": ["Disciplined", "Tactical", "Strong"],
+    "goals": ["Expand military control", "Secure strategic locations"],
+    "short_name": "GT",
+    "relationships": ["665741f2dcce998481adfc4d", "665741f2dcce998481adfc4e"]
+  },
+  {
+    "_id": { "$oid": "66573aca27dcee8e75ac1e52" },
+    "name": "Priestess Alara",
+    "faction": "The Golden Dawn",
+    "traits": ["Pious", "Wealthy", "Influential"],
+    "goals": ["Accumulate wealth", "Expand religious influence"],
+    "short_name": "PA",
+    "relationships": ["665741f2dcce998481adfc4f", "665741f2dcce998481adfc50"]
+  },
+  {
+    "_id": { "$oid": "66573ad627dcee8e75ac1e53" },
+    "name": "Shadowmaster Kryn",
+    "faction": "The Nightshade",
+    "traits": ["Stealthy", "Cunning", "Lethal"],
+    "goals": ["Control the underworld", "Eliminate rivals"],
+    "short_name": "SK",
+    "relationships": ["665741f2dcce998481adfc51", "665741f2dcce998481adfc52"]
+  }
+]

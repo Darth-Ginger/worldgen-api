@@ -1,5 +1,6 @@
 {
   "Era of Creation": {
+  "Periods": {
     "0": {
       "period": "0 - 0",
       "major events": ["Creation of the world"],
@@ -34,4 +35,5 @@
       }
     }
   }
+}
 }

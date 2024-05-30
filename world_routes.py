@@ -1,5 +1,5 @@
-from apiflask import Blueprint, jsonify, request
-from utils import load_json, dump_json, check_existence, abort_if_not_found
+from apiflask import Blueprint, jsonify
+from utils import load_json, check_existence, abort_if_not_found
 import os
 
 world_bp = Blueprint('world', __name__, url_prefix='/api/world')

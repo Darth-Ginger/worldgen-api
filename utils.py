@@ -1,82 +1,24 @@
 import os
 import json
-from flask import abort, app
+from flask import abort, current_app, jsonify
+import db
+
+
+#region JSON/File Functions
 
 def load_json(file_path: str):
     """Load JSON data from a file."""
     with open(file_path, 'r') as file:
         return json.load(file)
 
-def check_existence(path: str) -> bool:
-    """Check if a path exists."""
-    return os.path.exists(path)
-
-def world_exists(world_name: str, abortable: bool = True) -> bool:
-    if os.path.exists(os.path.join(app.config['WORLDS_DIR'], f"{world_name}")):
-        return True
-    if abortable:
-        abort(404, "World not found")
-    return False
-    
-
-def abort_if_not_found(condition: bool, message: str, code: int = 404):
-    """Abort if a condition is not met."""
-    if not condition:
-        abort(code, description=message)
-        
 def name_to_json(name: str) -> str:
     if  not name.endswith('.json'):
         name += '.json'
     return name
-
-def category_exists(world_name: str, category_name: str, abortable: bool = True) -> bool:
-    name_to_json(category_name)
-    if world_exists(world_name) and os.path.exists(os.path.join(world_path(world_name), f"{category_name}")):
-        return True
-    if abortable:
-        abort(404, f"Category not found for World: {world_name}")
-    return False
-        
-def world_path(world_name: str) -> str:
-    if world_exists(world_name):
-        return os.path.join(app.config['WORLDS_DIR'], f"{world_name}")
-
-def world_categories(world_name: str) -> list:
-    if world_exists(world_name):
-        return [category for category in os.listdir(world_path(world_name)) if category.endswith('.json')]
-
-def world_data(world_name: str) -> dict:
-    if world_exists(world_name):
-        categories = world_categories(world_name)
-        return {
-            category.replace('.json', ''): category_data(world_name, category) 
-            for category in categories
-        }
-
-def category_data(world_name: str, category_name: str) -> dict:
-    name_to_json(category_name)
-    if world_exists(world_name) and category_exists(world_name, category_name):
-        return load_json(os.path.join(world_path(world_name), f"{category_name}"))
-
 def dump_json(filepath: str, data: dict):
     filepath = name_to_json(filepath)
     with open(filepath, 'w') as file:
-        json.dump(data, file, indent=app.config['JSON_INDENT'])
-
-def dump_world_data(world_name: str, data: dict):
-    if world_exists(world_name):
-        dump_json(world_path(world_name), data)
-      
-def dump_category_data(world_name: str, category_name: str, data: dict):
-    if world_exists(world_name) and category_exists(world_name, category_name):
-        dump_json(world_path(world_name), data)
-        
-def dump_new_category_data(world_name: str, category_name: str, data: dict):
-    if world_exists(world_name) and not category_exists(world_name, category_name, False):
-        dump_json(world_path(world_name), data)
-    else:
-        abort(504, "Unable to create new category")
-
+        json.dump(data, file, indent=current_app.config['JSON_INDENT'])
 def patch_dict(original: dict, patch: dict) -> dict:
     for key, value in patch.items():
         if isinstance(value, dict):
@@ -84,3 +26,73 @@ def patch_dict(original: dict, patch: dict) -> dict:
         else:
             original[key] = value
     return original
+
+#endregion JSON/File Functions
+
+#region World Functions
+
+def worlds(from_file: bool=False) -> list:
+    if from_file:
+        return os.listdir(current_app.config['WORLDS_DIR'])
+    return [world["WorldName"] for world in db.collections['Worlds'].find()]
+    
+def world_exists(world_name: str, from_file: bool=False) -> bool:
+    if from_file and world_name in worlds():
+        return True
+    return not from_file and world_name in worlds()
+
+def world_path(world_name: str) -> str:
+    if world_exists(world_name):
+        return os.path.join(current_app.config['WORLDS_DIR'], f"{world_name}")
+    
+def world_data(world_name: str, from_file: bool=False) -> dict:
+    if world_exists(world_name, from_file):
+        categories = world_categories(world_name)
+        return {
+            category.replace('.json', ''): category_data(world_name, category) 
+            for category in categories
+        }
+def dump_world_data(world_name: str, data: dict):
+    if world_exists(world_name):
+        dump_json(world_path(world_name), data)
+                
+#endregion World Functions
+
+#region Category Functions
+
+def category_exists(world_name: str, category_name: str, from_file: bool=False) -> bool:
+    return world_exists(world_name, from_file) and \
+        (os.path.exists(f"{world_path(world_name)}/{name_to_json(category_name)}") or \
+            category_name in world_categories(world_name, from_file))
+     
+def world_categories(world_name: str, from_file: bool=False) -> list:
+    if world_exists(world_name):
+        if from_file:
+            return [category for category in os.listdir(world_path(world_name)) if category.endswith('.json')]
+        return list(db.collections.keys())
+        
+def category_data(world_name: str, category_name: str, from_file: bool=False) -> dict:
+    if world_exists(world_name, from_file) and category_exists(world_name, category_name, from_file):
+        if from_file:
+            return load_json(f"{world_path(world_name)}/{name_to_json(category_name)}")
+        data = db.collections["Worlds"].find_one("WorldName", world_name)[category_name]
+        return jsonify(data)
+    
+
+def dump_category_data(world_name: str, category_name: str, data: dict, to_file: bool=False):
+    if world_exists(world_name, to_file) and category_exists(world_name, category_name, to_file):
+        if to_file:
+            dump_json(world_path(world_name), data)
+        else:
+            cat_data = category_data(world_name, category_name, to_file)
+            data = patch_dict(cat_data, data)
+            #@TODO: figure out how to patch the data in the database or add new id to the worlds collection
+            
+        
+def dump_new_category_data(world_name: str, category_name: str, data: dict):
+    if world_exists(world_name) and not category_exists(world_name, category_name, False):
+        dump_json(world_path(world_name), data)
+    else:
+        abort(504, "Unable to create new category")
+
+

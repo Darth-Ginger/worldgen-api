@@ -1,6 +1,7 @@
 import inspect
 import os
 
+
 from apiflask import HTTPTokenAuth, Schema
 from flask import app
 
@@ -15,6 +16,9 @@ class Config:
     DEBUG = True
     SCHEMA_CLASSES = {c: getattr(schemas, c) for c in dir(schemas) if inspect.isclass(getattr(schemas,c)) and issubclass(getattr(schemas,c), Schema)}
     AUTH = HTTPTokenAuth(scheme='ApiKey', header='X-API-KEY')
+    MONGO_URI = "mongodb://172.20.1.3:27017/"
+    DB_NAME = "WorldGen"
+
 
     app.security_schemes = {
         'ApiKeyAuth': {

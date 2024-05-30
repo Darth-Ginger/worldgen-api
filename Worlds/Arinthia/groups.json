@@ -1,46 +1,76 @@
+[{
+  "_id": {
+    "$oid": "6657476698040eb09f002c4c"
+  },
+  "name": "The Silver Hand",
+  "short_name": "SH",
+  "type": "Faction",
+  "agenda": "political",
+  "goal": "Power",
+  "leadership": "Lord Elandor",
+  "relationships": [
+    "665741f2dcce998481adfc2f",
+    "665741f2dcce998481adfc30",
+    "665741f2dcce998481adfc31"
+  ]
+},
 {
-  "The Silver Hand": {
-      "name": "The Silver Hand",
-      "short_name": "SH",
-      "type": "Faction",
-      "agenda": "political",
-      "goal": "Power",
-      "leadership": "Lord Elandor",
-      "relationships": ["SH-IF", "SH-GD", "SH-NS"]
-    },
-  "The Iron Fist": {
-    "name": "The Iron Fist",
-    "short_name": "IF",
-    "type": "Faction",
-    "agenda": "Military",
-    "goal": "Control",
-    "leadership": "General Thorin",
-    "relationships": ["IF-SH", "IF-GD", "IF-NS"]
+  "_id": {
+    "$oid": "6657476698040eb09f002c4d"
   },
-  "Elanthia":{
-    "name": "Elanthia",
-    "short_name": "EL",
-    "type": "Kingdom",
-    "goal": "Power",
-    "leadership": "Lord Elandor",
-    "kingdom_properties": {
-      "race": "Elves",
-      "capital": "Eldoria",
-      "population": 120000
-    },
-    "relationships": ["EL-DM", "EL-VL", "EL-KG", "EL-SY", "EL-NS"]
+  "name": "The Iron Fist",
+  "short_name": "IF",
+  "type": "Faction",
+  "agenda": "Military",
+  "goal": "Control",
+  "leadership": "General Thorin",
+  "relationships": [
+    "665741f2dcce998481adfc32",
+    "665741f2dcce998481adfc33",
+    "665741f2dcce998481adfc34"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6657476698040eb09f002c4e"
   },
-  "Duramark": {
-    "name": "Duramark",
-    "short_name": "DM",
-    "type": "Kinigdom",
-    "goal": "Power",
-    "leadership": "Lord Duramark",
-    "kingdom_properties": {
-      "race": "Dwarves",
-      "capital": "Ironhold",
-      "population": 80000
-    },
-    "relationships": ["DM-EL", "DM-VL", "DM-KG", "DM-SY", "DM-NS"]
-  }
-}
+  "name": "Elanthia",
+  "short_name": "EL",
+  "type": "Kingdom",
+  "goal": "Power",
+  "leadership": "Lord Elandor",
+  "kingdom_properties": {
+    "race": "Elves",
+    "capital": "Eldoria",
+    "population": 120000
+  },
+  "relationships": [
+    "665741f2dcce998481adfc35",
+    "665741f2dcce998481adfc36",
+    "665741f2dcce998481adfc37",
+    "665741f2dcce998481adfc38",
+    "665741f2dcce998481adfc39"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6657476698040eb09f002c4f"
+  },
+  "name": "Duramark",
+  "short_name": "DM",
+  "type": "Kinigdom",
+  "goal": "Power",
+  "leadership": "Lord Duramark",
+  "kingdom_properties": {
+    "race": "Dwarves",
+    "capital": "Ironhold",
+    "population": 80000
+  },
+  "relationships": [
+    "665741f2dcce998481adfc3a",
+    "665741f2dcce998481adfc3b",
+    "665741f2dcce998481adfc3c",
+    "665741f2dcce998481adfc3d",
+    "665741f2dcce998481adfc3e"
+  ]
+}]
