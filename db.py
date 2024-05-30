@@ -10,7 +10,6 @@ db = client[conf.DB_NAME]
 # db = client.WorldGen
 
 collections = {name: db[name] for name in db.list_collection_names() if name not in ['system.indexes', 'system.users']}
-
 # for i,k in collections.items():
 #     print(i)
 #     for j in k.find():
