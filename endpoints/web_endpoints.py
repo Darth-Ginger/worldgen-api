@@ -3,8 +3,6 @@
 import os
 from flask import render_template, current_app
 
-from utils import world_data
-
 
 def index():
     world_names = [world.replace('.json', '') for world in os.listdir(current_app.config['WORLDS_DIR'])] 
@@ -12,10 +10,11 @@ def index():
 
 
 def world(world_name):
-    data = world_data(world_name)
-    data.pop("_id")
-    data["world_name"] = world_name
-    data.pop("WorldName")
+    # data = world_data(world_name)
+    # data.pop("_id")
+    # data["world_name"] = world_name
+    # data.pop("WorldName")
+    data = {}
     
     return render_template('world.html', world_name=world_name, world_data=data)
 
