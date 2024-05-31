@@ -13,20 +13,9 @@ def index():
 
 def world(world_name):
     data = world_data(world_name)
-    
-    data["kingdoms"] = {
-        name: data
-        for name, data in data["groups"].items()
-        if data["type"] == "Kingdom"
-    }
-    data["factions"] = {
-        name: data
-        for name, data in data["groups"].items()
-        if data["type"] != "Faction"
-    }
-    
-    data.pop("groups")
-    # print(world_data)
+    data.pop("_id")
+    data["world_name"] = world_name
+    data.pop("WorldName")
     
     return render_template('world.html', world_name=world_name, world_data=data)
 

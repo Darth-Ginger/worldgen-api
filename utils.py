@@ -2,7 +2,8 @@ import os
 import json
 import re
 from typing import Union
-from flask import abort, current_app, jsonify
+from apiflask import abort
+from flask import current_app, jsonify
 import db
 from pymongo import collection
 from pymongo.results import UpdateResult 
@@ -64,6 +65,12 @@ def to_ObjectId(obj: Union[ObjectId, str]) -> Union[ObjectId, None]:
             return world["_id"]
         return None
 
+def is_iterable(var: object) -> bool:
+    try:
+        _ = iter(var)
+        return True
+    except TypeError:
+        return False
 #endregion JSON/File Functions
 
 #region World Functions
@@ -104,14 +111,25 @@ def world_data(world_name: str, from_file: bool=False) -> dict:
     
     world = db.collections["Worlds"].find_one({"WorldName": world_name})
     for category in world.keys():
-        if category not in ["WorldName","Description", "_id"]:
-            full_category = []
-            for item in world[category]:
-                 full_category.append(category_data_by_id(item))
-            world[category] = full_category
+        if is_iterable(world[category]):
+            if isinstance(world[category], dict):
+                full_category = category_data_by_id(world[category])
+            elif isinstance(world[category], list):
+                full_category = [category_data_by_id(item) for item in world[category]]
+            else:
+                raise ValueError("Invalid type for category: {}".format(type(world[category])))
+        else:
+            full_category = category_data_by_id(world[category])
+        world[category] = full_category
             
     return world
-            
+
+def build_world_data(obj_id: Union[ObjectId, str], data: Union[dict, str, ObjectId, list]) -> object:
+    obj_id = to_ObjectId(obj_id)
+    
+    #@TODO Rework to recursively build a world json object
+    
+                
 def dump_world_data(world_name: str, data: dict):
     if world_exists(world_name):
         for category in data.values():
@@ -201,13 +219,13 @@ def category_data(world_name: str, category_name: str, from_file: bool=False) ->
             data = db.collections[category_name].find({"_id": {"$in": data_ids}})
             return jsonify(data)
         
-def category_data_by_id(category_id: Union[ObjectId, str]) -> dict:
+def category_data_by_id(category_id: Union[ObjectId, str]) -> Union[dict, str]:
     obj_id = to_ObjectId(category_id)
     if obj_id is not None:
         data = db.collections["Worlds"].find_one({"_id": obj_id})
         if data is not None:
             return data
-    return {}
+    return ""
 
 def dump_category_data(world_name: str, category_name: str, data: dict):
     dump_json(os.path.join(world_path(world_name), category_name, data))

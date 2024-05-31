@@ -5,7 +5,7 @@
                 <b>World Name:</b>
             </td>
             <td>
-                {% set upper_world_name = [world_data.geography.world_name[0]|upper,world_data.geography.world_name[1:]]|join() %}
+                {% set upper_world_name = [world_name[0]|upper,world_name[1:]]|join() %}
                 <b>{{upper_world_name}}</b>
             </td>
         </tr>
@@ -14,7 +14,7 @@
                 <b>Size:</b>
             </td>
             <td>
-                {{world_data.geography.geography.size}}
+                {{world_data["Geography"]["size"]}}
             </td>
         </tr>
         <tr>
@@ -22,7 +22,7 @@
                 <b>Balance:</b>
             </td>
             <td>
-                {{world_data.geography.geography.balance}}
+                {{world_data["Geography"]["balance"]}}
             </td>
         </tr>
         <tr>
@@ -31,11 +31,11 @@
             </td>
             <td>
                 <ul>
-                    {% for lm, desc in world_data.geography.geography.landmarks.items() %}
+                    {% for lm in world_data["Geography"]["landmarks"] %}
                     <li>
                         {{ lm }}
                         <ul>
-                            <li> {{desc}} </li>
+                           
                         </ul>
                     </li>
                     {% endfor %}
@@ -47,7 +47,7 @@
                 <b>Description:</b>
             </td>
             <td>
-                {{world_data.geography.geography.description}}
+                {{world_data["Geography"]["description"]}}
             </td>
         </tr>
     </table>

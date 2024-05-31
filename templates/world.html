@@ -21,8 +21,8 @@
 {%block content %}
 <h1>{{ world_name }}</h1>
 
-{% for key, data in world_data.items() %} 
-  {% set cat_page = [key,".html"]|join()%} 
+{% for key, data in world_data.items() %}
+  {% set cat_page = [key|lower,".html"]|join()%} 
   {% if cat_page != "relationships.html" %}
     {% if cat_page is defined %}
       <button type="button" class="collapsible">

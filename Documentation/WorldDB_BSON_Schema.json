@@ -1,0 +1,280 @@
+{
+  "Worlds": {
+    "_id": { "$oid": "ObjectId()" },
+    "name": { "$type": "string" },
+    "description": { "$type": "string" },
+    "size": {
+      "qualitative": "string",
+      "quantitative": {
+        "area": "Number",
+        "unit": "string",
+        "map_scale": {
+          "from": {
+            "value": "Number",
+            "unit": "string"
+          },
+          "to": {
+            "value": "Number",
+            "unit": "string"
+          }
+        }
+      }
+    },
+    "geography": { "$oid": "ObjectId('Geography')" },
+    "groups": [{ "$oid": "ObjectId('Groups')" }],
+    "races": [{ "$oid": "ObjectId('Races')" }],
+    "creatures": [{ "$oid": "ObjectId('Creatures')" }],
+    "pantheons": [{ "$oid": "ObjectId('Pantheons')" }],
+    "magic_systems": [{ "$oid": "ObjectId('MagicSystems')" }],
+    "historical_record": [
+      {
+        "era": { "$oid": "ObjectId('Eras')" },
+        "details": { "$type": "string" }
+      }
+    ]
+  },
+  "Geography": {
+    "_id": { "$oid": "ObjectId()" },
+    "name": { "$type": "string" },
+    "description": { "$type": "string" },
+    "landmarks": [{ "$oid": "ObjectId('Landmarks')" }],
+    "locations_of_interest": [{ "$oid": "ObjectId('PointsOfInterest')" }],
+    "regions": [{ "$oid": "ObjectId('Regions')" }],
+    "secrets": [{ "$type": "string" }]
+  },
+  "Landmarks": {
+    "_id": { "$oid": "ObjectId()" },
+    "name": { "$type": "string" },
+    "description": { "$type": "string" },
+    "details": { "$type": "string" }
+  },
+  "PointsOfInterest": {
+    "_id": { "$oid": "ObjectId()" },
+    "name": { "$type": "string" },
+    "owner": { "$type": "string" },
+    "description": { "$type": "string" },
+    "details": { "$type": "string" },
+    "coordinates": { "x": { "$type": "Number" }, "y": { "$type": "Number" } },
+    "historical_record": [
+      {
+        "era": { "$oid": "ObjectId('Eras')" },
+        "details": { "$type": "string" }
+      }
+    ]
+  },
+  "Regions": {
+    "_id": { "$oid": "ObjectId()" },
+    "name": { "$type": "string" },
+    "type": {
+      "type": { "$type": "string" },
+      "enum": [
+        "City",
+        "Town",
+        "Village",
+        "Hamlet",
+        "District",
+        "Region",
+        "Metropolis",
+        "Metropolis",
+        "Continent",
+        "Empire",
+        "Zone",
+        "Archipelago",
+        "Territory",
+        "Island"
+      ]
+    },
+    "description": { "$type": "string" },
+    "center_coordinates": {
+      "x": { "$type": "Number" },
+      "y": { "$type": "Number" }
+    },
+    "size": { "$type": "string" },
+    "points_of_interest": [{ "$oid": "ObjectId('PointsOfInterest')" }],
+    "historical_record": [
+      {
+        "era": { "$oid": "ObjectId('Eras')" },
+        "details": { "$type": "string" }
+      }
+    ]
+  },
+  "Groups": {
+    "_id": { "$oid": "ObjectId()" },
+    "name": { "$type": "string" },
+    "type": {
+      "type": { "$type": "string" },
+      "enum": [
+        "Kingdom",
+        "Faction",
+        "Order",
+        "Tribe",
+        "Clan",
+        "Group",
+        "Movement",
+        "School",
+        "Guild",
+        "League",
+        "Cohort",
+        "Cult",
+        "Society",
+        "Mercenary Group",
+        "Syndicate"
+      ]
+    },
+    "description": { "$type": "string" },
+    "leader": { "$oid": "ObjectId('Individuals')" },
+    "prominent_members": [{ "$oid": "ObjectId('Individuals')" }],
+    "follower_count": { "$type": "Number" },
+    "goals": [{ "$type": "string" }],
+    "schemes": [
+      { "target": { "$type": "string" }, "details": { "$type": "string" } }
+    ],
+    "relationships": [{ "$oid": "ObjectId('Relationships')" }],
+    "historical_record": [
+      {
+        "era": { "$oid": "ObjectId('Eras')" },
+        "unique_details": { "$type": "string" }
+      }
+    ]
+  },
+  "Individuals": {
+    "_id": { "$oid": "ObjectId()" },
+    "name": { "$type": "string" },
+    "type": {
+      "type": { "$type": "string" },
+      "enum": [
+        "Ruler",
+        "Leader",
+        "CEO",
+        "High Priest",
+        "Adventurer",
+        "Warlord",
+        "Merchant",
+        "Guildmaster",
+        "Cult Leader",
+        "Other"
+      ]
+    },
+    "race": { "$oid": "ObjectId('Races')" },
+    "description": { "$type": "string" },
+    "group": {
+      "oneOf": [
+        { "type": { "$oid": "ObjectId('Groups')" } },
+        { "type": { "$type": "string", "enum": ["None"] } }
+      ]
+    },
+    "goals": [{ "$type": "string" }],
+    "schemes": [{ "$oid": "ObjectId('Schemes')" }],
+    "relationships": [{ "$oid": "ObjectId('Relationships')" }]
+  },
+  "Schemes": {
+    "_id": { "$oid": "ObjectId()" },
+    "name": { "$type": "string" },
+    "description": { "$type": "string" },
+    "target": { "$type": "string" },
+    "schemer": { "$oid": "ObjectId('Individuals')" },
+    "details": { "$type": "string" }
+  },
+  "MagicSystems": {
+    "_id": { "$oid": "ObjectId()" },
+    "name": { "$type": "string" },
+    "source": { "$type": "string" },
+    "practitioners": [{ "$type": "string" }],
+    "rarity_qualifier": { "$type": "string" },
+    "uses": [{ "$type": "string" }],
+    "example_spells": [{ "$type": "string" }],
+    "historical_record": [
+      {
+        "era": { "$oid": "ObjectId('Eras')" },
+        "details": { "$type": "string" }
+      }
+    ]
+  },
+  "Pantheons": {
+    "_id": { "$oid": "ObjectId()" },
+    "name": { "$type": "string" },
+    "description": { "$type": "string" },
+    "gods": [{ "$oid": "ObjectId('Gods')" }],
+    "worlds_of_pantheon": [{ "$oid": "ObjectId('Worlds')" }],
+    "historical_record": [
+      {
+        "era": { "$oid": "ObjectId('Eras')" },
+        "details": { "$type": "string" }
+      }
+    ]
+  },
+  "Gods": {
+    "_id": { "$oid": "ObjectId()" },
+    "name": { "$type": "string" },
+    "domain": [{ "$type": "string" }],
+    "worshippers": [{ "$type": "string" }],
+    "mortal_intervention_stance": { "$type": "string" },
+    "details": [{ "$type": "string" }]
+  },
+  "Races": {
+    "_id": { "$oid": "ObjectId()" },
+    "name": { "$type": "string" },
+    "description": { "$type": "string" },
+    "average_lifespan": { "$type": "Number" },
+    "average_height": { "$type": "Number" },
+    "average_weight": { "$type": "Number" },
+    "language": {
+      "name": { "$type": "string" },
+      "derived_from": [{ "$type": "string" }]
+    },
+    "special_skills": [{ "$type": "string" }],
+    "special_traits": [{ "$type": "string" }],
+    "sentience_qualifier": { "$type": "string" },
+    "intelligence_qualifier": { "$type": "string" },
+    "origin_story": { "$type": "string" },
+    "historical_record": [
+      {
+        "era": { "$oid": "ObjectId('Eras')" },
+        "unique_details": { "$type": "string" }
+      }
+    ]
+  },
+  "Creatures": {
+    "_id": { "$oid": "ObjectId()" },
+    "name": { "$type": "string" },
+    "description": { "$type": "string" },
+    "skills": [
+      {
+        "name": { "$type": "string" },
+        "description": { "$type": "string" },
+        "details": { "$type": "string" }
+      }
+    ],
+    "rarity": { "$type": "string" },
+    "preferred_biome": { "$type": "string" }
+  },
+  "Eras": {
+    "_id": { "$oid": "ObjectId()" },
+    "perspective": {
+      "oneOf": [
+        { "$oid": "ObjectId('Individuals')" },
+        { "$oid": "ObjectId('Groups')" },
+        { "$oid": "ObjectId('Races')" },
+        { "$type": "string", "enum": ["None", "Narrator"] }
+      ]
+    },
+    "name": { "$type": "string" },
+    "time_periods": [
+      {
+        "period_start": { "$type": "Number" },
+        "period_end": { "$type": "Number" },
+        "major_events": [{ "$type": "string" }],
+        "minor_events": [{ "$type": "string" }]
+      }
+    ]
+  },
+  "Relationships": {
+    "_id": { "$oid": "ObjectId()" },
+    "entity_a": { "$oid": "ObjectId()" },
+    "entity_b": { "$oid": "ObjectId()" },
+    "reputation": { "$type": "Number" },
+    "intelligence_qualifier": { "$type": "string" },
+    "schemes_against_other": [{ "$oid": "ObjectId('Schemes')" }],
+    "schemes_from_other": [{ "$oid": "ObjectId('Schemes')" }]
+  }
+}

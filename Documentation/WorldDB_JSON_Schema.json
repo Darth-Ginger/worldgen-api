@@ -1,0 +1,204 @@
+{
+  "Worlds": {
+    "_id": "ObjectId()",
+    "name": "string",
+    "description": "string",
+    "size": { 
+      "qualitative": "string", 
+      "quantitative": {
+        "area": "Number",
+        "unit": "string",
+        "map_scale": {
+          "from": {
+            "value": "Number",
+            "unit": "string"
+          },
+          "to": {
+            "value": "Number",
+            "unit": "string"
+          }
+        }
+      } 
+    },
+    "geography": "ObjectId('Geography')",
+    "groups": ["ObjectId('Groups')"],
+    "races": ["ObjectId('Races')"],
+    "creatures": ["ObjectId('Creatures')"],
+    "pantheons": ["ObjectId('Pantheons')"],
+    "magic_systems": ["ObjectId('MagicSystems')"],
+    "historical_record": [{ "era": "ObjectId('Eras')", "details": "string" }]
+  },
+  "Geography": {
+    "_id": "ObjectId()",
+    "name": "string",
+    "description": "string",
+    "landmarks": ["ObjectId('Landmarks')"],
+    "locations_of_interest": ["ObjectId('PointsOfInterest')"],
+    "regions": ["ObjectId('Regions')"],
+    "secrets": ["string"]
+  },
+  "Landmarks": {
+    "_id": "ObjectId()",
+    "name": "string",
+    "description": "string",
+    "details": "string"
+  },
+  "PointsOfInterest": {
+    "_id": "ObjectId()",
+    "name": "string",
+    "owner": "string",
+    "description": "string",
+    "details": "string",
+    "coordinates": { "x": "Number", "y": "Number" },
+    "historical_record": [{ "era": "ObjectId('Eras')", "details": "string" }]
+  },
+  "Regions": {
+    "_id": "ObjectId()",
+    "name": "string",
+    "type": {
+      "type": "string",
+      "enum": [
+        "City", "Town", "Village", "Hamlet", "District",
+        "Region", "Metropolis", "Metropolis",
+        "Continent", "Empire", "Zone", "Archipelago",
+        "Territory", "Island"
+      ]
+    },
+    "description": "string",
+    "center_coordinates": { "x": "Number", "y": "Number" },
+    "size": "string",
+    "points_of_interest": ["ObjectId('PointsOfInterest')"],
+    "historical_record": [{ "era": "ObjectId('Eras')", "details": "string" }]
+  },
+  "Groups": {
+    "_id": "ObjectId()",
+    "name": "string",
+    "type": {
+      "type": "string",
+      "enum": [
+        "Kingdom", "Faction", "Order", "Tribe", "Clan",
+        "Group", "Movement", "School", "Guild", "League",
+        "Cohort", "Cult", "Society", "Mercenary Group", "Syndicate"
+      ]
+    },
+    "description": "string",
+    "leader": "ObjectId('Individuals')",
+    "prominent_members": ["ObjectId('Individuals')"],
+    "follower_count": "Number",
+    "goals": ["string"],
+    "schemes": [{ "target": "string", "details": "string" }],
+    "relationships": ["ObjectId('Relationships')"],
+    "historical_record": [{ "era": "ObjectId('Eras')", "unique_details": "string" }]
+  },
+  "Individuals": {
+    "_id": "ObjectId()",
+    "name": "string",
+    "type": {
+      "type": "string",
+      "enum": [
+        "Ruler", "Leader", "CEO", "High Priest",
+        "Adventurer", "Warlord", "Merchant", "Guildmaster",
+        "Cult Leader", "Other"
+      ]
+    },
+    "race": "ObjectId('Races')",
+    "description": "string",
+    "group": {
+      "oneOf": [
+        { "type": "ObjectId('Groups')" },
+        { "type": "string", "enum": ["None"] }
+      ]
+    },
+    "goals": ["string"],
+    "schemes": ["ObjectId('Schemes')"],
+    "relationships": ["ObjectId('Relationships')"]
+  },
+  "Schemes": {
+    "_id": "ObjectId()",
+    "name": "string",
+    "description": "string",
+    "target": "string",
+    "schemer": "ObjectId('Individuals')",
+    "details": "string"
+  },
+  "MagicSystems": {
+    "_id": "ObjectId()",
+    "name": "string",
+    "source": "string",
+    "practitioners": ["string"],
+    "rarity_qualifier": "string",
+    "uses": ["string"],
+    "example_spells": ["string"],
+    "historical_record": [{ "era": "ObjectId('Eras')", "details": "string" }]
+  },
+  "Pantheons": {
+    "_id": "ObjectId()",
+    "name": "string",
+    "description": "string",
+    "gods": ["ObjectId('Gods')"],
+    "worlds_of_pantheon": ["ObjectId('Worlds')"],
+    "historical_record": [{ "era": "ObjectId('Eras')", "details": "string" }]
+  },
+  "Gods": {
+    "_id": "ObjectId()",
+    "name": "string",
+    "domain": ["string"],
+    "worshippers": ["string"],
+    "mortal_intervention_stance": "string",
+    "details": ["string"]
+  },
+  "Races": {
+    "_id": "ObjectId()",
+    "name": "string",
+    "description": "string",
+    "average_lifespan": "Number",
+    "average_height": "Number",
+    "average_weight": "Number",
+    "language": { "name": "string", "derived_from": ["string"] },
+    "special_skills": ["string"],
+    "special_traits": ["string"],
+    "sentience_qualifier": "string",
+    "intelligence_qualifier": "string",
+    "origin_story": "string",
+    "historical_record": [{ "era": "ObjectId('Eras')", "unique_details": "string" }]
+  },
+  "Creatures": {
+    "_id": "ObjectId()",
+    "name": "string",
+    "description": "string",
+    "skills": [{
+      "name": "string",
+      "description": "string",
+      "details": "string"
+    }],
+    "rarity": "string",
+    "preferred_biome": "string"
+  },
+  "Eras": {
+    "_id": "ObjectId()",
+    "perspective": {
+      "oneOf": [
+        { "type": "ObjectId('Individuals')" },
+        { "type": "ObjectId('Groups')" },
+        { "type": "ObjectId('Races')" },
+        { "type": "string", "enum": ["None", "Narrator"] }
+      ]
+    },
+    "name": "string",
+    "time_periods": [{
+      "period_start": "Number",
+      "period_end": "Number",
+      "major_events": ["string"],
+      "minor_events": ["string"]
+    }]
+  },
+  "Relationships": {
+    "_id": "ObjectId()",
+    "entity_a": "ObjectId()",
+    "entity_b": "ObjectId()",
+    "reputation": "Number",
+    "intelligence_qualifier": "string",
+    "schemes_against_other": ["ObjectId('Schemes')"],
+    "schemes_from_other": ["ObjectId('Schemes')"]
+  }
+}

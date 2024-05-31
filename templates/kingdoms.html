@@ -1,4 +1,4 @@
-{% for name,data in world_data.kingdoms.items() %}
+{% for data in world_data["Kingdoms"].items() %}
 <span style="font-size:18pt">
 <b>
   {% set upper_name = [name[0]|upper,name[1:]]|join() %}
