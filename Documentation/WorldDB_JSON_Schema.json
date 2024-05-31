@@ -33,7 +33,7 @@
     "name": "string",
     "description": "string",
     "landmarks": ["ObjectId('Landmarks')"],
-    "locations_of_interest": ["ObjectId('PointsOfInterest')"],
+    "locations_of_interest": ["ObjectId('Points_Of_Interest')"],
     "regions": ["ObjectId('Regions')"],
     "secrets": ["string"]
   },
@@ -43,7 +43,7 @@
     "description": "string",
     "details": "string"
   },
-  "PointsOfInterest": {
+  "Points_Of_Interest": {
     "_id": "ObjectId()",
     "name": "string",
     "owner": "string",
@@ -67,7 +67,7 @@
     "description": "string",
     "center_coordinates": { "x": "Number", "y": "Number" },
     "size": "string",
-    "points_of_interest": ["ObjectId('PointsOfInterest')"],
+    "points_of_interest": ["ObjectId('Points_Of_Interest')"],
     "historical_record": [{ "era": "ObjectId('Eras')", "details": "string" }]
   },
   "Groups": {

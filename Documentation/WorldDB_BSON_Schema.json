@@ -38,7 +38,7 @@
     "name": { "$type": "string" },
     "description": { "$type": "string" },
     "landmarks": [{ "$oid": "ObjectId('Landmarks')" }],
-    "locations_of_interest": [{ "$oid": "ObjectId('PointsOfInterest')" }],
+    "locations_of_interest": [{ "$oid": "ObjectId('Points_Of_Interest')" }],
     "regions": [{ "$oid": "ObjectId('Regions')" }],
     "secrets": [{ "$type": "string" }]
   },
@@ -48,7 +48,7 @@
     "description": { "$type": "string" },
     "details": { "$type": "string" }
   },
-  "PointsOfInterest": {
+  "Points_Of_Interest": {
     "_id": { "$oid": "ObjectId()" },
     "name": { "$type": "string" },
     "owner": { "$type": "string" },
@@ -90,7 +90,7 @@
       "y": { "$type": "Number" }
     },
     "size": { "$type": "string" },
-    "points_of_interest": [{ "$oid": "ObjectId('PointsOfInterest')" }],
+    "points_of_interest": [{ "$oid": "ObjectId('Points_Of_Interest')" }],
     "historical_record": [
       {
         "era": { "$oid": "ObjectId('Eras')" },
@@ -175,7 +175,7 @@
     "schemer": { "$oid": "ObjectId('Individuals')" },
     "details": { "$type": "string" }
   },
-  "MagicSystems": {
+  "Magic_Systems": {
     "_id": { "$oid": "ObjectId()" },
     "name": { "$type": "string" },
     "source": { "$type": "string" },
