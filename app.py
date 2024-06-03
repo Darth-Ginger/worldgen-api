@@ -14,6 +14,7 @@ db = DB_Connection()
 def inject_sidebar():
     """Injects the directory contents into the template context."""
     sidebar_items = db.all_collection_documents('Worlds')
+    sidebar_items = [world["WorldName"] for world in sidebar_items]
     print(sidebar_items)
     return {"sidebar_items": sidebar_items}
 
