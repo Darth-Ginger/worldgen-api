@@ -13,7 +13,7 @@ db = DB_Connection()
 @app.context_processor
 def inject_sidebar():
     """Injects the directory contents into the template context."""
-    sidebar_items = db.collection_documents('Worlds')
+    sidebar_items = db.all_collection_documents('Worlds')
     print(sidebar_items)
     return {"sidebar_items": sidebar_items}
 

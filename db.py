@@ -90,7 +90,7 @@ class DB_Connection:
         self.create_name_index(collection_name)
         return self.conn[collection_name]
     
-    def collection_documents(self, collection_name: str) -> dict:
+    def all_collection_documents(self, collection_name: str) -> list[dict]:
         """
         Retrieves all documents from the specified collection.
 
@@ -98,14 +98,11 @@ class DB_Connection:
             collection_name (str): The name of the collection to retrieve documents from.
 
         Returns:
-            dict: A dictionary containing the retrieved documents. If the collection is empty, an empty dictionary is returned.
+            List[dict]: A list of dictionaries containing the retrieved documents.
+                        If the collection is empty, an empty list is returned.
         """
-        docs = self.collections[collection_name].find({})
-        if self.collection_document_count(collection_name) == 0:
-            return {}
-        for doc in docs:
-            doc = serialize_doc(doc)
-        return docs
+        documents = list(self.collections[collection_name].find())
+        return [serialize_doc(doc) for doc in documents]
     
     def collection_document_count(self, collection_name: str) -> int:
         return self.collections[collection_name].count_documents({})
